@@ -1,0 +1,736 @@
+.main {
+  padding-top: 80px;
+}
+
+/* HERO SECTION - Professional with image */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,0,0,0.02) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: -200px;
+  left: -200px;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-30px) translateX(30px);
+  }
+}
+
+.heroContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.heroImage {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 4px solid rgba(0,0,0,0.05);
+}
+
+.heroImage:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  border-color: rgba(0,0,0,0.1);
+}
+
+.heroImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.careerImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.travelImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+  font-weight: 300;
+  color: #fff;
+  font-style: italic;
+}
+
+.placeholderWork {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 4px;
+}
+
+.placeholderTravel {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  font-weight: 300;
+  color: #999;
+}
+
+.heroText {
+  
+}
+
+.heroTitle {
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroTagline {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+.heroDescription {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 600px;
+  opacity: 0.8;
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.primaryButton {
+  padding: 16px 32px;
+  background: #000;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid #000;
+}
+
+.primaryButton:hover {
+  background: #333;
+  border-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  opacity: 1;
+}
+
+.secondaryButton {
+  padding: 16px 32px;
+  background: transparent;
+  color: #000;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+}
+
+.secondaryButton:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 1;
+}
+
+/* EXPERIENCE SECTION */
+.experience {
+  padding: 80px 0;
+  background: #000;
+  color: #fff;
+}
+
+.experienceLabel {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.6;
+}
+
+.logoGrid {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.logoItem {
+  transition: opacity 0.3s ease;
+}
+
+.logoText {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.logoItem:hover .logoText {
+  opacity: 1;
+}
+
+/* ABOUT PREVIEW */
+.aboutPreview {
+  padding: 120px 0;
+  background: #fafafa;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 80px;
+}
+
+.aboutColumn {
+  
+}
+
+.statsColumn {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.stat {
+  
+}
+
+.statNumber {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 14px;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.aboutText {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+/* CAREER SECTION */
+.career {
+  padding: 120px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 80px;
+}
+
+.sectionTitle {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.textLink {
+  font-size: 16px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.textLink:hover {
+  opacity: 1;
+}
+
+.careerCard {
+  margin-bottom: 80px;
+  padding: 48px;
+  background: #fafafa;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.careerCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.careerCard:hover::before {
+  left: 100%;
+}
+
+.careerCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  background: #ffffff;
+}
+
+.careerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.careerInfo {
+  
+}
+
+.companyLogo {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  background: #000;
+  color: #fff;
+  border-radius: 2px;
+}
+
+.careerTitle {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.careerTimeline {
+  font-size: 14px;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.careerDescription {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.careerImage {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+}
+
+.careerImage .imagePlaceholder {
+  transition: transform 0.3s ease;
+}
+
+.careerCard:hover .careerImage .imagePlaceholder {
+  transform: scale(1.05);
+}
+
+/* PROJECTS SECTION */
+.projects {
+  padding: 120px 0;
+  background: #000;
+  color: #fff;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.projectCard {
+  padding: 40px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-4px);
+}
+
+.projectHeader {
+  margin-bottom: 24px;
+}
+
+.statusBadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.statusBadge::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.projectTitle {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.projectDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 24px;
+}
+
+.projectLink {
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.projectLink:hover {
+  opacity: 1;
+}
+
+/* TRAVEL SECTION */
+.travel {
+  padding: 120px 0;
+}
+
+.travelStats {
+  font-size: 16px;
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+.travelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.travelImage {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.travelImage:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+}
+
+.travelImage .imagePlaceholder {
+  transition: transform 0.3s ease;
+}
+
+.travelImage:hover .imagePlaceholder {
+  transform: scale(1.1);
+}
+
+/* CONTACT SECTION */
+.contact {
+  padding: 120px 0;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  color: #fff;
+}
+
+.contactContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contactTitle {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.contactText {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0.8;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contactActions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact .primaryButton {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.contact .primaryButton:hover {
+  background: #f0f0f0;
+  border-color: #f0f0f0;
+}
+
+.contact .secondaryButton {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.contact .secondaryButton:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* IMAGE PLACEHOLDER */
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  border: 2px dashed #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .heroImage {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .aboutGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .careerContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .travelGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: 60px;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 60px 0;
+  }
+  
+  .heroContainer {
+    padding: 0 24px;
+  }
+  
+  .heroImage {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .container {
+    padding: 0 24px;
+  }
+  
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  
+  .careerCard {
+    padding: 32px 24px;
+  }
+  
+  .statsColumn {
+    grid-template-columns: 1fr;
+  }
+  
+  .logoGrid {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  
+  .travelGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .heroActions,
+  .contactActions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+  }
+}

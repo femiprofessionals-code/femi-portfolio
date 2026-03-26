@@ -1,0 +1,101 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.6;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.separator {
+  opacity: 0.3;
+}
+
+.title {
+  opacity: 0.6;
+}
+
+.links {
+  display: flex;
+  gap: 32px;
+  font-size: 15px;
+}
+
+.links a {
+  transition: opacity 0.3s ease;
+}
+
+.links a:hover {
+  opacity: 0.6;
+}
+
+.portfolioLink {
+  position: relative;
+  padding-left: 20px;
+}
+
+.portfolioLink::before {
+  content: "🔒";
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  .title {
+    display: none;
+  }
+  
+  .separator {
+    display: none;
+  }
+  
+  .links {
+    gap: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .links {
+    display: none;
+  }
+}

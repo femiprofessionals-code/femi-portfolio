@@ -1,0 +1,382 @@
+.main {
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+/* LOCK SCREEN */
+.lockScreen {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  color: #fff;
+}
+
+.lockContent {
+  max-width: 500px;
+  padding: 48px;
+  text-align: center;
+}
+
+.lockIcon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.lockTitle {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.lockDescription {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 40px;
+}
+
+.lockForm {
+  margin-bottom: 24px;
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-family: inherit;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.passwordInput:focus {
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.passwordInput::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-bottom: 16px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.unlockButton {
+  width: 100%;
+  padding: 16px 24px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.unlockButton:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+}
+
+.lockNote {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.lockNote a {
+  color: #fff;
+  text-decoration: underline;
+  transition: opacity 0.3s ease;
+}
+
+.lockNote a:hover {
+  opacity: 1;
+}
+
+/* AUTHENTICATED CONTENT */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 48px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.title {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 400;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+/* RESUME SECTION */
+.resumeSection {
+  margin-bottom: 80px;
+}
+
+.resumeCard {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  background: #fafafa;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.resumeCard:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.resumeIcon {
+  font-size: 48px;
+}
+
+.resumeInfo {
+  flex: 1;
+}
+
+.resumeInfo h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.resumeInfo p {
+  font-size: 14px;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.downloadButton {
+  padding: 12px 24px;
+  background: #000;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.downloadButton:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 1;
+}
+
+/* MATERIALS SECTION */
+.materialsSection {
+  margin-bottom: 80px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+.materialsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.materialCard {
+  padding: 32px;
+  background: #fafafa;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.materialCard:hover {
+  background: #f0f0f0;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.materialCard h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.materialCard p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.materialLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.materialLink:hover {
+  opacity: 0.6;
+}
+
+/* EXPERIENCE SECTION */
+.experienceSection {
+  margin-bottom: 80px;
+}
+
+.experienceCard {
+  padding: 40px;
+  background: #fafafa;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.experienceCard h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.role {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.timeline {
+  font-size: 14px;
+  opacity: 0.6;
+  margin-bottom: 24px;
+}
+
+.achievements {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievements li {
+  font-size: 15px;
+  line-height: 1.7;
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.achievements li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
+}
+
+/* CREDENTIALS SECTION */
+.credentialsSection {
+  margin-bottom: 80px;
+}
+
+.credentialsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.credentialCard {
+  padding: 32px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.credentialCard h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.credentialCard p {
+  font-size: 15px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.skill {
+  padding: 12px 16px;
+  background: #fafafa;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.skill:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 24px;
+  }
+  
+  .resumeCard {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .materialsGrid,
+  .credentialsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

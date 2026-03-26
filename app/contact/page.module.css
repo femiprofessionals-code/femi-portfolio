@@ -1,0 +1,184 @@
+.main {
+  padding: 120px 0 200px;
+  margin-top: 80px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.intro {
+  margin-bottom: 120px;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(48px, 8vw, 96px);
+  margin-bottom: 48px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.title em {
+  font-style: italic;
+}
+
+.subtitle {
+  font-size: 20px;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+.reasons,
+.methods,
+.form {
+  margin-bottom: 120px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+  margin-bottom: 48px;
+  opacity: 0.6;
+}
+
+.reasonsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+}
+
+.reason h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.reason p {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+.methodsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.method h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.methodLink {
+  display: block;
+  font-size: 16px;
+  color: #000;
+  text-decoration: underline;
+  margin-bottom: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.methodLink:hover {
+  opacity: 0.6;
+}
+
+.methodNote {
+  font-size: 14px;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+.contactForm {
+  max-width: 600px;
+}
+
+.formGroup {
+  margin-bottom: 32px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  opacity: 0.4;
+}
+
+.contactForm button {
+  margin-top: 16px;
+}
+
+.formNote {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.6;
+  margin-top: 32px;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 80px 0 120px;
+  }
+  
+  .container {
+    padding: 0 24px;
+  }
+  
+  .intro {
+    margin-bottom: 80px;
+  }
+  
+  .reasons,
+  .methods {
+    margin-bottom: 80px;
+  }
+  
+  .reasonsGrid,
+  .methodsGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+  }
+}

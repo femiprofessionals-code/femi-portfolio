@@ -1,0 +1,282 @@
+.main {
+  padding: 120px 0 200px;
+  margin-top: 80px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.intro {
+  max-width: 800px;
+  margin: 0 auto 200px;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(48px, 8vw, 96px);
+  margin-bottom: 32px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.stats {
+  font-size: 18px;
+  margin-bottom: 64px;
+  opacity: 0.6;
+}
+
+.stat {
+  margin: 0 8px;
+}
+
+.separator {
+  opacity: 0.4;
+}
+
+.philosophy {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  text-align: left;
+  opacity: 0.8;
+}
+
+/* VIDEO SECTION */
+.videoSection {
+  margin: 120px 0 200px;
+}
+
+.videoContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.videoCaption {
+  padding: 20px;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.mapSection {
+  margin: 200px 0;
+}
+
+.mapPlaceholder {
+  aspect-ratio: 16/9;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  text-align: center;
+}
+
+.mapPlaceholder p:first-child {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.mapNote {
+  font-size: 14px;
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+.cities {
+  margin: 200px 0;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+  margin-bottom: 80px;
+  opacity: 0.6;
+}
+
+.cityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cityCard {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cityCard:hover {
+  transform: translateY(-4px);
+}
+
+.cityImage {
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #000;
+}
+
+.cityPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.cityCard:hover .cityPhoto {
+  transform: scale(1.05);
+}
+
+.imagePlaceholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.cityOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cityCard:hover .cityOverlay {
+  opacity: 1;
+}
+
+.cityName {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.photoCount {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.narratives {
+  margin: 200px 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.narrative {
+  margin-bottom: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.narrative:last-child {
+  border-bottom: none;
+}
+
+.narrativeCity {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.narrativeText {
+  font-size: 18px;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.closing {
+  margin-top: 200px;
+  padding-top: 80px;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closing p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.closing .button {
+  margin-top: 48px;
+}
+
+@media (max-width: 1024px) {
+  .cityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 80px 0 120px;
+  }
+  
+  .container {
+    padding: 0 24px;
+  }
+  
+  .intro {
+    margin-bottom: 120px;
+  }
+  
+  .mapSection,
+  .cities,
+  .narratives {
+    margin: 120px 0;
+  }
+  
+  .cityGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .philosophy,
+  .narrativeText {
+    font-size: 16px;
+  }
+  
+  .closing {
+    margin-top: 120px;
+  }
+}
