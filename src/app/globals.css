@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #080F1C;
+  color: #F0EDE8;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: rgba(201,168,76,0.22); color: #F0EDE8; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #080F1C; }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.35); border-radius: 2px; }
+
+/* ── Ticker ─────────────────────────────────────── */
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-inner {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 36s linear infinite;
+}
+.ticker-inner:hover { animation-play-state: paused; }
+
+/* ── Hero video fade-in ─────────────────────────── */
+@keyframes videoFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.video-loaded { animation: videoFade 1.2s ease forwards; }
+
+/* ── Page enter ─────────────────────────────────── */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter { animation: pageEnter 0.5s ease forwards; }
