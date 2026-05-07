@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* ────────────────────────────────────────
+   BASE RESET
+   ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   background: #FAF8F5;
@@ -14,16 +25,29 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: rgba(217,119,87,0.22); color: #111111; }
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: rgba(217, 119, 87, 0.22);
+  color: #111111;
+}
+
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #FAF8F5; }
-::-webkit-scrollbar-thumb { background: rgba(217,119,87,0.5); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(217, 119, 87, 0.5); border-radius: 2px; }
 
-/* Ticker */
+
+/* ────────────────────────────────────────
+   ANIMATIONS
+   ──────────────────────────────────────── */
 @keyframes tickerScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
 .ticker-inner {
   display: flex;
   width: max-content;
@@ -31,9 +55,215 @@ body {
 }
 .ticker-inner:hover { animation-play-state: paused; }
 
-/* Video fade */
 @keyframes videoFade {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 .video-loaded { animation: videoFade 1.2s ease forwards; }
+
+
+/* ────────────────────────────────────────
+   MOBILE NAV — hamburger menu
+   ──────────────────────────────────────── */
+.mobile-menu-btn { display: none; }
+.mobile-menu-panel { display: none; }
+
+
+/* ────────────────────────────────────────
+   TABLET AND BELOW (under 1024px)
+   ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+
+  /* Globe slightly smaller */
+  div[style*="height: 480"] {
+    height: 400px !important;
+  }
+
+  /* 4-col and 5-col grids → 2-col on tablet */
+  [style*="grid-template-columns: repeat(4,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(4,1fr)'"],
+  [style*="grid-template-columns: repeat(5, 1fr)"],
+  [style*="gridTemplateColumns: 'repeat(5, 1fr)'"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+
+/* ────────────────────────────────────────
+   MOBILE OPTIMIZATION (under 768px)
+   ──────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Typography — scale down */
+  h1 { font-size: clamp(2.2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.6rem, 6vw, 2.5rem) !important; line-height: 1.15 !important; }
+  h3 { font-size: 1.25rem !important; }
+
+  /* Section padding — tighter */
+  section {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Force all multi-column grids → single column */
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="gridTemplateColumns: '1fr 1fr'"],
+  [style*="grid-template-columns: 1fr 1.5fr"],
+  [style*="gridTemplateColumns: '1fr 1.5fr'"],
+  [style*="grid-template-columns: 1fr 1.7fr"],
+  [style*="gridTemplateColumns: 1fr 1.7fr"],
+  [style*="grid-template-columns: 260px 1fr"],
+  [style*="gridTemplateColumns: '260px 1fr'"],
+  [style*="grid-template-columns: 200px 1fr"],
+  [style*="gridTemplateColumns: '200px 1fr'"],
+  [style*="grid-template-columns: 96px 1fr"],
+  [style*="grid-template-columns: 120px 1fr"],
+  [style*="grid-template-columns: repeat(3,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(3,1fr)'"],
+  [style*="grid-template-columns: repeat(4,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(4,1fr)'"],
+  [style*="grid-template-columns: repeat(5, 1fr)"],
+  [style*="gridTemplateColumns: 'repeat(5, 1fr)'"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Sticky elements — release on mobile */
+  [style*="position: sticky"] { position: static !important; }
+
+  /* Hero sections — release fixed heights */
+  section[style*="100vh"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 4rem !important;
+  }
+  section[style*="88vh"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 4rem !important;
+  }
+  section[style*="55vh"],
+  section[style*="52vh"],
+  section[style*="50vh"],
+  section[style*="48vh"],
+  section[style*="40vh"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Nav — compact, hide desktop links and CTA */
+  header[style] {
+    padding: 0 1rem !important;
+  }
+  header nav {
+    display: none !important;
+  }
+  /* Hide the desktop CTA pill on mobile (last child link) */
+  header > a:last-of-type {
+    display: none !important;
+  }
+
+  /* Show mobile hamburger button */
+  .mobile-menu-btn { display: block !important; }
+  .mobile-menu-panel { display: flex !important; }
+
+  /* Globe — smaller height */
+  div[style*="height: 480"] {
+    height: 320px !important;
+  }
+
+  /* Ticker — tighter */
+  .ticker-inner > div {
+    padding: 0 1.5rem !important;
+    min-width: 160px !important;
+  }
+
+  /* Forms — prevent iOS zoom on focus */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Horizontal scroll lists — pad correctly */
+  div[style*="overflow-x: auto"],
+  div[style*="overflowX: 'auto'"] {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* CTA sections with flex layouts — wrap nicely */
+  section[style*="justify-content: space-between"],
+  section[style*="justifyContent: 'space-between'"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Filter buttons — wrap or scroll horizontally */
+  div[style*="display: flex"][style*="gap: '2.5rem'"] {
+    gap: 1.25rem !important;
+  }
+
+  /* Footer columns → stack */
+  footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 3rem 1.25rem 2rem !important;
+  }
+  footer > div:last-child {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: flex-start !important;
+    padding: 1rem 1.25rem !important;
+  }
+}
+
+
+/* ────────────────────────────────────────
+   TINY MOBILE (under 480px)
+   ──────────────────────────────────────── */
+@media (max-width: 480px) {
+
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.4rem !important; }
+  h3 { font-size: 1.15rem !important; }
+
+  section {
+    padding: 2.5rem 1rem !important;
+  }
+
+  /* Logo sizing */
+  header img {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  header a span {
+    font-size: 15px !important;
+  }
+
+  /* Stat values smaller */
+  p[style*="clamp(2.2rem"],
+  p[style*="clamp(1.5rem"] {
+    font-size: 1.4rem !important;
+  }
+
+  /* Globe — even smaller */
+  div[style*="height: 480"],
+  div[style*="height: 320"] {
+    height: 280px !important;
+  }
+}
+
+
+/* ────────────────────────────────────────
+   ACCESSIBILITY — respect reduced motion
+   ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-inner { animation: none !important; }
+}
