@@ -1,5 +1,4 @@
 'use client'
-import dynamic from 'next/dynamic'
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
@@ -7,15 +6,6 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import VideoHero from '@/components/VideoHero'
 import { F, C, LINE, fadeUp } from '@/components/tokens'
-
-const Globe = dynamic(() => import('@/components/Globe'), {
-  ssr: false,
-  loading: () => (
-    <div style={{ borderTop: LINE, minHeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', background: C.bg }}>
-      <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(17,17,17,0.4)' }}>Loading globe</span>
-    </div>
-  ),
-})
 
 const TICKER = [
   { name: 'Goldman Sachs',    cat: 'Global Banking and Markets' },
@@ -42,12 +32,6 @@ const WORK = [
   { company: 'Goldman Sachs',     period: '2023 to Present', tags: ['Regulatory', 'AI Tooling', 'Transformation'], desc: 'CFTC framework across 10 departments in 30 days. $580M entity migration across 31 trading desks. Claude-based AI tool cutting review cycles by 60%.', wide: true  },
   { company: 'The Carlyle Group', period: '2021 to 2023',    tags: ['CRM Architecture', 'EMEA Operations'],         desc: 'Built Salesforce CRM for all EMEA funds from scratch. Redesigned investor onboarding adopted as global standard.', wide: false },
   { company: 'T. Rowe Price',     period: '2019 to 2021',    tags: ['Central Operations'],                          desc: 'Trade settlement, position reconciliation, and operational coordination across global investment platforms.', wide: false },
-]
-
-const PROJECTS = [
-  { n: '01', title: 'AI Hiring Platform',      desc: 'Pre-screening infrastructure that eliminates resume noise.' },
-  { n: '02', title: 'Renter Matching',          desc: 'Apartment matching built on genuine fit signals.' },
-  { n: '03', title: 'Freelance Infrastructure', desc: 'End-to-end operations platform for independent professionals.' },
 ]
 
 function WorkCard({ w, i }: { w: typeof WORK[0]; i: number }) {
@@ -130,38 +114,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GLOBE */}
-      <Globe />
+      {/* SPECIAL PROJECTS — fully gated, single CTA */}
+      <section style={{ borderTop: LINE, padding: 'clamp(4rem, 8vw, 6rem) 2.5rem', background: C.bg }}>
+        <motion.div {...fadeUp()} style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          <div style={{ flex: '1 1 320px' }}>
+            <p style={{ fontFamily: F.sans, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '1rem' }}>
+              Special Projects
+            </p>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.8rem, 4vw, 3rem)', fontWeight: 300, letterSpacing: '-0.025em', color: C.text, lineHeight: 1.15, marginBottom: '0.75rem' }}>
+              Currently in stealth.
+            </h2>
+            <p style={{ fontFamily: F.sans, fontSize: 14, fontWeight: 300, color: C.muted, lineHeight: 1.7, maxWidth: '46ch' }}>
+              Three platforms in active development. Detailed case studies available to authorized stakeholders only.
+            </p>
+          </div>
 
-      {/* SPECIAL PROJECTS — public teaser only */}
-      <section style={{ borderTop: LINE, padding: '6rem 2.5rem', background: C.bg }}>
-        <motion.div {...fadeUp()} style={{ marginBottom: '3rem' }}>
-          <p style={{ fontFamily: F.sans, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '1rem' }}>
-            Special Projects
-          </p>
-          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.25rem)', fontWeight: 300, letterSpacing: '-0.025em', color: C.text, maxWidth: '20ch', marginBottom: '1rem' }}>
-            Three platforms in development.
-          </h2>
-          <p style={{ fontFamily: F.sans, fontSize: 14, fontWeight: 300, color: C.muted, maxWidth: '46ch' }}>
-            Each addresses a market where current solutions are a decade behind the problem.
-          </p>
+          <Link href="/special-projects/case-studies" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+            fontFamily: F.sans, fontSize: 13, fontWeight: 500,
+            background: C.accent, color: C.bg,
+            padding: '14px 28px', borderRadius: 100,
+            textDecoration: 'none', whiteSpace: 'nowrap',
+            transition: 'opacity 0.2s, transform 0.2s',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+          >
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <rect x="2.5" y="6" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
+              <path d="M4.5 6V4a2 2 0 014 0v2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+            </svg>
+            Request access
+          </Link>
         </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1.5rem', marginBottom: '2.5rem' }}>
-          {PROJECTS.map((p, i) => (
-            <motion.div key={p.n} {...fadeUp(i * 0.08)}
-              style={{ border: '1px solid rgba(217,119,87,0.18)', padding: '2rem', background: 'transparent' }}>
-              <span style={{ fontFamily: F.sans, fontSize: 9.5, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.accent, border: '1px solid rgba(217,119,87,0.3)', padding: '3px 10px', display: 'inline-block', marginBottom: 20 }}>In Development</span>
-              <p style={{ fontFamily: F.serif, fontSize: '3rem', fontWeight: 300, color: 'rgba(217,119,87,0.12)', lineHeight: 1, marginBottom: 12 }}>{p.n}</p>
-              <h3 style={{ fontFamily: F.serif, fontSize: '1.4rem', fontWeight: 400, letterSpacing: '-0.02em', color: C.text, marginBottom: 10 }}>{p.title}</h3>
-              <p style={{ fontFamily: F.sans, fontSize: 13.5, fontWeight: 300, lineHeight: 1.65, color: C.dim }}>{p.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <Link href="/special-projects/case-studies" style={{ fontFamily: F.sans, fontSize: 13, fontWeight: 400, color: C.accent, textDecoration: 'none', borderBottom: '1px solid rgba(217,119,87,0.4)', paddingBottom: 2 }}>
-          Detailed case studies available on request
-        </Link>
       </section>
 
       {/* CTA */}

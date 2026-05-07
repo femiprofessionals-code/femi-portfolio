@@ -345,3 +345,8 @@ a, button {
   }
   .ticker-inner { animation: none !important; }
 }
+/* Hide hero headshot on phones — too cramped */
+@media (max-width: 767px) {
+  .hero-headshot { display: none !important; }
+  .hero-text-wrap { max-width: 100% !important; }
+}

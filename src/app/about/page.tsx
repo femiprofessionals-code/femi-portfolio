@@ -14,10 +14,10 @@ const TIMELINE = [
 ]
 
 const VALUES = [
-  { title: 'Precision over polish.',     body: 'A framework that works beats a presentation that dazzles. Outcomes over optics.' },
-  { title: 'Speed with rigor.',          body: 'The 30-day CFTC framework was fast because the thinking was done upfront. Not because corners were cut.' },
-  { title: 'Build to hand off.',         body: 'The best programs do not require the person who built them. Designed for institutional durability.' },
-  { title: 'AI as infrastructure.',      body: 'Not a demo. Not a pilot. AI tools that go into production and get used daily.' },
+  { title: 'Precision over polish.', body: 'A framework that works beats a presentation that dazzles. Outcomes over optics.' },
+  { title: 'Speed with rigor.',       body: 'The 30-day CFTC framework was fast because the thinking was done upfront. Not because corners were cut.' },
+  { title: 'Build to hand off.',      body: 'The best programs do not require the person who built them. Designed for institutional durability.' },
+  { title: 'AI as infrastructure.',   body: 'Not a demo. Not a pilot. AI tools that go into production and get used daily.' },
 ]
 
 function TItem({ t, i }: { t: typeof TIMELINE[0]; i: number }) {
@@ -29,14 +29,7 @@ function TItem({ t, i }: { t: typeof TIMELINE[0]; i: number }) {
       initial={{ opacity: 0, y: 18 }}
       animate={inV ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: i * 0.09, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      className="timeline-item"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '120px 1fr',
-        gap: '2rem',
-        padding: '2.5rem 0',
-        borderTop: LINE,
-      }}>
+      style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '2rem', padding: '2.5rem 0', borderTop: LINE }}>
       <p style={{ fontFamily: F.serif, fontSize: '1.3rem', fontWeight: 300, color: C.accent, letterSpacing: '-0.01em' }}>{t.year}</p>
       <div>
         <p style={{ fontFamily: F.serif, fontSize: '1.35rem', fontWeight: 400, letterSpacing: '-0.02em', color: C.text, marginBottom: 4 }}>{t.co}</p>
@@ -53,102 +46,33 @@ export default function AboutPage() {
       <Nav />
 
       {/* Hero */}
-      <section
-        className="about-hero"
-        style={{
-          minHeight: '88vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: 'clamp(5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem)',
-          borderBottom: LINE,
-          position: 'relative',
-          overflow: 'hidden',
-          background: C.bg,
-        }}>
-        <div style={{
-          position: 'absolute',
-          right: '-1rem',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          fontFamily: F.serif,
-          fontSize: 'clamp(8rem, 22vw, 20rem)',
-          fontWeight: 300,
-          color: 'rgba(217,119,87,0.05)',
-          letterSpacing: '-0.08em',
-          lineHeight: 1,
-          userSelect: 'none',
-          pointerEvents: 'none',
-        }}>FF</div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
+      <section style={{
+        minHeight: '88vh',
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        padding: 'clamp(5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem)',
+        borderBottom: LINE, position: 'relative', overflow: 'hidden', background: C.bg,
+      }}>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }}
           style={{ fontFamily: F.sans, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', color: C.muted, marginBottom: '1.75rem' }}>
           About Femi Falade
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            fontFamily: F.serif,
-            fontSize: 'clamp(2rem, 5.5vw, 5.2rem)',
-            fontWeight: 300,
-            lineHeight: 1.05,
-            letterSpacing: '-0.025em',
-            color: C.text,
-            maxWidth: '28ch',
-            marginBottom: '2rem',
-          }}>
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          style={{ fontFamily: F.serif, fontSize: 'clamp(2rem, 5.5vw, 5.2rem)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.025em', color: C.text, maxWidth: '28ch', marginBottom: '2rem' }}>
           I build operational systems. I ship programs that scale. I do this inside institutions that move markets.
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.36, duration: 0.8 }}
-          style={{
-            fontFamily: F.sans,
-            fontSize: 'clamp(14px, 2.2vw, 16px)',
-            fontWeight: 300,
-            lineHeight: 1.8,
-            color: C.dim,
-            maxWidth: '60ch',
-          }}>
+        <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36, duration: 0.8 }}
+          style={{ fontFamily: F.sans, fontSize: 'clamp(14px, 2.2vw, 16px)', fontWeight: 300, lineHeight: 1.8, color: C.dim, maxWidth: '60ch' }}>
           Six years across Goldman Sachs, The Carlyle Group, and T. Rowe Price. Three AI-native platforms in development. Goldman-caliber operational discipline applied to transformation programs that actually ship.
         </motion.p>
       </section>
 
-      {/* Stats — wraps on mobile */}
-      <section
-        style={{
-          borderBottom: LINE,
-          padding: 'clamp(2rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem)',
-          background: C.bg,
-        }}>
-        <div
-          className="stats-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: 'clamp(1rem, 2vw, 1.5rem)',
-          }}>
-          {[
-            ['6+', 'Years in institutional finance'],
-            ['$580M', 'Migration managed'],
-            ['60%', 'Cycle time reduced'],
-            ['27', 'Annual transactions'],
-            ['3', 'AI platforms building'],
-          ].map(([v, l], i) => (
-            <motion.div
-              key={l}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.6 }}>
+      {/* Stats */}
+      <section style={{ borderBottom: LINE, padding: 'clamp(2rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem)', background: C.bg }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 'clamp(1rem, 2vw, 1.5rem)' }}>
+          {[['6+', 'Years in institutional finance'], ['$580M', 'Migration managed'], ['60%', 'Cycle time reduced'], ['27', 'Annual transactions'], ['3', 'AI platforms building']].map(([v, l], i) => (
+            <motion.div key={l} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.6 }}>
               <p style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem, 3vw, 2.5rem)', fontWeight: 300, color: C.text, letterSpacing: '-0.03em', marginBottom: 6 }}>{v}</p>
               <p style={{ fontFamily: F.sans, fontSize: 11, fontWeight: 300, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.muted, lineHeight: 1.4 }}>{l}</p>
             </motion.div>
@@ -156,77 +80,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Bio with headshot — collapses to single column on mobile */}
-      <section
-        className="bio-section"
-        style={{
-          padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.5fr)',
-          gap: 'clamp(2rem, 4vw, 5rem)',
-          borderBottom: LINE,
-          alignItems: 'start',
-          background: C.bg,
-        }}>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="bio-sticky"
-          style={{ position: 'sticky', top: 80 }}>
-          {/* Headshot — constrained for mobile */}
-          <div style={{
-            width: '100%',
-            maxWidth: 360,
-            aspectRatio: '3/4',
-            background: 'rgba(217,119,87,0.06)',
-            border: '1px solid rgba(217,119,87,0.15)',
-            marginBottom: '2rem',
-            overflow: 'hidden',
-            position: 'relative',
-          }}>
-            <img
-              src="/images/femi-headshot.jpg"
-              alt="Femi Falade"
-              onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'top',
-                position: 'relative',
-                zIndex: 2,
-              }}
-            />
+      {/* Bio with headshot — locked aspect ratio, never warps */}
+      <section className="bio-section" style={{
+        padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)',
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.5fr)',
+        gap: 'clamp(2rem, 4vw, 5rem)',
+        borderBottom: LINE, alignItems: 'start', background: C.bg,
+      }}>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+          className="bio-sticky" style={{ position: 'sticky', top: 80 }}>
+
+          {/* Headshot — bulletproof aspect ratio with paddingBottom hack */}
+          <div style={{ width: '100%', maxWidth: 320, marginLeft: 'auto', marginRight: 'auto', marginBottom: '2rem' }}>
             <div style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              width: '100%',
+              paddingBottom: '125%',  // 4:5 aspect ratio, can never warp
+              background: 'rgba(217,119,87,0.06)',
+              border: '1px solid rgba(217,119,87,0.15)',
+              overflow: 'hidden',
+              position: 'relative',
             }}>
-              <span style={{
-                fontFamily: F.serif,
-                fontSize: 'clamp(3rem, 8vw, 5rem)',
-                fontWeight: 300,
-                color: 'rgba(217,119,87,0.25)',
-                letterSpacing: '-0.04em',
-              }}>FF</span>
+              <img
+                src="/images/femi-headshot.jpg"
+                alt="Femi Falade"
+                onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                style={{
+                  position: 'absolute', inset: 0,
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'top center',
+                  zIndex: 2, display: 'block',
+                }}
+              />
+              <div style={{
+                position: 'absolute', inset: 0, zIndex: 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <span style={{
+                  fontFamily: F.serif,
+                  fontSize: 'clamp(3rem, 8vw, 5rem)',
+                  fontWeight: 300,
+                  color: 'rgba(217,119,87,0.25)',
+                  letterSpacing: '-0.04em',
+                }}>FF</span>
+              </div>
             </div>
           </div>
 
           <p style={{ fontFamily: F.sans, fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '1rem' }}>The story</p>
-          <h2 style={{
-            fontFamily: F.serif,
-            fontSize: 'clamp(1.4rem, 2.5vw, 2.25rem)',
-            fontWeight: 300,
-            lineHeight: 1.2,
-            letterSpacing: '-0.025em',
-            color: C.text,
-            maxWidth: '18ch',
-          }}>
+          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem, 2.5vw, 2.25rem)', fontWeight: 300, lineHeight: 1.2, letterSpacing: '-0.025em', color: C.text, maxWidth: '18ch' }}>
             Operational discipline, built inside the hardest rooms.
           </h2>
         </motion.div>
@@ -239,20 +141,8 @@ export default function AboutPage() {
             'That deployment proved the thesis I had been building toward. AI is not a feature. It is infrastructure. Not a demo for a committee. A tool that goes into production on Monday and makes the team faster by Thursday.',
             'In parallel, I am building three AI-native platforms under a single holding company. A hiring pre-screening platform. A renter-to-apartment matching product. A freelance task marketplace. Each attacks a market where current solutions are a decade behind the problem.',
           ].map((para, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.65 }}
-              style={{
-                fontFamily: F.sans,
-                fontSize: 'clamp(14px, 2vw, 15px)',
-                fontWeight: 300,
-                lineHeight: 1.85,
-                color: C.dim,
-                marginBottom: '1.5rem',
-              }}>
+            <motion.p key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.65 }}
+              style={{ fontFamily: F.sans, fontSize: 'clamp(14px, 2vw, 15px)', fontWeight: 300, lineHeight: 1.85, color: C.dim, marginBottom: '1.5rem' }}>
               {para}
             </motion.p>
           ))}
@@ -260,35 +150,14 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section
-        style={{
-          padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)',
-          borderBottom: LINE,
-          background: C.bg,
-        }}>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+      <section style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)', borderBottom: LINE, background: C.bg }}>
+        <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           style={{ fontFamily: F.sans, fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '3rem' }}>
           Operating principles
         </motion.p>
-        <div
-          className="values-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 2,
-            background: C.line,
-          }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 2, background: C.line }}>
           {VALUES.map((v, i) => (
-            <motion.div
-              key={v.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.65 }}
+            <motion.div key={v.title} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.65 }}
               style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2rem)', background: C.bg }}>
               <h3 style={{ fontFamily: F.serif, fontSize: 'clamp(1.25rem, 2vw, 1.5rem)', fontWeight: 400, letterSpacing: '-0.02em', color: C.accent, marginBottom: 12 }}>{v.title}</h3>
               <p style={{ fontFamily: F.sans, fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: C.dim }}>{v.body}</p>
@@ -298,43 +167,16 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section
-        style={{
-          padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)',
-          borderBottom: LINE,
-          background: C.bg,
-        }}>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+      <section style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)', borderBottom: LINE, background: C.bg }}>
+        <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           style={{ fontFamily: F.sans, fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '3rem' }}>
           Career timeline
         </motion.p>
         {TIMELINE.map((t, i) => <TItem key={i} t={t} i={i} />)}
       </section>
 
-      <section
-        className="cta-section"
-        style={{
-          padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '2rem',
-          background: C.bg,
-        }}>
-        <h2 style={{
-          fontFamily: F.serif,
-          fontSize: 'clamp(1.6rem, 4vw, 3.5rem)',
-          fontWeight: 300,
-          lineHeight: 1.1,
-          letterSpacing: '-0.025em',
-          color: C.text,
-          maxWidth: '22ch',
-        }}>
+      <section style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', background: C.bg }}>
+        <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem, 4vw, 3.5rem)', fontWeight: 300, lineHeight: 1.1, letterSpacing: '-0.025em', color: C.text, maxWidth: '22ch' }}>
           Seen enough? Let us talk about what I can do for you.
         </h2>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -345,24 +187,10 @@ export default function AboutPage() {
 
       <Footer />
 
-      {/* Mobile-only tweaks */}
       <style jsx global>{`
         @media (max-width: 768px) {
-          .bio-section {
-            grid-template-columns: 1fr !important;
-          }
-          .bio-sticky {
-            position: static !important;
-          }
-          .bio-sticky > div:first-child {
-            max-width: 280px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-          }
-          .timeline-item {
-            grid-template-columns: 1fr !important;
-            gap: 0.5rem !important;
-          }
+          .bio-section { grid-template-columns: 1fr !important; }
+          .bio-sticky { position: static !important; }
         }
       `}</style>
     </>
