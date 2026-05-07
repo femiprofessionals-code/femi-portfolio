@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ────────────────────────────────────────
-   BASE RESET
-   ──────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   BASE — applies to all screen sizes
+   ════════════════════════════════════════════════════════ */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -14,6 +14,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -23,31 +24,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-width: 320px;          /* never let layout collapse below this */
 }
 
-img, video {
+img, video, svg {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-::selection {
-  background: rgba(217, 119, 87, 0.22);
-  color: #111111;
+a, button {
+  -webkit-tap-highlight-color: transparent;     /* removes ugly grey flash on tap */
+  touch-action: manipulation;                    /* removes 300ms tap delay on iOS */
 }
 
+::selection { background: rgba(217, 119, 87, 0.22); color: #111111; }
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #FAF8F5; }
 ::-webkit-scrollbar-thumb { background: rgba(217, 119, 87, 0.5); border-radius: 2px; }
 
 
-/* ────────────────────────────────────────
+/* ════════════════════════════════════════════════════════
    ANIMATIONS
-   ──────────────────────────────────────── */
+   ════════════════════════════════════════════════════════ */
 @keyframes tickerScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-
 .ticker-inner {
   display: flex;
   width: max-content;
@@ -62,51 +65,146 @@ img, video {
 .video-loaded { animation: videoFade 1.2s ease forwards; }
 
 
-/* ────────────────────────────────────────
-   MOBILE NAV — hamburger menu
-   ──────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   MOBILE NAV — hidden until needed
+   ════════════════════════════════════════════════════════ */
 .mobile-menu-btn { display: none; }
 .mobile-menu-panel { display: none; }
 
 
-/* ────────────────────────────────────────
-   TABLET AND BELOW (under 1024px)
-   ──────────────────────────────────────── */
-@media (max-width: 1024px) {
+/* ════════════════════════════════════════════════════════
+   ULTRA-WIDE / 4K (1920px+)
+   ════════════════════════════════════════════════════════ */
+@media (min-width: 1920px) {
+  section {
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+  }
+  body {
+    font-size: 17px;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LARGE DESKTOP (1440px – 1919px) — default looks fine
+   ════════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════════════
+   SMALL DESKTOP / LARGE LAPTOP (1200px – 1439px)
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 1439px) {
+  section[style*="padding"] {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   STANDARD LAPTOP (1024px – 1199px)
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 1199px) {
+
+  /* Reduce gigantic gaps */
+  [style*="gap: '5rem'"],
+  [style*="gap: 5rem"],
+  [style*="gap: '6rem'"],
+  [style*="gap: 6rem"] {
+    gap: 3rem !important;
+  }
+
+  /* 5-col stat grid → 3-col on small laptops */
+  [style*="grid-template-columns: repeat(5, 1fr)"],
+  [style*="gridTemplateColumns: 'repeat(5, 1fr)'"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   TABLET LANDSCAPE / SMALL LAPTOP (900px – 1023px)
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 1023px) {
+
+  section {
+    padding-left: 1.75rem !important;
+    padding-right: 1.75rem !important;
+  }
+
+  /* 4-col grids → 2-col */
+  [style*="grid-template-columns: repeat(4,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(4,1fr)'"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.75rem !important;
+  }
 
   /* Globe slightly smaller */
   div[style*="height: 480"] {
     height: 400px !important;
   }
 
-  /* 4-col and 5-col grids → 2-col on tablet */
-  [style*="grid-template-columns: repeat(4,1fr)"],
-  [style*="gridTemplateColumns: 'repeat(4,1fr)'"],
+  /* Hero h1 sizes back off */
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   TABLET PORTRAIT (768px – 899px)
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 899px) {
+
+  /* 3-col grids → 2-col */
+  [style*="grid-template-columns: repeat(3,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(3,1fr)'"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  /* 5-col stats → 2-col on tablet */
   [style*="grid-template-columns: repeat(5, 1fr)"],
   [style*="gridTemplateColumns: 'repeat(5, 1fr)'"] {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1.5rem !important;
   }
+
+  /* Sidebar layouts collapse to single col */
+  [style*="grid-template-columns: 260px 1fr"],
+  [style*="gridTemplateColumns: '260px 1fr'"],
+  [style*="grid-template-columns: 200px 1fr"],
+  [style*="gridTemplateColumns: '200px 1fr'"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  [style*="position: sticky"] {
+    position: static !important;
+  }
 }
 
 
-/* ────────────────────────────────────────
-   MOBILE OPTIMIZATION (under 768px)
-   ──────────────────────────────────────── */
-@media (max-width: 768px) {
+/* ════════════════════════════════════════════════════════
+   MOBILE LARGE / TABLET PORTRAIT (under 768px) — phones
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
 
-  /* Typography — scale down */
-  h1 { font-size: clamp(2.2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
-  h2 { font-size: clamp(1.6rem, 6vw, 2.5rem) !important; line-height: 1.15 !important; }
-  h3 { font-size: 1.25rem !important; }
+  /* Typography */
+  h1 { font-size: clamp(2rem, 8vw, 3rem) !important; line-height: 1.08 !important; }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.25rem) !important; line-height: 1.15 !important; }
+  h3 { font-size: 1.2rem !important; }
 
-  /* Section padding — tighter */
+  /* Section padding tightened */
   section {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
+    padding-top: clamp(2.5rem, 8vw, 4rem) !important;
+    padding-bottom: clamp(2.5rem, 8vw, 4rem) !important;
   }
 
-  /* Force all multi-column grids → single column */
+  /* Force ALL multi-column grids → single column */
   [style*="grid-template-columns: 1fr 1fr"],
   [style*="gridTemplateColumns: '1fr 1fr'"],
   [style*="grid-template-columns: 1fr 1.5fr"],
@@ -119,6 +217,8 @@ img, video {
   [style*="gridTemplateColumns: '200px 1fr'"],
   [style*="grid-template-columns: 96px 1fr"],
   [style*="grid-template-columns: 120px 1fr"],
+  [style*="grid-template-columns: repeat(2,1fr)"],
+  [style*="gridTemplateColumns: 'repeat(2,1fr)'"],
   [style*="grid-template-columns: repeat(3,1fr)"],
   [style*="gridTemplateColumns: 'repeat(3,1fr)'"],
   [style*="grid-template-columns: repeat(4,1fr)"],
@@ -129,18 +229,15 @@ img, video {
     gap: 1.5rem !important;
   }
 
-  /* Sticky elements — release on mobile */
+  /* Sticky elements release */
   [style*="position: sticky"] { position: static !important; }
 
   /* Hero sections — release fixed heights */
-  section[style*="100vh"] {
+  section[style*="100vh"],
+  section[style*="88vh"],
+  section[style*="70vh"] {
     min-height: auto !important;
-    padding-top: 5rem !important;
-    padding-bottom: 4rem !important;
-  }
-  section[style*="88vh"] {
-    min-height: auto !important;
-    padding-top: 5rem !important;
+    padding-top: 6rem !important;
     padding-bottom: 4rem !important;
   }
   section[style*="55vh"],
@@ -153,58 +250,55 @@ img, video {
     padding-bottom: 3rem !important;
   }
 
-  /* Nav — compact, hide desktop links and CTA */
+  /* Nav adjustments */
   header[style] {
     padding: 0 1rem !important;
   }
-  header nav {
+  header > nav {
     display: none !important;
   }
-  /* Hide the desktop CTA pill on mobile (last child link) */
-  header > a:last-of-type {
+  header > a:nth-of-type(2) {            /* desktop CTA pill */
     display: none !important;
   }
 
-  /* Show mobile hamburger button */
+  /* Show mobile hamburger */
   .mobile-menu-btn { display: block !important; }
   .mobile-menu-panel { display: flex !important; }
 
-  /* Globe — smaller height */
+  /* Globe smaller */
   div[style*="height: 480"] {
     height: 320px !important;
   }
 
-  /* Ticker — tighter */
+  /* Ticker tighter */
   .ticker-inner > div {
     padding: 0 1.5rem !important;
     min-width: 160px !important;
   }
 
-  /* Forms — prevent iOS zoom on focus */
+  /* Forms — prevent iOS zoom */
   input, textarea, select {
     font-size: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* Horizontal scroll lists — pad correctly */
+  /* Horizontal scroll lists */
   div[style*="overflow-x: auto"],
   div[style*="overflowX: 'auto'"] {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* CTA sections with flex layouts — wrap nicely */
+  /* CTA flex sections wrap */
   section[style*="justify-content: space-between"],
   section[style*="justifyContent: 'space-between'"] {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
 
-  /* Filter buttons — wrap or scroll horizontally */
-  div[style*="display: flex"][style*="gap: '2.5rem'"] {
-    gap: 1.25rem !important;
-  }
-
-  /* Footer columns → stack */
+  /* Footer */
   footer > div:first-child {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
@@ -216,48 +310,120 @@ img, video {
     align-items: flex-start !important;
     padding: 1rem 1.25rem !important;
   }
+
+  /* Big decorative FF on About hero — hide */
+  div[style*="clamp(12rem,22vw,20rem)"],
+  div[style*="clamp(8rem, 22vw, 20rem)"] {
+    opacity: 0.025 !important;
+    font-size: clamp(8rem, 30vw, 14rem) !important;
+  }
+
+  /* Globe pin label cards — fit screen */
+  div[style*="maxWidth: 420"] {
+    max-width: calc(100vw - 2rem) !important;
+  }
 }
 
 
-/* ────────────────────────────────────────
-   TINY MOBILE (under 480px)
-   ──────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   STANDARD MOBILE (375px – 480px) — iPhone, most Android
+   ════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
 
-  h1 { font-size: 2rem !important; }
-  h2 { font-size: 1.4rem !important; }
-  h3 { font-size: 1.15rem !important; }
+  h1 { font-size: clamp(1.75rem, 8vw, 2.4rem) !important; }
+  h2 { font-size: clamp(1.35rem, 6vw, 1.85rem) !important; }
+  h3 { font-size: 1.1rem !important; }
 
   section {
-    padding: 2.5rem 1rem !important;
+    padding: clamp(2rem, 7vw, 3rem) 1rem !important;
   }
 
-  /* Logo sizing */
+  /* Logo and wordmark */
   header img {
     width: 22px !important;
     height: 22px !important;
   }
-  header a span {
+  header > a:first-of-type span {
     font-size: 15px !important;
   }
 
-  /* Stat values smaller */
+  /* Stat values */
   p[style*="clamp(2.2rem"],
-  p[style*="clamp(1.5rem"] {
-    font-size: 1.4rem !important;
+  p[style*="clamp(1.5rem"],
+  p[style*="clamp(1.4rem"] {
+    font-size: 1.5rem !important;
   }
 
-  /* Globe — even smaller */
+  /* Globe even smaller */
   div[style*="height: 480"],
   div[style*="height: 320"] {
     height: 280px !important;
   }
+
+  /* Mobile menu links smaller */
+  .mobile-menu-panel a[style*="2rem"] {
+    font-size: 1.5rem !important;
+  }
+
+  /* Hero copy */
+  section[style*="100vh"] p[style*="font-size: 16"],
+  section[style*="100vh"] p[style*="font-size: 15"] {
+    font-size: 14px !important;
+  }
 }
 
 
-/* ────────────────────────────────────────
-   ACCESSIBILITY — respect reduced motion
-   ──────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   TINY MOBILE (under 375px) — iPhone SE, older Android
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 374px) {
+
+  h1 { font-size: 1.65rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  h3 { font-size: 1rem !important; }
+
+  section {
+    padding: 2rem 0.875rem !important;
+  }
+
+  header[style] {
+    padding: 0 0.75rem !important;
+  }
+  header img {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  header > a:first-of-type span {
+    font-size: 14px !important;
+  }
+
+  /* Hero subhead */
+  section p {
+    font-size: 13px !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LANDSCAPE PHONES (max-height: 500px in landscape)
+   Stops content from being unreadable when phone is sideways
+   ════════════════════════════════════════════════════════ */
+@media (max-height: 500px) and (orientation: landscape) {
+  section[style*="100vh"],
+  section[style*="88vh"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   ACCESSIBILITY — respect motion preferences
+   ════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -266,4 +432,14 @@ img, video {
     scroll-behavior: auto !important;
   }
   .ticker-inner { animation: none !important; }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   PRINT STYLES — bonus for anyone printing your portfolio
+   ════════════════════════════════════════════════════════ */
+@media print {
+  header, footer, video { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  section { padding: 1rem !important; page-break-inside: avoid; }
 }
