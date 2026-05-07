@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { F, C } from './tokens'
 
@@ -16,7 +16,6 @@ export default function VideoHero({
   const videoRef = useRef<HTMLVideoElement>(null)
   const [loaded, setLoaded] = useState(false)
   const [hasVideo, setHasVideo] = useState(true)
-  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
     const v = videoRef.current
@@ -47,12 +46,11 @@ export default function VideoHero({
       flexDirection: 'column',
       justifyContent: 'flex-end',
       padding: '0 2.5rem 5.5rem',
-      paddingTop: 58,
+      paddingTop: 120,
       overflow: 'hidden',
       background: '#080F1C',
     }}>
 
-      {/* Background video */}
       {hasVideo && (
         <video
           ref={videoRef}
@@ -77,7 +75,6 @@ export default function VideoHero({
         />
       )}
 
-      {/* Fallback poster if video fails */}
       {!hasVideo && (
         <div style={{
           position: 'absolute',
@@ -89,7 +86,6 @@ export default function VideoHero({
         }} />
       )}
 
-      {/* Bottom gradient overlay */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -97,14 +93,13 @@ export default function VideoHero({
         background: 'linear-gradient(to top, rgba(8,15,28,0.97) 0%, rgba(8,15,28,0.75) 35%, rgba(8,15,28,0.3) 65%, rgba(8,15,28,0.15) 100%)',
       }} />
 
-      {/* Top gradient overlay */}
+      {/* Top gradient is now lighter so the nav logo stays readable */}
       <div style={{
         position: 'absolute',
-        top: 0, left: 0, right: 0, height: '30%', zIndex: 1,
-        background: 'linear-gradient(to bottom, rgba(8,15,28,0.6) 0%, transparent 100%)',
+        top: 0, left: 0, right: 0, height: '15%', zIndex: 1,
+        background: 'linear-gradient(to bottom, rgba(8,15,28,0.25) 0%, transparent 100%)',
       }} />
 
-      {/* Vignette */}
       <div style={{
         position: 'absolute',
         bottom: '10%', right: '5%',
@@ -114,167 +109,18 @@ export default function VideoHero({
         pointerEvents: 'none',
       }} />
 
-      {/* Hero text content */}
-      <div
-        className="hero-text-wrap"
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          maxWidth: '60%',
-        }}
-      >
-
-        {/* Eyebrow row with interactive headshot */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 14,
-          marginBottom: '1.75rem',
-          position: 'relative',
-        }}>
-          {/* Animated headshot */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            whileHover={{ scale: 1.08 }}
-            className="hero-headshot"
-            style={{
-              position: 'relative',
-              width: 56,
-              height: 56,
-              flexShrink: 0,
-              cursor: 'pointer',
-              transition: 'transform 0.3s ease',
-            }}
-          >
-            {/* Outer pulsing ring on hover */}
-            <motion.div
-              animate={hovered ? {
-                scale: [1, 1.4, 1.4],
-                opacity: [0.6, 0, 0],
-              } : { scale: 1, opacity: 0 }}
-              transition={{
-                duration: 1.5,
-                repeat: hovered ? Infinity : 0,
-                ease: 'easeOut',
-              }}
-              style={{
-                position: 'absolute',
-                inset: -2,
-                borderRadius: '50%',
-                border: '2px solid #D97757',
-                pointerEvents: 'none',
-              }}
-            />
-
-            {/* Headshot circle with image */}
-            <div style={{
-              width: 56,
-              height: 56,
-              borderRadius: '50%',
-              overflow: 'hidden',
-              border: hovered
-                ? '2px solid rgba(217,119,87,1)'
-                : '2px solid rgba(217,119,87,0.6)',
-              boxShadow: hovered
-                ? '0 0 24px rgba(217,119,87,0.55), 0 6px 20px rgba(0,0,0,0.4)'
-                : '0 6px 20px rgba(0,0,0,0.4)',
-              background: 'rgba(8,15,28,0.5)',
-              transition: 'border 0.3s ease, box-shadow 0.3s ease',
-            }}>
-              <img
-                src="/images/femi-headshot.jpg"
-                alt="Femi Falade"
-                onError={e => { (e.currentTarget.parentElement?.parentElement as HTMLElement).style.display = 'none' }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'top center',
-                  display: 'block',
-                  transition: 'transform 0.5s ease',
-                  transform: hovered ? 'scale(1.1)' : 'scale(1)',
-                }}
-              />
-            </div>
-
-            {/* Floating reveal card */}
-            <AnimatePresence>
-              {hovered && (
-                <motion.div
-                  initial={{ opacity: 0, x: -8, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -8, scale: 0.95 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: 'calc(100% + 14px)',
-                    transform: 'translateY(-50%)',
-                    background: 'rgba(8,15,28,0.92)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(217,119,87,0.3)',
-                    padding: '10px 16px',
-                    borderRadius: 8,
-                    whiteSpace: 'nowrap',
-                    zIndex: 10,
-                    pointerEvents: 'none',
-                  }}
-                >
-                  <p style={{
-                    fontFamily: F.serif,
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color: '#F0EDE8',
-                    letterSpacing: '-0.01em',
-                    margin: 0,
-                  }}>
-                    Femi Falade
-                  </p>
-                  <p style={{
-                    fontFamily: F.sans,
-                    fontSize: 10,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: '#D97757',
-                    margin: '2px 0 0 0',
-                  }}>
-                    Senior Associate · Goldman Sachs
-                  </p>
-
-                  {/* Pointing arrow on left edge */}
-                  <div style={{
-                    position: 'absolute',
-                    left: -6,
-                    top: '50%',
-                    transform: 'translateY(-50%) rotate(45deg)',
-                    width: 12,
-                    height: 12,
-                    background: 'rgba(8,15,28,0.92)',
-                    borderLeft: '1px solid rgba(217,119,87,0.3)',
-                    borderBottom: '1px solid rgba(217,119,87,0.3)',
-                  }} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          <motion.p {...fadeUp(0.15)}
-            style={{
-              fontFamily: F.sans,
-              fontSize: 11,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: 'rgba(240,237,232,0.5)',
-              margin: 0,
-            }}>
-            Goldman Sachs · Global Banking and Markets · New York
-          </motion.p>
-        </div>
+      <div className="hero-text-wrap" style={{ position: 'relative', zIndex: 2 }}>
+        <motion.p {...fadeUp(0.15)}
+          style={{
+            fontFamily: F.sans,
+            fontSize: 12,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: 'rgba(240,237,232,0.55)',
+            marginBottom: '1.75rem',
+          }}>
+          Goldman Sachs · Global Banking and Markets · New York
+        </motion.p>
 
         <motion.h1 {...fadeUp(0.25)}
           style={{
@@ -295,11 +141,11 @@ export default function VideoHero({
         <motion.p {...fadeUp(0.4)}
           style={{
             fontFamily: F.sans,
-            fontSize: 15,
+            fontSize: 17,
             fontWeight: 300,
             lineHeight: 1.75,
-            color: 'rgba(240,237,232,0.7)',
-            maxWidth: '52ch',
+            color: 'rgba(240,237,232,0.8)',
+            maxWidth: '54ch',
             marginBottom: '2.75rem',
           }}>
           Goldman Sachs. The Carlyle Group. T. Rowe Price. CFTC frameworks delivered in 30 days. A $580M entity migration. An AI workflow tool deployed to 60 team members. Three platforms in development.
@@ -312,7 +158,7 @@ export default function VideoHero({
             alignItems: 'center',
             gap: 8,
             fontFamily: F.sans,
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: 500,
             color: '#F0EDE8',
             textDecoration: 'none',
@@ -326,9 +172,9 @@ export default function VideoHero({
           </Link>
           <Link href="/contact" style={{
             fontFamily: F.sans,
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: 300,
-            color: 'rgba(240,237,232,0.5)',
+            color: 'rgba(240,237,232,0.55)',
             textDecoration: 'none',
           }}>
             Work with me

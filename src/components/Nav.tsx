@@ -10,6 +10,7 @@ const LINKS = [
   { label: 'About',    href: '/about'    },
   { label: 'Work',     href: '/work'     },
   { label: 'Services', href: '/services' },
+  { label: 'Travel',   href: '/travel'   },
   { label: 'Contact',  href: '/contact'  },
 ]
 
@@ -43,13 +44,13 @@ export default function Nav() {
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-          height: 58,
+          height: 64,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 2.5rem',
           background: scrolled || open
             ? 'rgba(250,248,245,0.97)'
             : isHome
-              ? 'rgba(8,15,28,0.35)'
+              ? 'rgba(8,15,28,0.4)'
               : 'rgba(250,248,245,0.85)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -58,16 +59,47 @@ export default function Nav() {
         }}
       >
         <Link href="/" style={{
-          display: 'flex', alignItems: 'center', gap: 2,
+          display: 'flex', alignItems: 'center', gap: 10,
           textDecoration: 'none', transition: 'opacity 0.2s',
         }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.75')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-          <img src="/ff-logo.png" alt="FF" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+
+          {/* LOGO BADGE — light disc behind logo for visibility */}
+          <div style={{
+            width: 38,
+            height: 38,
+            borderRadius: '50%',
+            background: onDark ? 'rgba(250,248,245,0.95)' : 'transparent',
+            border: onDark ? '1px solid rgba(217,119,87,0.35)' : 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: onDark ? '0 4px 16px rgba(0,0,0,0.25)' : 'none',
+            transition: 'background 0.4s, border 0.4s, box-shadow 0.4s',
+            flexShrink: 0,
+          }}>
+            <img
+              src="/ff-logo.png"
+              alt="FF"
+              style={{
+                width: 26,
+                height: 26,
+                objectFit: 'contain',
+                display: 'block',
+              }}
+            />
+          </div>
+
           <span style={{
-            fontFamily: F.serif, fontSize: 17, fontWeight: 400,
+            fontFamily: F.serif,
+            fontSize: 19,
+            fontWeight: 400,
             color: onDark ? '#F0EDE8' : '#111111',
-            letterSpacing: '-0.015em', lineHeight: 1, transition: 'color 0.3s',
+            letterSpacing: '-0.015em',
+            lineHeight: 1,
+            transition: 'color 0.3s',
+            textShadow: onDark ? '0 2px 12px rgba(0,0,0,0.65)' : 'none',
           }}>
             Femi Falade
           </span>
@@ -76,15 +108,16 @@ export default function Nav() {
         <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           {LINKS.map(l => {
             const active = path === l.href
-            const baseColor  = onDark ? 'rgba(240,237,232,0.55)' : 'rgba(17,17,17,0.5)'
+            const baseColor  = onDark ? 'rgba(240,237,232,0.7)' : 'rgba(17,17,17,0.6)'
             const hoverColor = onDark ? '#F0EDE8' : '#111111'
             return (
               <Link key={l.href} href={l.href} style={{
-                fontFamily: F.sans, fontSize: 11.5,
+                fontFamily: F.sans, fontSize: 13,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
                 color: active ? C.accent : baseColor,
                 textDecoration: 'none', transition: 'color 0.2s',
                 position: 'relative', paddingBottom: 2,
+                textShadow: onDark ? '0 1px 6px rgba(0,0,0,0.5)' : 'none',
               }}
                 onMouseEnter={e => { if (!active) e.currentTarget.style.color = hoverColor }}
                 onMouseLeave={e => { if (!active) e.currentTarget.style.color = baseColor }}
@@ -102,10 +135,10 @@ export default function Nav() {
         </nav>
 
         <Link href="/contact" style={{
-          fontFamily: F.sans, fontSize: 12, fontWeight: 500,
+          fontFamily: F.sans, fontSize: 13, fontWeight: 500,
           letterSpacing: '0.07em',
           background: C.accent, color: '#FAF8F5',
-          padding: '9px 22px', borderRadius: 100,
+          padding: '11px 26px', borderRadius: 100,
           textDecoration: 'none',
           transition: 'opacity 0.2s, transform 0.2s',
         }}
@@ -126,16 +159,16 @@ export default function Nav() {
             transition: 'color 0.3s',
           }}
         >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <svg width="24" height="24" viewBox="0 0 22 22" fill="none">
             {open ? (
               <>
-                <line x1="4"  y1="4"  x2="18" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="18" y1="4"  x2="4"  y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <line x1="4"  y1="4"  x2="18" y2="18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                <line x1="18" y1="4"  x2="4"  y2="18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
               </>
             ) : (
               <>
-                <line x1="3" y1="7"  x2="19" y2="7"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="3" y1="15" x2="19" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <line x1="3" y1="7"  x2="19" y2="7"  stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                <line x1="3" y1="15" x2="19" y2="15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
               </>
             )}
           </svg>
@@ -152,7 +185,7 @@ export default function Nav() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="mobile-menu-panel"
             style={{
-              position: 'fixed', top: 58, left: 0, right: 0, bottom: 0,
+              position: 'fixed', top: 64, left: 0, right: 0, bottom: 0,
               background: 'rgba(250,248,245,0.98)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
@@ -172,7 +205,7 @@ export default function Nav() {
                   onClick={() => setOpen(false)}
                   style={{
                     display: 'block',
-                    fontFamily: F.serif, fontSize: '2rem', fontWeight: 400,
+                    fontFamily: F.serif, fontSize: '2.2rem', fontWeight: 400,
                     color: path === l.href ? C.accent : '#111111',
                     textDecoration: 'none', letterSpacing: '-0.015em',
                     padding: '0.75rem 0',
@@ -195,10 +228,10 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
                 style={{
                   display: 'inline-block',
-                  fontFamily: F.sans, fontSize: 13, fontWeight: 500,
+                  fontFamily: F.sans, fontSize: 15, fontWeight: 500,
                   letterSpacing: '0.07em',
                   background: C.accent, color: '#FAF8F5',
-                  padding: '13px 28px', borderRadius: 100,
+                  padding: '14px 32px', borderRadius: 100,
                   textDecoration: 'none',
                 }}
               >
@@ -213,14 +246,14 @@ export default function Nav() {
               style={{ marginTop: 'auto', paddingTop: '2rem' }}
             >
               <p style={{
-                fontFamily: F.sans, fontSize: 10,
+                fontFamily: F.sans, fontSize: 12,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: 'rgba(17,17,17,0.4)', marginBottom: 8,
               }}>
                 Get in touch
               </p>
               <a href="mailto:femi@femifalade.com" style={{
-                fontFamily: F.sans, fontSize: 14, fontWeight: 300,
+                fontFamily: F.sans, fontSize: 16, fontWeight: 300,
                 color: '#111111', textDecoration: 'none', display: 'block',
               }}>
                 femi@femifalade.com
