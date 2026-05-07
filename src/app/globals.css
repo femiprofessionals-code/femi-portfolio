@@ -70,20 +70,18 @@ a, button {
 
 
 /* ════════════════════════════════════════════════════════
-   MOBILE NAV STATES
+   MOBILE NAV — hamburger menu states
    ════════════════════════════════════════════════════════ */
 .mobile-menu-btn { display: none; }
 .mobile-menu-panel { display: none; }
 
 
 /* ════════════════════════════════════════════════════════
-   MOBILE — under 900px
-   This is where the overflow was happening
+   MOBILE OPTIMIZATION — under 900px
    ════════════════════════════════════════════════════════ */
 @media (max-width: 899px) {
 
-  /* ── HERO — most important fix ── */
-  /* The hero section was wider than viewport because of padding + content combo */
+  /* Section containment */
   section {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
@@ -92,14 +90,17 @@ a, button {
     overflow-x: hidden !important;
   }
 
-  /* All h1, h2, p inside sections — wrap and never overflow */
-  section h1, section h2, section h3, section p {
+  /* All text elements wrap properly */
+  section h1,
+  section h2,
+  section h3,
+  section p {
     max-width: 100% !important;
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
   }
 
-  /* Hero release fixed heights */
+  /* Hero sections release fixed heights */
   section[style*="100vh"],
   section[style*="88vh"] {
     min-height: auto !important;
@@ -116,7 +117,12 @@ a, button {
     padding-bottom: 3rem !important;
   }
 
-  /* ── NAV — completely hide desktop nav and CTA ── */
+  /* Hero text uses full width on mobile */
+  .hero-text-wrap {
+    max-width: 100% !important;
+  }
+
+  /* Nav adjustments */
   header[style] {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -124,12 +130,10 @@ a, button {
     max-width: 100vw !important;
   }
 
-  /* Hide the desktop nav entirely */
   header > nav {
     display: none !important;
   }
 
-  /* Hide BOTH desktop CTAs (the second <a> child) */
   header > a:nth-of-type(2) {
     display: none !important;
   }
@@ -138,12 +142,12 @@ a, button {
   .mobile-menu-btn { display: block !important; }
   .mobile-menu-panel { display: flex !important; }
 
-  /* ── Typography ── */
+  /* Typography scales down */
   h1 { font-size: clamp(1.9rem, 8vw, 3rem) !important; line-height: 1.1 !important; }
   h2 { font-size: clamp(1.4rem, 6vw, 2.25rem) !important; line-height: 1.15 !important; }
   h3 { font-size: 1.2rem !important; }
 
-  /* ── ALL multi-column grids → single column ── */
+  /* All multi-column grids → single column */
   [style*="grid-template-columns: 1fr 1fr"],
   [style*="gridTemplateColumns: '1fr 1fr'"],
   [style*="grid-template-columns: 1fr 1.5fr"],
@@ -169,43 +173,37 @@ a, button {
   }
 
   /* Sticky elements release */
-  [style*="position: sticky"] { position: static !important; }
+  [style*="position: sticky"] {
+    position: static !important;
+  }
 
-  /* ── DECORATIVE GIANT FF — major overflow culprit ── */
-  /* The huge FF on About hero was wider than the screen */
+  /* Hide decorative giant FF on About hero */
   div[style*="22vw"][style*="absolute"] {
     display: none !important;
   }
 
-  /* ── SCROLL INDICATOR — hide on mobile, takes up space ── */
+  /* Hide vertical SCROLL indicator */
   div[style*="writingMode: 'vertical-rl'"],
   div[style*="writing-mode: vertical-rl"] {
     display: none !important;
   }
 
-  /* Their parent container too */
-  motion-div[style*="writingMode"],
   div[style*="bottom: '2.5rem'"][style*="right: '2.5rem'"] {
     display: none !important;
   }
 
-  /* ── VIDEO HERO scroll indicator parent ── */
-  section[style*="100vh"] > div[style*="position: 'absolute'"][style*="bottom"] {
-    display: none !important;
-  }
-
-  /* Globe smaller */
+  /* Globe smaller height */
   div[style*="height: 480"] {
     height: 320px !important;
   }
 
-  /* Ticker */
+  /* Ticker tightens up */
   .ticker-inner > div {
     padding: 0 1.5rem !important;
     min-width: 160px !important;
   }
 
-  /* Forms */
+  /* Forms — prevent iOS zoom and contain */
   input, textarea, select {
     font-size: 16px !important;
     width: 100% !important;
@@ -221,14 +219,14 @@ a, button {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Flex sections that should wrap */
+  /* Flex sections wrap nicely */
   section[style*="justify-content: space-between"],
   section[style*="justifyContent: 'space-between'"] {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
 
-  /* Footer */
+  /* Footer columns stack */
   footer > div:first-child {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
@@ -244,7 +242,7 @@ a, button {
 
 
 /* ════════════════════════════════════════════════════════
-   SMALL PHONES — under 480px
+   STANDARD MOBILE — under 480px
    ════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
 
@@ -276,7 +274,7 @@ a, button {
     height: 280px !important;
   }
 
-  /* Mobile menu link size */
+  /* Mobile menu link sizing */
   .mobile-menu-panel a[style*="2rem"] {
     font-size: 1.5rem !important;
   }
@@ -284,7 +282,7 @@ a, button {
 
 
 /* ════════════════════════════════════════════════════════
-   TINY PHONES — under 375px (iPhone SE)
+   TINY PHONES — under 375px (iPhone SE, older Android)
    ════════════════════════════════════════════════════════ */
 @media (max-width: 374px) {
 
@@ -312,7 +310,7 @@ a, button {
 
 
 /* ════════════════════════════════════════════════════════
-   LARGER LAYOUTS — desktop refinements
+   TABLET LANDSCAPE — 900px to 1023px
    ════════════════════════════════════════════════════════ */
 @media (min-width: 900px) and (max-width: 1023px) {
   [style*="grid-template-columns: repeat(4,1fr)"],
@@ -325,6 +323,10 @@ a, button {
   }
 }
 
+
+/* ════════════════════════════════════════════════════════
+   STANDARD LAPTOP — 1024px to 1199px
+   ════════════════════════════════════════════════════════ */
 @media (min-width: 1024px) and (max-width: 1199px) {
   [style*="grid-template-columns: repeat(5, 1fr)"],
   [style*="gridTemplateColumns: 'repeat(5, 1fr)'"] {
@@ -334,7 +336,7 @@ a, button {
 
 
 /* ════════════════════════════════════════════════════════
-   ACCESSIBILITY
+   ACCESSIBILITY — respect reduced motion
    ════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -344,9 +346,4 @@ a, button {
     scroll-behavior: auto !important;
   }
   .ticker-inner { animation: none !important; }
-}
-/* Hide hero headshot on phones — too cramped */
-@media (max-width: 767px) {
-  .hero-headshot { display: none !important; }
-  .hero-text-wrap { max-width: 100% !important; }
 }
