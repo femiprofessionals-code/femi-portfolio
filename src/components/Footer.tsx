@@ -49,14 +49,14 @@ export default function Footer() {
 
         <motion.div {...fadeUp(0.07)}>
           <span style={lStyle}>Navigate</span>
-          {([['/', 'Home'], ['/about', 'About'], ['/work', 'Work'], ['/services', 'Services'], ['/travel', 'Travel'], ['/contact', 'Contact']] as [string,string][]).map(([href, lbl]) => (
+          {([['/', 'Home'], ['/about', 'About'], ['/work', 'Work'], ['/services', 'Services'],  ['/contact', 'Contact']] as [string,string][]).map(([href, lbl]) => (
             <Link key={href} href={href} style={aStyle} onMouseEnter={hov} onMouseLeave={lev}>{lbl}</Link>
           ))}
         </motion.div>
 
         <motion.div {...fadeUp(0.14)}>
           <span style={lStyle}>Connect</span>
-          <a href="https://www.linkedin.com/in/femifalade" target="_blank" rel="noopener noreferrer" style={aStyle} onMouseEnter={hov} onMouseLeave={lev}>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/femi-falade" target="_blank" rel="noopener noreferrer" style={aStyle} onMouseEnter={hov} onMouseLeave={lev}>LinkedIn</a>
           <a href="https://calendly.com/femijfalade/femi" target="_blank" rel="noopener noreferrer" style={aStyle} onMouseEnter={hov} onMouseLeave={lev}>Calendly</a>
           <a href="mailto:femi@femifalade.com" style={aStyle} onMouseEnter={hov} onMouseLeave={lev}>Email</a>
         </motion.div>

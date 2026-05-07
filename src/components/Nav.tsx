@@ -10,7 +10,6 @@ const LINKS = [
   { label: 'About',    href: '/about'    },
   { label: 'Work',     href: '/work'     },
   { label: 'Services', href: '/services' },
-  { label: 'Travel',   href: '/travel'   },
   { label: 'Contact',  href: '/contact'  },
 ]
 
@@ -49,14 +48,26 @@ export default function Nav() {
         transition: 'background 0.5s, border-color 0.5s',
       }}
     >
-      <Link href="/" style={{
-        fontFamily: F.serif, fontSize: 18, fontWeight: 400,
-        color: onDark ? '#F0EDE8' : '#111111',
-        textDecoration: 'none', letterSpacing: '-0.015em', lineHeight: 1,
-        transition: 'color 0.3s',
-      }}>
-        Femi Falade
-      </Link>
+  <Link href="/" style={{
+  display: 'flex', alignItems: 'center', gap: 10,
+  textDecoration: 'none',
+  transition: 'opacity 0.2s',
+}}
+  onMouseEnter={e => (e.currentTarget.style.opacity = '0.75')}
+  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
+  <img
+    src="/ff-logo.png"
+    alt="FF"
+    style={{ width: 28, height: 28, objectFit: 'contain' }}
+  />
+  <span style={{
+    fontFamily: F.serif, fontSize: 17, fontWeight: 400,
+    color: onDark ? '#F0EDE8' : '#111111',
+    letterSpacing: '-0.015em', lineHeight: 1,
+  }}>
+    Femi Falade
+  </span>
+</Link>
 
       <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
         {LINKS.map(l => {
