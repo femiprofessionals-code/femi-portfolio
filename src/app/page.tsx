@@ -1,175 +1,170 @@
-'use client'
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import VideoHero from '@/components/VideoHero'
-import { F, C, LINE, fadeUp } from '@/components/tokens'
-
-const TICKER = [
-  { name: 'Goldman Sachs',    cat: 'Global Banking and Markets' },
-  { name: '$580M Migration',  cat: 'Entity Restructuring'       },
-  { name: 'CFTC Framework',   cat: 'Regulatory Governance'      },
-  { name: '60% Reduction',    cat: 'Review Cycle Efficiency'    },
-  { name: 'Carlyle Group',    cat: 'Private Equity EMEA'        },
-  { name: 'Claude AI Deploy', cat: 'AI-Native Tooling'          },
-  { name: 'T. Rowe Price',    cat: 'Central Operations'         },
-  { name: '31 Trading Desks', cat: 'Operational Scope'          },
-  { name: 'Salesforce CRM',   cat: 'Systems Architecture'       },
-  { name: '27 Transactions',  cat: 'Annual Deal Execution'      },
-]
-const TICKER_ALL = [...TICKER, ...TICKER]
-
-const METRICS = [
-  { val: '6+',      label: 'Years in institutional finance', sub: 'Goldman, Carlyle, T. Rowe' },
-  { val: '$580M',   label: 'Entity migration managed',       sub: 'Goldman Sachs, 2024'        },
-  { val: '60%',     label: 'Review cycle reduction',         sub: 'AI deployment, GBM'         },
-  { val: '30 days', label: 'CFTC framework delivered',       sub: '10 departments'             },
-]
-
-const WORK = [
-  { company: 'Goldman Sachs',     period: '2023 to Present', tags: ['Regulatory', 'AI Tooling', 'Transformation'], desc: 'CFTC framework across 10 departments in 30 days. $580M entity migration across 31 trading desks. Claude-based AI tool cutting review cycles by 60%.', wide: true  },
-  { company: 'The Carlyle Group', period: '2021 to 2023',    tags: ['CRM Architecture', 'EMEA Operations'],         desc: 'Built Salesforce CRM for all EMEA funds from scratch. Redesigned investor onboarding adopted as global standard.', wide: false },
-  { company: 'T. Rowe Price',     period: '2019 to 2021',    tags: ['Central Operations'],                          desc: 'Trade settlement, position reconciliation, and operational coordination across global investment platforms.', wide: false },
-]
-
-function WorkCard({ w, i }: { w: typeof WORK[0]; i: number }) {
-  const [hov, setHov] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const inV = useInView(ref, { once: true, margin: '-30px' })
-  const initials = w.company.split(' ').map((x: string) => x[0]).join('')
-  return (
-    <motion.div ref={ref}
-      initial={{ opacity: 0, y: 16 }} animate={inV ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: i * 0.07, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ gridColumn: w.wide ? 'span 2' : 'span 1', background: C.bg, cursor: 'pointer' }}>
-      <div style={{ aspectRatio: w.wide ? '21/8' : '16/9', background: C.bgSoft, overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ fontFamily: F.serif, fontWeight: 300, fontSize: w.wide ? '11rem' : '6rem', color: 'rgba(217,119,87,0.10)', letterSpacing: '-0.07em', transform: hov ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)', userSelect: 'none', display: 'block' }}>
-          {initials}
-        </span>
-        <span style={{ position: 'absolute', top: '1rem', right: '1rem', fontFamily: F.sans, fontSize: 10, letterSpacing: '0.08em', color: C.muted, border: LINE, padding: '3px 10px', background: 'rgba(250,248,245,0.6)' }}>{w.period}</span>
-      </div>
-      <div style={{ padding: '1.25rem 1.5rem 1.75rem' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 10 }}>
-          {w.tags.map((t: string) => <span key={t} style={{ fontFamily: F.sans, fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.muted, border: LINE, padding: '2px 9px' }}>{t}</span>)}
-        </div>
-        <h3 style={{ fontFamily: F.serif, fontSize: '1.5rem', fontWeight: 400, letterSpacing: '-0.02em', color: C.text, marginBottom: 6 }}>{w.company}</h3>
-        <p style={{ fontFamily: F.sans, fontSize: 13.5, fontWeight: 300, lineHeight: 1.65, color: C.dim }}>{w.desc}</p>
-      </div>
-    </motion.div>
-  )
-}
+import Arrow from '@/components/Arrow'
+import Artifact from '@/components/Artifact'
+import Wordmark from '@/components/Wordmark'
+import {
+  CAREER_ARC, CLOSING, FEATURED, HERO, INSTITUTIONS, METRICS, PERSON, ROLES, THESES,
+} from '@/content/site'
+import portrait from '../../public/images/femi-portrait.webp'
+import library from '../../public/images/rooms/library-dark.webp'
+import lounge from '../../public/images/rooms/lounge-dark.webp'
 
 export default function Home() {
   return (
     <>
-      <Nav />
-      <VideoHero videoSrc="/videos/hero.mp4" posterSrc="/images/hero-poster.jpg" />
-
-      {/* TICKER */}
-      <section style={{ borderTop: LINE, padding: '4rem 0', overflow: 'hidden', background: C.bg }}>
-        <p style={{ padding: '0 2.5rem', fontFamily: F.sans, fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: C.muted, marginBottom: '2.5rem' }}>
-          Career credentials and impact
-        </p>
-        <div style={{ overflow: 'hidden' }}>
-          <div className="ticker-inner">
-            {TICKER_ALL.map((c, i) => (
-              <div key={i} style={{ padding: '0 3rem', borderLeft: LINE, minWidth: 200, flexShrink: 0 }}>
-                <p style={{ fontFamily: F.serif, fontSize: '1.2rem', letterSpacing: '-0.02em', color: C.text, marginBottom: 4 }}>{c.name}</p>
-                <p style={{ fontFamily: F.sans, fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.muted }}>{c.cat}</p>
+      {/* 01 — Arrival */}
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="wrap hero__grid">
+          <div className="hero__copy">
+            <p className="eyebrow reveal">{HERO.eyebrow}</p>
+            <h1 id="hero-title" className="display reveal" data-delay="1">{HERO.headline}</h1>
+            <p className="body reveal" data-delay="2">{HERO.body}</p>
+            <div className="btn-row reveal" data-delay="3">
+              <Link href="/work" className="btn btn--solid">View selected work <Arrow /></Link>
+              <Link href="/resume" className="btn">Download résumé <Arrow /></Link>
+            </div>
+          </div>
+          <figure className="hero__figure reveal" data-delay="2">
+            <div className="frame">
+              <div className="frame__inner" style={{ aspectRatio: '4 / 5' }}>
+                <Image
+                  src={portrait}
+                  alt="Portrait of Femi Falade"
+                  priority
+                  sizes="(max-width: 860px) 90vw, 40vw"
+                  style={{ objectPosition: '50% 18%' }}
+                  placeholder="blur"
+                />
               </div>
+            </div>
+            <figcaption className="plaque">{PERSON.name} · {PERSON.location}</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* 02 — Gallery: institutions + institutional scale */}
+      <section className="room room--plaster" aria-labelledby="gallery-title">
+        <div className="wrap">
+          <h2 id="gallery-title" className="sr-only">Institutions and institutional scale</h2>
+          <div className="rail reveal">
+            {INSTITUTIONS.map(inst => (
+              <div key={inst.key} className="rail__item">
+                <Wordmark inst={inst} />
+                <span className="eyebrow">{inst.division}</span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ marginTop: 'clamp(4rem, 8vw, 7rem)' }}>
+            <div className="section-head">
+              <p className="eyebrow reveal">Institutional scale</p>
+            </div>
+            <dl className="metrics">
+              {METRICS.map((m, i) => (
+                <div key={m.value} className={`metric reveal${i === 0 ? ' metric--impact' : ''}`} data-delay={String(i)}>
+                  <dt className="metric__label">{m.label}</dt>
+                  <dd className="metric__value" style={{ order: -1 }}>{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 — Selected work */}
+      <section className="room" aria-labelledby="work-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow reveal">Selected work</p>
+            <h2 id="work-title" className="h1 reveal" data-delay="1">Programs led across markets, products and private capital.</h2>
+          </div>
+          <div className="features">
+            {FEATURED.map(b => (
+              <Link key={b.slug} href={`/work/${b.slug}`} className="feature reveal">
+                <div className="feature__art"><Artifact brief={b} thesis /></div>
+                <div className="feature__copy">
+                  <p className="eyebrow">{b.n} — {b.domain}</p>
+                  <h3 className="h2">{b.title}</h3>
+                  <p className="lede">{b.summary}</p>
+                  <div className="feature__metrics">
+                    {b.metrics.slice(0, 2).map(m => (
+                      <div key={m.label}><strong>{m.value}</strong><span>{m.label}</span></div>
+                    ))}
+                  </div>
+                  <span className="text-link" style={{ marginTop: '0.5rem' }}>Read brief <Arrow /></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div style={{ marginTop: 'clamp(4rem, 8vw, 6rem)' }} className="reveal">
+            <Link href="/work" className="btn">All six briefs <Arrow /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 04 — Career arc */}
+      <section className="room room--parchment" aria-labelledby="career-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow reveal">Career arc</p>
+            <h2 id="career-title" className="h2 reveal" data-delay="1">{CAREER_ARC}</h2>
+          </div>
+          <div className="career">
+            {ROLES.map(r => (
+              <article key={r.company} className="career__row reveal">
+                <div className="career__mark">
+                  <Wordmark inst={INSTITUTIONS.find(i => i.key === r.institution)!} />
+                  <span className="meta">{r.dates}</span>
+                </div>
+                <div className="career__body">
+                  <h3 className="career__title">{r.title}</h3>
+                  <p className="body">{r.summary}</p>
+                  <p className="career__outcome">{r.outcome}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div style={{ marginTop: '3rem' }} className="reveal">
+            <Link href="/experience" className="text-link">Full experience <Arrow /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 05 — Point of view (dark hospitality) */}
+      <section className="room room--walnut room-image dark" aria-labelledby="pov-title">
+        <Image src={library} alt="" className="room-image__bg" sizes="100vw" placeholder="blur" />
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow reveal">Point of view</p>
+            <h2 id="pov-title" className="h1 reveal" data-delay="1">How I think about the work.</h2>
+          </div>
+          <div className="theses">
+            {THESES.map((t, i) => (
+              <article key={t.theme} className="thesis reveal" data-delay={String(i + 1)}>
+                <h3 className="eyebrow">{t.theme}</h3>
+                <p className="serif">{t.body}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* METRICS */}
-      <section style={{ borderTop: LINE, padding: '5rem 2.5rem', background: C.bg }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '2rem' }}>
-          {METRICS.map((m, i) => (
-            <motion.div key={m.label} {...fadeUp(i * 0.08)}>
-              <p style={{ fontFamily: F.serif, fontSize: 'clamp(2.2rem,4vw,4rem)', fontWeight: 300, lineHeight: 1, letterSpacing: '-0.035em', color: C.text }}>{m.val}</p>
-              <div style={{ width: 28, height: 1, background: C.accent, margin: '0.85rem 0 0.7rem' }} />
-              <p style={{ fontFamily: F.sans, fontSize: 12, fontWeight: 400, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.dim, lineHeight: 1.4, marginBottom: 4 }}>{m.label}</p>
-              <p style={{ fontFamily: F.sans, fontSize: 11, fontWeight: 300, color: C.muted }}>{m.sub}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* WORK PREVIEW */}
-      <section style={{ borderTop: LINE, padding: '5rem 2.5rem', background: C.bg }}>
-        <motion.div {...fadeUp()} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem' }}>
-          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.25rem)', fontWeight: 300, lineHeight: 1.1, letterSpacing: '-0.025em', color: C.text, maxWidth: '16ch' }}>
-            Career trajectory, from seed to scale
-          </h2>
-          <Link href="/work" style={{ fontFamily: F.sans, fontSize: 12, fontWeight: 500, color: C.text, textDecoration: 'none', borderBottom: `1px solid ${C.accent}`, paddingBottom: 1 }}>
-            See all work
-          </Link>
-        </motion.div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: C.line }}>
-          {WORK.map((w, i) => <WorkCard key={w.company} w={w} i={i} />)}
-        </div>
-      </section>
-
-      {/* SPECIAL PROJECTS — fully gated, single CTA */}
-      <section style={{ borderTop: LINE, padding: 'clamp(4rem, 8vw, 6rem) 2.5rem', background: C.bg }}>
-        <motion.div {...fadeUp()} style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          <div style={{ flex: '1 1 320px' }}>
-            <p style={{ fontFamily: F.sans, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.muted, marginBottom: '1rem' }}>
-              Special Projects
-            </p>
-            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.8rem, 4vw, 3rem)', fontWeight: 300, letterSpacing: '-0.025em', color: C.text, lineHeight: 1.15, marginBottom: '0.75rem' }}>
-              Currently in stealth.
-            </h2>
-            <p style={{ fontFamily: F.sans, fontSize: 14, fontWeight: 300, color: C.muted, lineHeight: 1.7, maxWidth: '46ch' }}>
-              Three platforms in active development. Detailed case studies available to authorized stakeholders only.
-            </p>
-          </div>
-
-          <Link href="/special-projects/case-studies" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 10,
-            fontFamily: F.sans, fontSize: 13, fontWeight: 500,
-            background: C.accent, color: C.bg,
-            padding: '14px 28px', borderRadius: 100,
-            textDecoration: 'none', whiteSpace: 'nowrap',
-            transition: 'opacity 0.2s, transform 0.2s',
-          }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = '0.85'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
-          >
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <rect x="2.5" y="6" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
-              <path d="M4.5 6V4a2 2 0 014 0v2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-            </svg>
-            Request access
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* CTA */}
-      <section style={{ borderTop: LINE, padding: '7rem 2.5rem', background: C.bg }}>
-        <motion.div {...fadeUp()}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'end' }}>
-            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(2.5rem,5vw,4.5rem)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.03em', color: C.text }}>
-              Bringing operational discipline to the work that ships. <em style={{ color: C.accent, fontStyle: 'italic' }}>Let us build what is next.</em>
-            </h2>
-            <div>
-              <p style={{ fontFamily: F.sans, fontSize: 15, fontWeight: 300, lineHeight: 1.75, color: C.dim, marginBottom: '2.5rem', maxWidth: '42ch' }}>
-                Goldman-caliber rigor applied to transformation programs that ship on time and at scale.
-              </p>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <Link href="/work" style={{ fontFamily: F.sans, fontSize: 13, border: `1px solid ${C.accent}`, color: C.accent, padding: '12px 26px', borderRadius: 100, textDecoration: 'none' }}>View work</Link>
-                <Link href="/contact" style={{ fontFamily: F.sans, fontSize: 13, fontWeight: 500, background: C.accent, color: C.bg, padding: '12px 26px', borderRadius: 100, textDecoration: 'none' }}>Work with me</Link>
-              </div>
+      {/* 06 — Contact */}
+      <section className="room room--black room-image dark closing" aria-labelledby="contact-title">
+        <Image src={lounge} alt="" className="room-image__bg" sizes="100vw" placeholder="blur" />
+        <div className="wrap">
+          <div style={{ maxWidth: '46rem', display: 'grid', gap: '2.5rem' }}>
+            <p className="eyebrow reveal">Contact</p>
+            <h2 id="contact-title" className="h1 reveal" data-delay="1">{CLOSING}</h2>
+            <div className="contact-links reveal" data-delay="2">
+              <a className="text-link" href={`mailto:${PERSON.email}`}>Email <Arrow /></a>
+              <a className="text-link" href={PERSON.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a>
+              <Link className="text-link" href="/resume">Résumé <Arrow /></Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
-
-      <Footer />
     </>
   )
 }
