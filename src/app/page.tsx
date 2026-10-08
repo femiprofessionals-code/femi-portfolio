@@ -1,110 +1,143 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import Artifact from '@/components/Artifact'
 import Wordmark from '@/components/Wordmark'
+import { Apex, Bars, Crescent, Disc, Monolith, Ring, Rings } from '@/components/Icons'
+import { BRIEF_IMAGES } from '@/content/images'
 import {
-  CAREER_ARC, CLOSING, FEATURED, HERO, INSTITUTIONS, METRICS, PERSON, ROLES, THESES,
+  CAREER_ARC, CLOSING, FEATURED, HERO, INSTITUTIONS, METRICS, PERSON, PILLARS, ROLES, THESES,
 } from '@/content/site'
-import portrait from '../../public/images/femi-portrait.webp'
-import library from '../../public/images/rooms/library-dark.webp'
-import lounge from '../../public/images/rooms/lounge-dark.webp'
+import residence from '../../public/images/rooms/hero-residence.webp'
+import gallery from '../../public/images/rooms/gallery-wall.webp'
+import library from '../../public/images/rooms/philosophy-library.webp'
+import lounge from '../../public/images/rooms/contact-lounge.webp'
+
+const PILLAR_ICON = { ring: Ring, apex: Apex, rings: Rings, bars: Bars }
+
+/** Metric frames on the gallery wall, positioned in % of the photograph (1672 × 823). */
+const FRAMES = [
+  { cls: 'gframe--black', style: { left: '55.6%', top: '8.2%', width: '11.2%', height: '24.4%' } },
+  { cls: 'gframe--ivory', style: { left: '69.85%', top: '38.9%', width: '6.6%', height: '15.4%' } },
+  { cls: 'gframe--green', style: { left: '78.95%', top: '45.2%', width: '9.1%', height: '13.3%' } },
+  { cls: 'gframe--marble', style: { left: '32.9%', top: '27%', width: '6.2%', height: '15%' } },
+]
+
+const PHILOSOPHY_TILES = [
+  { art: Crescent, value: '31', label: 'business units aligned' },
+  { art: Monolith, value: '120 days', label: 'from a 12-month plan' },
+  { art: Disc, value: '33%', label: 'faster investor onboarding' },
+]
 
 export default function Home() {
   return (
     <>
-      {/* 01 — Arrival */}
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="wrap hero__grid">
-          <div className="hero__copy">
+      {/* 01 — Arrival: light residence */}
+      <section className="arrival" aria-labelledby="hero-title">
+        <div className="arrival__scene">
+          <Image
+            src={residence}
+            alt=""
+            priority
+            placeholder="blur"
+            sizes="100vw"
+            className="arrival__img"
+          />
+          <div className="arrival__copy">
             <p className="eyebrow reveal">{HERO.eyebrow}</p>
-            <h1 id="hero-title" className="display reveal" data-delay="1">{HERO.headline}</h1>
-            <p className="body reveal" data-delay="2">{HERO.body}</p>
+            <h1 id="hero-title" className="arrival__title reveal" data-delay="1">{HERO.headline}</h1>
+            <p className="arrival__body reveal" data-delay="2">{HERO.body}</p>
             <div className="btn-row reveal" data-delay="3">
-              <Link href="/work" className="btn btn--solid">View selected work <Arrow /></Link>
-              <Link href="/resume" className="btn">Download résumé <Arrow /></Link>
+              <Link href="/work" className="btn btn--bronze">Selected work <Arrow /></Link>
+              <Link href="/resume" className="btn">Résumé <Arrow /></Link>
             </div>
           </div>
-          <figure className="hero__figure reveal" data-delay="2">
-            <div className="frame">
-              <div className="frame__inner" style={{ aspectRatio: '4 / 5' }}>
-                <Image
-                  src={portrait}
-                  alt="Portrait of Femi Falade"
-                  priority
-                  sizes="(max-width: 860px) 90vw, 40vw"
-                  style={{ objectPosition: '50% 18%' }}
-                  placeholder="blur"
-                />
-              </div>
-            </div>
-            <figcaption className="plaque">{PERSON.name} · {PERSON.location}</figcaption>
-          </figure>
         </div>
+        <ul className="pillars" aria-label="Positioning">
+          {PILLARS.map((p, i) => {
+            const Icon = PILLAR_ICON[p.icon]
+            return (
+              <li key={p.title} className="pillar reveal" data-delay={String(i)}>
+                <span className={`pillar__icon pillar__icon--${p.tone}`}><Icon size={40} /></span>
+                <span>
+                  <span className="pillar__title">{p.title}</span>
+                  <span className="pillar__body">{p.body}</span>
+                </span>
+              </li>
+            )
+          })}
+        </ul>
       </section>
 
-      {/* 02 — Gallery: institutions + institutional scale */}
-      <section className="room room--plaster" aria-labelledby="gallery-title">
-        <div className="wrap">
-          <h2 id="gallery-title" className="sr-only">Institutions and institutional scale</h2>
-          <div className="rail reveal">
+      {/* 02 — Institutional gallery: proof wall */}
+      <section className="gallery" aria-labelledby="gallery-title">
+        <div className="gallery__scene">
+          <Image src={gallery} alt="" placeholder="blur" sizes="100vw" className="gallery__img" />
+          <div className="gallery__copy">
+            <h2 id="gallery-title" className="gallery__title reveal">Institutional Gallery</h2>
+            <p className="gallery__body reveal" data-delay="1">
+              7+ years across Goldman Sachs, The Carlyle Group and T. Rowe Price — measured in outcomes, not adjectives.
+            </p>
+            <Link href="/experience" className="btn btn--frame reveal" data-delay="2">Experience <Arrow /></Link>
+          </div>
+          <dl className="gallery__frames">
+            {METRICS.map((m, i) => (
+              <div key={m.value} className={`gframe ${FRAMES[i].cls}`} style={FRAMES[i].style}>
+                <dt className="gframe__label">{m.short}</dt>
+                <dd className="gframe__value">{m.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="plaques">
+          <div className="wrap plaques__grid">
             {INSTITUTIONS.map(inst => (
-              <div key={inst.key} className="rail__item">
+              <div key={inst.key} className="plaque-card reveal">
                 <Wordmark inst={inst} />
                 <span className="eyebrow">{inst.division}</span>
               </div>
             ))}
           </div>
-
-          <div style={{ marginTop: 'clamp(4rem, 8vw, 7rem)' }}>
-            <div className="section-head">
-              <p className="eyebrow reveal">Institutional scale</p>
-            </div>
-            <dl className="metrics">
-              {METRICS.map((m, i) => (
-                <div key={m.value} className={`metric reveal${i === 0 ? ' metric--impact' : ''}`} data-delay={String(i)}>
-                  <dt className="metric__label">{m.label}</dt>
-                  <dd className="metric__value" style={{ order: -1 }}>{m.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      {/* 03 — Selected work */}
-      <section className="room" aria-labelledby="work-title">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow reveal">Selected work</p>
-            <h2 id="work-title" className="h1 reveal" data-delay="1">Programs led across markets, products and private capital.</h2>
-          </div>
-          <div className="features">
-            {FEATURED.map(b => (
-              <Link key={b.slug} href={`/work/${b.slug}`} className="feature reveal">
-                <div className="feature__art"><Artifact brief={b} thesis /></div>
-                <div className="feature__copy">
-                  <p className="eyebrow">{b.n} — {b.domain}</p>
-                  <h3 className="h2">{b.title}</h3>
-                  <p className="lede">{b.summary}</p>
-                  <div className="feature__metrics">
-                    {b.metrics.slice(0, 2).map(m => (
-                      <div key={m.label}><strong>{m.value}</strong><span>{m.label}</span></div>
-                    ))}
-                  </div>
-                  <span className="text-link" style={{ marginTop: '0.5rem' }}>Read brief <Arrow /></span>
-                </div>
-              </Link>
+          <dl className="wrap plaques__legend">
+            {METRICS.map(m => (
+              <div key={m.value}><dt>{m.value}</dt><dd>{m.label}</dd></div>
             ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* 03 — Selected work: editorial */}
+      <section className="room paper" aria-labelledby="work-title">
+        <div className="wrap">
+          <div className="split-head">
+            <div>
+              <p className="eyebrow reveal">Selected work</p>
+              <h2 id="work-title" className="h1 reveal" data-delay="1">Programs led across markets, products and private capital.</h2>
+            </div>
+            <Link href="/work" className="btn reveal" data-delay="2">All six briefs <Arrow /></Link>
           </div>
-          <div style={{ marginTop: 'clamp(4rem, 8vw, 6rem)' }} className="reveal">
-            <Link href="/work" className="btn">All six briefs <Arrow /></Link>
+          <div className="cards">
+            {FEATURED.map((b, i) => {
+              const img = BRIEF_IMAGES[b.slug]
+              return (
+                <Link key={b.slug} href={`/work/${b.slug}`} className="card reveal" data-delay={String(i)}>
+                  <div className="card__img">
+                    <Image src={img.src} alt="" placeholder="blur" sizes="(max-width: 860px) 100vw, 33vw" style={{ objectPosition: img.position }} />
+                  </div>
+                  <div className="card__label">
+                    <span>{b.domain}</span>
+                    <Arrow />
+                  </div>
+                  <h3 className="card__title">{b.title}</h3>
+                  <p className="card__body">{b.summary}</p>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* 04 — Career arc */}
-      <section className="room room--parchment" aria-labelledby="career-title">
+      {/* 04 — Career thesis: warm white */}
+      <section className="room room--warm" aria-labelledby="career-title">
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow reveal">Career arc</p>
@@ -131,36 +164,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 — Point of view (dark hospitality) */}
-      <section className="room room--walnut room-image dark" aria-labelledby="pov-title">
-        <Image src={library} alt="" className="room-image__bg" sizes="100vw" placeholder="blur" />
+      {/* Point of view */}
+      <section className="room paper" aria-labelledby="thesis-title">
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow reveal">Point of view</p>
-            <h2 id="pov-title" className="h1 reveal" data-delay="1">How I think about the work.</h2>
+            <h2 id="thesis-title" className="h2 reveal" data-delay="1">Three convictions from the work.</h2>
           </div>
-          <div className="theses">
+          <div className="pov">
             {THESES.map((t, i) => (
-              <article key={t.theme} className="thesis reveal" data-delay={String(i + 1)}>
+              <article key={t.theme} className="reveal" data-delay={String(i + 1)}>
                 <h3 className="eyebrow">{t.theme}</h3>
-                <p className="serif">{t.body}</p>
+                <p>{t.body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 06 — Contact */}
-      <section className="room room--black room-image dark closing" aria-labelledby="contact-title">
-        <Image src={lounge} alt="" className="room-image__bg" sizes="100vw" placeholder="blur" />
-        <div className="wrap">
-          <div style={{ maxWidth: '46rem', display: 'grid', gap: '2.5rem' }}>
-            <p className="eyebrow reveal">Contact</p>
-            <h2 id="contact-title" className="h1 reveal" data-delay="1">{CLOSING}</h2>
-            <div className="contact-links reveal" data-delay="2">
-              <a className="text-link" href={`mailto:${PERSON.email}`}>Email <Arrow /></a>
-              <a className="text-link" href={PERSON.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a>
-              <Link className="text-link" href="/resume">Résumé <Arrow /></Link>
+      {/* 05 — Operating philosophy: walnut library */}
+      <section className="dark-room dark" aria-labelledby="pov-title">
+        <Image src={library} alt="" placeholder="blur" sizes="100vw" className="dark-room__img" />
+        <div className="wrap dark-room__inner">
+          <p className="eyebrow reveal">Operating philosophy</p>
+          <h2 id="pov-title" className="dark-room__title reveal" data-delay="1">Clarity Before Motion</h2>
+          <p className="dark-room__body reveal" data-delay="2">
+            The fastest teams are not always moving first; they are aligned on the right problem first.
+          </p>
+          <ul className="tiles" aria-label="Proof of operating model">
+            {PHILOSOPHY_TILES.map((t, i) => (
+              <li key={t.label} className="tile reveal" data-delay={String(i + 1)}>
+                <t.art />
+                <span className="tile__value">{t.value}</span>
+                <span className="tile__label">{t.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 06 — Contact: dark hospitality */}
+      <section className="dark-room dark-room--contact dark" aria-labelledby="contact-title">
+        <Image src={lounge} alt="" placeholder="blur" sizes="100vw" className="dark-room__img" />
+        <div className="wrap dark-room__inner">
+          <p className="eyebrow reveal">Contact</p>
+          <h2 id="contact-title" className="dark-room__title reveal" data-delay="1">Leading What&rsquo;s Next</h2>
+          <p className="dark-room__body reveal" data-delay="2">{CLOSING}</p>
+          <div className="reveal" data-delay="3" style={{ display: 'grid', gap: '1.75rem', justifyItems: 'start' }}>
+            <Link href="/contact" className="btn btn--wide">Get in touch <Arrow /></Link>
+            <div className="contact-links">
+              <a className="text-link" href={`mailto:${PERSON.email}`}>Email</a>
+              <a className="text-link" href={PERSON.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <Link className="text-link" href="/resume">Résumé</Link>
             </div>
           </div>
         </div>

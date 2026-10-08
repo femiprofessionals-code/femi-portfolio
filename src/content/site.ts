@@ -41,13 +41,13 @@ export const INSTITUTIONS: Institution[] = [
  * Never describe $580M as "migration value" — it is annualized funding-cost savings
  * enabled by an enterprise implementation (see résumé).
  */
-export type Metric = { value: string; label: string; source: string }
+export type Metric = { value: string; short: string; label: string; source: string }
 
 export const METRICS: Metric[] = [
-  { value: '$580M', label: 'annualized funding-cost savings enabled', source: 'Goldman Sachs — Enterprise Inter-Affiliate Clearing' },
-  { value: '$13B+', label: 'private-equity AUM supported', source: 'Carlyle — five flagship funds, 40+ co-investment vehicles' },
-  { value: '600+', label: 'clients in global cross-asset migration', source: 'Goldman Sachs — client & dealer migration' },
-  { value: '60%', label: 'review-cycle reduction through applied AI', source: 'Goldman Sachs — Claude-based review workflow' },
+  { value: '$580M', short: 'Funding-cost savings', label: 'annualized funding-cost savings enabled', source: 'Goldman Sachs — Enterprise Inter-Affiliate Clearing' },
+  { value: '$13B+', short: 'PE AUM supported', label: 'private-equity AUM supported', source: 'Carlyle — five flagship funds, 40+ co-investment vehicles' },
+  { value: '600+', short: 'Clients migrated', label: 'clients in global cross-asset migration', source: 'Goldman Sachs — client & dealer migration' },
+  { value: '60%', short: 'Review-cycle reduction', label: 'review-cycle reduction through applied AI', source: 'Goldman Sachs — Claude-based review workflow' },
 ]
 
 export type Pillar = 'Private Markets' | 'Product Strategy' | 'Strategic Transformation'
@@ -70,6 +70,7 @@ export type Brief = {
   outcome?: string
   scope?: string
   signal: string
+  reach: string
   featured?: boolean
 }
 
@@ -102,6 +103,7 @@ export const BRIEFS: Brief[] = [
     scale: '120+ stakeholders across Strats, Front Office Engineering, Sales and Trading.',
     scope:
       'CDS; estimated initial margin across the client and hedge legs; SIMM methodology; inputs spanning trade economics, counterparty, clearing house, portfolio data, CSA terms and risk factors.',
+    reach: '120+ stakeholders',
     signal:
       'Product judgment in a markets environment: translating a technical margin problem into a usable front-office experience while coordinating quantitative, engineering and business stakeholders.',
     featured: true,
@@ -135,6 +137,7 @@ export const BRIEFS: Brief[] = [
       '100+ teams across five divisions in the broader onboarding program; coordination across market, legal, engineering and control stakeholders.',
     outcome:
       'Implementation timeline compressed from approximately 12 months to 120 days, enabling roughly $40M in annual funding-cost savings.',
+    reach: '100+ teams · 5 divisions',
     signal: 'Drive speed without sacrificing control in a regulated market-infrastructure launch.',
   },
   {
@@ -165,6 +168,7 @@ export const BRIEFS: Brief[] = [
     ],
     scale: '31 business units; 38 departments; multiple regions and control functions; senior sponsorship across divisions.',
     outcome: 'Approximately $580M in annualized funding-cost savings enabled by the enterprise implementation.',
+    reach: '31 business units',
     signal:
       'Enterprise orchestration with financial consequences — creating alignment across organizations that do not naturally move as one.',
     featured: true,
@@ -194,6 +198,7 @@ export const BRIEFS: Brief[] = [
       'Coordination across Legal, Compliance, Engineering, Operations and business teams',
     ],
     scale: '$1.8M platform implementation across three global regions.',
+    reach: '3 global regions',
     signal:
       'Connect transaction rationale to operating reality — moving from diligence questions to integration decisions and scaled adoption.',
   },
@@ -225,6 +230,7 @@ export const BRIEFS: Brief[] = [
     scale: '342 institutional investors annually across EMEA private equity funds.',
     outcome:
       'Onboarding cycle reduced 33%, from six weeks to four; first-pass approvals improved 27%; playbook adopted as a global standard across Private Equity fund teams.',
+    reach: '342 investors a year',
     signal: 'Understand the investor journey and redesign the underlying institution around it.',
     featured: true,
   },
@@ -254,6 +260,7 @@ export const BRIEFS: Brief[] = [
       'Coordination across fund operations, finance, legal, deal teams and external stakeholders',
     ],
     scale: '€1.25B facility; 20+ portfolio assets; 13+ internal and external teams; five jurisdictions; five-month execution timeline.',
+    reach: '5 jurisdictions',
     signal: 'Private-markets execution with direct exposure to fund structure, portfolio-level diligence and financing complexity.',
   },
 ]
@@ -338,3 +345,11 @@ export const CLOSING =
   'Complex institutions reward clarity, judgment and execution. That is the work I am interested in leading next.'
 
 export const institutionName = (k: Institution['key']) => INSTITUTIONS.find(i => i.key === k)!.name
+
+/** Brand pillars — homepage arrival strip. */
+export const PILLARS = [
+  { title: 'Private Markets', body: 'Flagship PE funds, co-investments, LP lifecycle and fund finance at Carlyle.', icon: 'ring', tone: 'dark' },
+  { title: 'Product Strategy', body: 'Front-office product from requirements to rollout at Goldman Sachs.', icon: 'apex', tone: 'light' },
+  { title: 'Strategic Transformation', body: 'Enterprise clearing, migrations, market infrastructure and regulation.', icon: 'rings', tone: 'dark' },
+  { title: 'Applied AI', body: 'Governed AI workflows embedded in regulated review cycles.', icon: 'bars', tone: 'light' },
+] as const

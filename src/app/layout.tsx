@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { EB_Garamond, Inter } from 'next/font/google'
+import { Cormorant_Garamond, EB_Garamond, Inter } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import Reveal from '@/components/Reveal'
@@ -11,6 +11,12 @@ const serif = EB_Garamond({
   weight: ['400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
+  display: 'swap',
+})
+const display = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-display',
   display: 'swap',
 })
 const sans = Inter({
@@ -42,7 +48,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: ['/og.jpg'] },
 }
 
-export const viewport: Viewport = { themeColor: '#F3F0EA' }
+export const viewport: Viewport = { themeColor: '#EFE9DF' }
 
 const personLd = {
   '@context': 'https://schema.org',
@@ -61,7 +67,7 @@ const personLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
