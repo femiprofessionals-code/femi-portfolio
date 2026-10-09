@@ -1,10 +1,11 @@
 'use client'
 import { useEffect } from 'react'
-import { FOCUS, SCENE } from '@/content/gallery'
+import { FOCUS, MASTHEAD, SCENE } from '@/content/gallery'
 import twinkle from '@/content/twinkle.json'
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v))
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+const smooth = (a: number, b: number, v: number) => { const t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t) }
 
 type Mote = { x: number; y: number; r: number; vx: number; vy: number; a: number; ph: number }
 
@@ -19,8 +20,9 @@ export default function RoomMotion() {
     const viewport = room?.querySelector<HTMLElement>('[data-stage-viewport]')
     const scene = room?.querySelector<HTMLElement>('[data-scene]')
     const cam = room?.querySelector<HTMLElement>('[data-cam]')
+    const mast = room?.querySelector<HTMLElement>('[data-masthead]')
     const canvas = room?.querySelector<HTMLCanvasElement>('[data-particles]')
-    if (!room || !viewport || !scene || !cam || !canvas) return
+    if (!room || !viewport || !scene || !cam || !mast || !canvas) return
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     const touchLayout = window.matchMedia('(max-width: 899px), (orientation: portrait)')
@@ -32,6 +34,7 @@ export default function RoomMotion() {
     const place = () => {
       if (touchLayout.matches) {
         scene.style.transform = ''
+        mast.style.opacity = ''
         return
       }
       const vw = window.innerWidth
@@ -54,6 +57,7 @@ export default function RoomMotion() {
       tx = clamp(tx, vw / 2 - hw, hw - vw / 2)
       ty = clamp(ty, vh / 2 - hh, hh - vh / 2)
       scene.style.transform = `translate(-50%, -50%) translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${k.toFixed(4)})`
+      mast.style.opacity = String(1 - smooth(0.12, 0.5, p))
       room.style.setProperty('--progress', p.toFixed(3))
     }
 
@@ -61,7 +65,7 @@ export default function RoomMotion() {
     const startPan = () => {
       if (!touchLayout.matches) return
       const c = scene.offsetWidth / SCENE.w
-      viewport.scrollLeft = Math.max(0, FOCUS.x * c - 24)
+      viewport.scrollLeft = Math.max(0, MASTHEAD.x * c - 20)
     }
 
     // ── Pointer parallax (very small) ─────────────────────────
