@@ -585,8 +585,8 @@ html[data-time='night'] .gf:hover .gf__inner, html[data-time='night'] .gf:focus-
 
 /* Touch & portrait: walk the wall by swiping */
 @media (max-width: 899px), (orientation: portrait) {
-  .gallery-room { height: auto; display: flex; flex-direction: column; padding-top: var(--nav-h); background: var(--ivory); }
-  .gallery-room__stage { position: relative; height: min(80svh, 740px); overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .gallery-room { height: auto; display: flex; flex-direction: column; background: var(--ivory); }
+  .gallery-room__stage { position: relative; height: min(88svh, 800px); overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; }
   .gallery-room__stage::-webkit-scrollbar { display: none; }
   .scene { position: relative; left: 0; top: 0; height: 100%; width: auto; transform: none !important; }
   .scene__cam { animation: none; }
@@ -631,17 +631,12 @@ html[data-time='night'] .gf:hover .gf__inner, html[data-time='night'] .gf:focus-
 .gf--company .gf__sub { color: #D2B08A; }
 
 /* ── Home header: floats over the room, with a soft scrim for legibility ── */
-.nav--clear::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: color-mix(in srgb, var(--ivory) 58%, transparent);
-  -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1);
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
-}
-html[data-time='night'] .nav--clear::before { background: rgba(14, 10, 8, .5); border-bottom-color: rgba(239, 231, 218, .1); }
-.nav--clear .nav__name { opacity: 0; transform: translateY(-4px); }
 .nav__name { transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .nav--clear .nav__brand { border-right-color: transparent; }
-.nav--clear .nav__cta { background: color-mix(in srgb, var(--ivory) 30%, transparent); }
+.nav--clear .nav__cta { background: transparent; }
+/* No bar over the room: type sits directly on the plaster, with a soft halo for legibility */
+.nav--clear :is(.nav__name, .nav__mono, .nav__links a, .nav__cta, .nav__resume, .nav__toggle) { text-shadow: 0 0 14px color-mix(in srgb, var(--ivory) 85%, transparent), 0 0 3px color-mix(in srgb, var(--ivory) 70%, transparent); }
+html[data-time='night'] .nav--clear :is(.nav__name, .nav__mono, .nav__links a, .nav__cta, .nav__resume, .nav__toggle) { text-shadow: 0 1px 12px rgba(0, 0, 0, .75); }
 
 /* ── Masthead refinement ─────────────────────────────── */
 .masthead { gap: 1.35cqw; }

@@ -3,7 +3,7 @@ import path from 'node:path'
 import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { FRAMES, MASTHEAD, PICTURE_LIGHTS, SCENE, type Frame } from '@/content/gallery'
+import { FRAMES, PICTURE_LIGHTS, SCENE, type Frame } from '@/content/gallery'
 import { HERO, PERSON } from '@/content/site'
 import portrait from '../../../public/images/femi-portrait.webp'
 import RoomMotion from './RoomMotion'
@@ -70,6 +70,7 @@ function FrameBody({ f }: { f: Frame }) {
 export default function GalleryRoom() {
   return (
     <section className="gallery-room" aria-labelledby="room-title" data-room>
+      <h1 id="room-title" className="sr-only">{PERSON.name} — {HERO.headline}</h1>
       <div className="gallery-room__stage" data-stage-viewport>
         <div className="scene" data-scene>
           <div className="scene__cam" data-cam>
@@ -93,17 +94,6 @@ export default function GalleryRoom() {
             <canvas className="fx fx--particles" data-particles aria-hidden="true" />
             <div className="fx fx--plane" aria-hidden="true"><i /></div>
 
-            {/* Masthead on the wall */}
-            <div className="masthead" style={{ left: pct(MASTHEAD.x, SCENE.w), top: pct(MASTHEAD.y, SCENE.h), width: pct(MASTHEAD.w, SCENE.w) }} data-masthead>
-              <p className="masthead__eyebrow">{PERSON.positioning.map(p => <span key={p}>{p}</span>)}</p>
-              <h1 id="room-title" className="masthead__name">{PERSON.name}</h1>
-              <p className="masthead__line">{HERO.headline}</p>
-              <div className="masthead__actions">
-                <Link href="/work" className="masthead__cta masthead__cta--solid">Selected work <Arrow /></Link>
-                <Link href="/resume" className="masthead__cta">Résumé <Arrow /></Link>
-              </div>
-            </div>
-
             {/* The collection — each frame opens a page */}
             <nav className="frames" aria-label="The gallery">
               {FRAMES.map(f => (
@@ -125,9 +115,7 @@ export default function GalleryRoom() {
             </nav>
           </div>
         </div>
-        <p className="gallery-room__hint" aria-hidden="true">Scroll to approach the wall · Every frame opens a page</p>
       </div>
-      <p className="gallery-room__touchhint" aria-hidden="true">Swipe along the wall · Tap a frame to open it</p>
       <RoomMotion />
     </section>
   )
