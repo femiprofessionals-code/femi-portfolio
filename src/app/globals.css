@@ -680,3 +680,16 @@ html[data-time='night'] .lamps i::before { box-shadow: 0 .8em 1.6em rgba(255, 19
 html[data-time='night'] .lamps i::after { filter: brightness(.6); }
 
 .gf__label { font-size: clamp(9px, 6.6cqw, 13px); letter-spacing: .08em; overflow-wrap: anywhere; }
+
+/* ── Generated-video variant (/preview) ─────────────── */
+.wallset { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
+.gallery-room--ai .lamps, .gallery-room--ai .fx--clouds, .gallery-room--ai .fx--beams,
+.gallery-room--ai .fx--glows, .gallery-room--ai .fx--plane, .gallery-room--ai .fx--particles { display: none; }
+.gallery-room--ai .scene__img { object-fit: cover; }
+.gallery-room--ai .scene__cam { animation: none; }
+html[data-time='night'] .gallery-room--ai .gf__inner { filter: brightness(.86) sepia(.12); }
+html[data-time='night'] .gallery-room--ai .gf__moulding { filter: brightness(.8) saturate(.95); }
+html[data-time='night'] .gallery-room--ai { --room-ink: #1C1611; --room-muted: #3E342B; }
+html[data-time='night'] .gallery-room--ai .masthead { text-shadow: none; }
+html[data-time='night'] .gallery-room--ai .masthead__cta--solid { color: #F4EDE2; }
+html[data-time='night'] .gallery-room--ai .masthead__cta--solid:hover { color: var(--room-ink); }

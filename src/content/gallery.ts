@@ -49,3 +49,10 @@ export const FRAMES: Frame[] = [
 export const PICTURE_LIGHTS: [number, number, number][] = [
   [799, 78, 120], [1048, 58, 150], [1257, 88, 95], [1421, 98, 110],
 ]
+
+/**
+ * Generated-video variant. The clips are cropped to 1280×630 (same aspect as SCENE) and the wall
+ * layout is scaled onto their bare wall: scene' = WALLSET_AI.scale · scene + (x, y).
+ * Per-frame camera drift is tracked offline (public/room/ai/*.json) and applied on top.
+ */
+export const WALLSET_AI = { scale: 0.785, x: 293, y: 40 }

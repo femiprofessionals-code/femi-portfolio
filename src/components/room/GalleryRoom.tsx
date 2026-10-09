@@ -3,7 +3,7 @@ import path from 'node:path'
 import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { FRAMES, MASTHEAD, PICTURE_LIGHTS, SCENE, type Frame } from '@/content/gallery'
+import { FRAMES, MASTHEAD, PICTURE_LIGHTS, SCENE, WALLSET_AI, type Frame } from '@/content/gallery'
 import { HERO, PERSON } from '@/content/site'
 import portrait from '../../../public/images/femi-portrait.webp'
 import RoomMotion from './RoomMotion'
@@ -73,19 +73,25 @@ function FrameBody({ f }: { f: Frame }) {
   )
 }
 
-export default function GalleryRoom() {
+export default function GalleryRoom({ variant = 'rendered' }: { variant?: 'rendered' | 'ai' }) {
+  const ai = variant === 'ai'
+  const base = ai ? '/room/ai' : '/room'
+  const clips = ai ? (['morning', 'golden', 'night'] as const) : CLIPS
+  const wallset = ai
+    ? { transform: `translate(calc(${WALLSET_AI.x} * 100cqw / ${SCENE.w}), calc(${WALLSET_AI.y} * 100cqw / ${SCENE.w})) scale(${WALLSET_AI.scale})` }
+    : undefined
   return (
-    <section className="gallery-room" aria-labelledby="room-title" data-room>
+    <section className={`gallery-room${ai ? ' gallery-room--ai' : ''}`} aria-labelledby="room-title" data-room data-variant={variant}>
       <div className="gallery-room__stage" data-stage-viewport>
         <div className="scene" data-scene>
           <div className="scene__cam" data-cam>
             {(['morning', 'golden', 'night'] as const).map(s => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={s} src={`/room/${s}.webp`} alt="" className="scene__img" data-light={s} width={2508} height={1235} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
+              <img key={s} src={`${base}/${s}.webp`} alt="" className="scene__img" data-light={s} width={ai ? 1920 : 2508} height={ai ? 946 : 1235} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
             ))}
             {/* Generated motion clips (Higgsfield), loaded only for the active light — see RoomMotion */}
-            {CLIPS.map(s => (
-              <video key={s} className="scene__img scene__video" data-light={s} data-src={`/room/${s}.mp4`} muted loop playsInline preload="none" aria-hidden="true" />
+            {clips.map(s => (
+              <video key={s} className="scene__img scene__video" data-light={s} data-src={`${base}/${s}.mp4`} data-track={ai ? `${base}/${s}.json` : undefined} muted loop playsInline preload="none" aria-hidden="true" />
             ))}
 
             {/* Light & air */}
@@ -99,6 +105,8 @@ export default function GalleryRoom() {
             <canvas className="fx fx--particles" data-particles aria-hidden="true" />
             <div className="fx fx--plane" aria-hidden="true"><i /></div>
 
+            {/* Everything hung on the wall moves as one: tracked to the camera in the AI variant */}
+            <div className="wallset" data-wallset style={wallset}>
             {/* Masthead on the wall */}
             <div className="masthead" style={{ left: pct(MASTHEAD.x, SCENE.w), top: pct(MASTHEAD.y, SCENE.h), width: pct(MASTHEAD.w, SCENE.w) }} data-masthead>
               <p className="masthead__eyebrow">{PERSON.positioning.map(p => <span key={p}>{p}</span>)}</p>
@@ -137,6 +145,7 @@ export default function GalleryRoom() {
                 </Link>
               ))}
             </nav>
+            </div>
           </div>
         </div>
       </div>

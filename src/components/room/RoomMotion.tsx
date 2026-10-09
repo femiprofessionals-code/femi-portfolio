@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { FOCUS, MASTHEAD, SCENE } from '@/content/gallery'
+import { FOCUS as FOCUS_STILL, MASTHEAD, SCENE, WALLSET_AI } from '@/content/gallery'
 import twinkle from '@/content/twinkle.json'
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v))
@@ -31,6 +31,12 @@ export default function RoomMotion() {
     let visible = true
 
     // ── Camera dolly (wide screens) ───────────────────────────
+    const ai = room.dataset.variant === 'ai'
+    const A = WALLSET_AI
+    const FOCUS = ai
+      ? { x: FOCUS_STILL.x * A.scale + A.x, y: FOCUS_STILL.y * A.scale + A.y, w: FOCUS_STILL.w * A.scale, h: FOCUS_STILL.h * A.scale }
+      : FOCUS_STILL
+    const MAST_X = ai ? MASTHEAD.x * A.scale + A.x : MASTHEAD.x
     const place = () => {
       if (touchLayout.matches) {
         scene.style.transform = ''
@@ -65,7 +71,7 @@ export default function RoomMotion() {
     const startPan = () => {
       if (!touchLayout.matches) return
       const c = scene.offsetWidth / SCENE.w
-      viewport.scrollLeft = Math.max(0, MASTHEAD.x * c - 20)
+      viewport.scrollLeft = Math.max(0, MAST_X * c - 20)
     }
 
     // ── Pointer parallax (very small) ─────────────────────────
@@ -158,13 +164,51 @@ export default function RoomMotion() {
         }
       }
     }
+    // ── Wall tracking (AI variant): keep drawn frames glued to the drifting camera ──
+    const wallset = room.querySelector<HTMLElement>('[data-wallset]')
+    const tracks: Record<string, { fps: number; t: [number, number, number][] }> = {}
+    const anchor = () => {
+      const u = scene.offsetWidth / SCENE.w
+      return `translate(${(A.x * u).toFixed(2)}px, ${(A.y * u).toFixed(2)}px) scale(${A.scale})`
+    }
+    const applyTrack = (v: HTMLVideoElement, mediaTime: number) => {
+      const tr = tracks[v.dataset.light || '']
+      if (!wallset || !tr) return
+      const i = Math.round(mediaTime * tr.fps) % tr.t.length
+      const [sc, tx, ty] = tr.t[i]
+      const u = scene.offsetWidth / SCENE.w
+      wallset.style.transform = `translate(${(tx * SCENE.w * u).toFixed(2)}px, ${(ty * SCENE.h * u).toFixed(2)}px) scale(${sc.toFixed(5)}) ${anchor()}`
+    }
+    type RVFC = (cb: (now: number, meta: { mediaTime: number }) => void) => number
+    const follow = (v: HTMLVideoElement) => {
+      const rvfc = (v as HTMLVideoElement & { requestVideoFrameCallback?: RVFC }).requestVideoFrameCallback
+      if (rvfc) {
+        const step = (_: number, meta: { mediaTime: number }) => {
+          if (v.classList.contains('is-playing')) applyTrack(v, meta.mediaTime)
+          rvfc.call(v, step)
+        }
+        rvfc.call(v, step)
+      } else {
+        const step = () => { if (v.classList.contains('is-playing')) applyTrack(v, v.currentTime); requestAnimationFrame(step) }
+        requestAnimationFrame(step)
+      }
+    }
+    if (ai) {
+      for (const v of videos) {
+        if (!v.dataset.track) continue
+        fetch(v.dataset.track).then(r => r.json()).then(j => { tracks[v.dataset.light || ''] = j }).catch(() => {})
+        follow(v)
+      }
+    }
+    const resetWall = () => { if (ai && wallset && !room.classList.contains('has-clip')) wallset.style.transform = anchor() }
+
     syncVideo()
     const vio = new IntersectionObserver(([en]) => {
       for (const v of videos) { if (en.isIntersecting && v.classList.contains('is-playing')) v.play().catch(() => {}); else if (!en.isIntersecting) v.pause() }
       if (en.isIntersecting) syncVideo()
     })
     vio.observe(room)
-    const onTime = () => { syncVideo(); if (reduced.matches) draw(0) }
+    const onTime = () => { syncVideo(); resetWall(); if (reduced.matches) draw(0) }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
