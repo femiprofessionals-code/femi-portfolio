@@ -145,7 +145,10 @@ export default function RoomMotion() {
       for (const v of videos) {
         const on = v.dataset.light === stage && !reduced.matches && !saveData
         if (on) {
-          if (!v.src) v.src = v.dataset.src || ''
+          if (!v.src) {
+            const webm = v.canPlayType('video/webm; codecs="vp9"') === 'probably'
+            v.src = (v.dataset.src || '').replace(/\.mp4$/, webm ? '.webm' : '.mp4')
+          }
           v.onplaying = () => { v.classList.add('is-playing'); room.classList.add('has-clip') }
           if (visible) v.play().catch(() => {})
         } else {

@@ -620,3 +620,38 @@ html[data-time='night'] .gf:hover .gf__inner, html[data-time='night'] .gf:focus-
 .tod__opt-hint { font-size: .75rem; color: var(--stone); }
 @media (max-width: 520px) { .tod__now { display: none; } .tod { left: 12px; bottom: 12px; } }
 @media print { .tod { display: none; } }
+
+/* ── Company plates (logos framed like prints) ──────── */
+.gf--company .gf__inner { gap: 7cqw; }
+.gf__plate { display: block; line-height: 0; box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 .8cqw 2.4cqw rgba(0, 0, 0, .55); }
+.gf__plate .plate { display: block; width: 100%; height: auto; }
+.gf__plate--gs { width: 50%; }
+.gf__plate--carlyle { width: 64%; }
+.gf__plate--trowe { width: 80%; }
+.gf--company .gf__sub { color: #D2B08A; }
+
+/* ── Home header: floats over the room, with a soft scrim for legibility ── */
+.nav--clear::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--ivory) 58%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+html[data-time='night'] .nav--clear::before { background: rgba(14, 10, 8, .5); border-bottom-color: rgba(239, 231, 218, .1); }
+.nav--clear .nav__name { opacity: 0; transform: translateY(-4px); }
+.nav__name { transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.nav--clear .nav__brand { border-right-color: transparent; }
+.nav--clear .nav__cta { background: color-mix(in srgb, var(--ivory) 30%, transparent); }
+
+/* ── Masthead refinement ─────────────────────────────── */
+.masthead { gap: 1.35cqw; }
+.masthead__eyebrow { display: grid; gap: .25cqw; padding-left: .9cqw; border-left: 1px solid var(--bronze); letter-spacing: .22em; }
+.masthead__eyebrow span { display: block; }
+.masthead__name { font-size: 4.6cqw; }
+.masthead__line { max-width: 17em; }
+.masthead__actions { display: flex; gap: .8cqw; flex-wrap: wrap; }
+.masthead__cta--solid { background: var(--room-ink); color: var(--ivory); border-color: var(--room-ink); }
+.masthead__cta--solid:hover { background: transparent; color: var(--room-ink); }
+
+/* Clips carry their own motion: retire the overlapping CSS/canvas effects */
+.has-clip .fx--particles, .has-clip .fx--glows, .has-clip .fx--plane { opacity: 0; }

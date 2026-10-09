@@ -7,6 +7,7 @@ import { FRAMES, MASTHEAD, PICTURE_LIGHTS, SCENE, type Frame } from '@/content/g
 import { HERO, PERSON } from '@/content/site'
 import portrait from '../../../public/images/femi-portrait.webp'
 import RoomMotion from './RoomMotion'
+import { CarlylePlate, TRowePlate } from '@/components/BrandMarks'
 
 /** Optional looping clips: drop /public/room/{morning,golden,night}.mp4 in and they play over the stills. */
 const CLIPS = (['morning', 'golden', 'night'] as const).filter(s => fs.existsSync(path.join(process.cwd(), 'public', 'room', `${s}.mp4`)))
@@ -39,12 +40,13 @@ function FrameBody({ f }: { f: Frame }) {
   }
   if (f.kind === 'company') {
     const src = logoSrc(f.company!)
+    const plate = src
+      // eslint-disable-next-line @next/next/no-img-element
+      ? <img src={src} alt="" className={`plate plate--${f.company}`} />
+      : f.company === 'carlyle' ? <CarlylePlate /> : f.company === 'trowe' ? <TRowePlate /> : <span className="gf__wordmark">{WORDMARK[f.company!]}</span>
     return (
       <>
-        {src
-          // eslint-disable-next-line @next/next/no-img-element
-          ? <img src={src} alt="" className={`gf__logo gf__logo--${f.company}`} />
-          : <span className={`gf__wordmark gf__wordmark--${f.company}`}>{WORDMARK[f.company!]}</span>}
+        <span className={`gf__plate gf__plate--${f.company}`}>{plate}</span>
         <span className="gf__sub">{f.caption.split(' · ')[1]}</span>
       </>
     )
@@ -93,10 +95,13 @@ export default function GalleryRoom() {
 
             {/* Masthead on the wall */}
             <div className="masthead" style={{ left: pct(MASTHEAD.x, SCENE.w), top: pct(MASTHEAD.y, SCENE.h), width: pct(MASTHEAD.w, SCENE.w) }} data-masthead>
-              <p className="masthead__eyebrow">{HERO.eyebrow}</p>
+              <p className="masthead__eyebrow">{PERSON.positioning.map(p => <span key={p}>{p}</span>)}</p>
               <h1 id="room-title" className="masthead__name">{PERSON.name}</h1>
               <p className="masthead__line">{HERO.headline}</p>
-              <Link href="/work" className="masthead__cta">Selected work <Arrow /></Link>
+              <div className="masthead__actions">
+                <Link href="/work" className="masthead__cta masthead__cta--solid">Selected work <Arrow /></Link>
+                <Link href="/resume" className="masthead__cta">Résumé <Arrow /></Link>
+              </div>
             </div>
 
             {/* The collection — each frame opens a page */}
