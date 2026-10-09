@@ -2,25 +2,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import Wordmark from '@/components/Wordmark'
+import GalleryRoom from '@/components/room/GalleryRoom'
 import { Apex, Bars, Crescent, Disc, Monolith, Ring, Rings } from '@/components/Icons'
 import { BRIEF_IMAGES } from '@/content/images'
 import {
-  CAREER_ARC, CLOSING, FEATURED, HERO, INSTITUTIONS, METRICS, PERSON, PILLARS, ROLES, THESES,
+  CAREER_ARC, CLOSING, FEATURED, INSTITUTIONS, METRICS, PERSON, PILLARS, ROLES, THESES,
 } from '@/content/site'
-import residence from '../../public/images/rooms/hero-residence.webp'
-import gallery from '../../public/images/rooms/gallery-wall.webp'
 import library from '../../public/images/rooms/philosophy-library.webp'
 import lounge from '../../public/images/rooms/contact-lounge.webp'
 
 const PILLAR_ICON = { ring: Ring, apex: Apex, rings: Rings, bars: Bars }
-
-/** Metric frames on the gallery wall, positioned in % of the photograph (1672 × 823). */
-const FRAMES = [
-  { cls: 'gframe--black', style: { left: '55.6%', top: '8.2%', width: '11.2%', height: '24.4%' } },
-  { cls: 'gframe--ivory', style: { left: '69.85%', top: '38.9%', width: '6.6%', height: '15.4%' } },
-  { cls: 'gframe--green', style: { left: '78.95%', top: '45.2%', width: '9.1%', height: '13.3%' } },
-  { cls: 'gframe--marble', style: { left: '32.9%', top: '27%', width: '6.2%', height: '15%' } },
-]
 
 const PHILOSOPHY_TILES = [
   { art: Crescent, value: '31', label: 'business units aligned' },
@@ -31,28 +22,13 @@ const PHILOSOPHY_TILES = [
 export default function Home() {
   return (
     <>
-      {/* 01 — Arrival: light residence */}
-      <section className="arrival" aria-labelledby="hero-title">
-        <div className="arrival__scene">
-          <Image
-            src={residence}
-            alt=""
-            priority
-            placeholder="blur"
-            sizes="100vw"
-            className="arrival__img"
-          />
-          <div className="arrival__copy">
-            <p className="eyebrow reveal">{HERO.eyebrow}</p>
-            <h1 id="hero-title" className="arrival__title reveal" data-delay="1">{HERO.headline}</h1>
-            <p className="arrival__body reveal" data-delay="2">{HERO.body}</p>
-            <div className="btn-row reveal" data-delay="3">
-              <Link href="/work" className="btn btn--bronze">Selected work <Arrow /></Link>
-              <Link href="/resume" className="btn">Résumé <Arrow /></Link>
-            </div>
-          </div>
-        </div>
-        <ul className="pillars" aria-label="Positioning">
+      {/* 01 — The gallery: a room that follows the light in New York */}
+      <GalleryRoom />
+
+      {/* 02 — Positioning & proof */}
+      <section className="plaques" aria-labelledby="proof-title">
+        <h2 id="proof-title" className="sr-only">Positioning and institutional scale</h2>
+        <ul className="pillars pillars--flush" aria-label="Positioning">
           {PILLARS.map((p, i) => {
             const Icon = PILLAR_ICON[p.icon]
             return (
@@ -66,43 +42,11 @@ export default function Home() {
             )
           })}
         </ul>
-      </section>
-
-      {/* 02 — Institutional gallery: proof wall */}
-      <section className="gallery" aria-labelledby="gallery-title">
-        <div className="gallery__scene">
-          <Image src={gallery} alt="" placeholder="blur" sizes="100vw" className="gallery__img" />
-          <div className="gallery__copy">
-            <h2 id="gallery-title" className="gallery__title reveal">Institutional Gallery</h2>
-            <p className="gallery__body reveal" data-delay="1">
-              7+ years across Goldman Sachs, The Carlyle Group and T. Rowe Price — measured in outcomes, not adjectives.
-            </p>
-            <Link href="/experience" className="btn btn--frame reveal" data-delay="2">Experience <Arrow /></Link>
-          </div>
-          <dl className="gallery__frames">
-            {METRICS.map((m, i) => (
-              <div key={m.value} className={`gframe ${FRAMES[i].cls}`} style={FRAMES[i].style}>
-                <dt className="gframe__label">{m.short}</dt>
-                <dd className="gframe__value">{m.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="plaques">
-          <div className="wrap plaques__grid">
-            {INSTITUTIONS.map(inst => (
-              <div key={inst.key} className="plaque-card reveal">
-                <Wordmark inst={inst} />
-                <span className="eyebrow">{inst.division}</span>
-              </div>
-            ))}
-          </div>
-          <dl className="wrap plaques__legend">
-            {METRICS.map(m => (
-              <div key={m.value}><dt>{m.value}</dt><dd>{m.label}</dd></div>
-            ))}
-          </dl>
-        </div>
+        <dl className="wrap plaques__legend">
+          {METRICS.map(m => (
+            <div key={m.value} className="reveal"><dt>{m.value}</dt><dd>{m.label}</dd></div>
+          ))}
+        </dl>
       </section>
 
       {/* 03 — Selected work: editorial */}

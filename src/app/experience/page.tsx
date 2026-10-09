@@ -30,7 +30,7 @@ export default function ExperiencePage() {
         <div className="wrap">
           <div className="career">
             {ROLES.map(r => (
-              <article key={r.company} className="career__row reveal">
+              <article key={r.company} id={r.company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} className="career__row reveal" style={{ scrollMarginTop: 'calc(var(--nav-h) + 1.5rem)' }}>
                 <div className="career__mark">
                   <Wordmark inst={INSTITUTIONS.find(i => i.key === r.institution)!} />
                   <span className="meta">{r.dates}</span>

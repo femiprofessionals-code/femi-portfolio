@@ -3,6 +3,8 @@ import { Cormorant_Garamond, EB_Garamond, Inter } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import Reveal from '@/components/Reveal'
+import TimeSelector from '@/components/TimeSelector'
+import { TIME_BOOT_SCRIPT } from '@/lib/time'
 import { PERSON, INSTITUTIONS } from '@/content/site'
 import './globals.css'
 
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: ['/og.jpg'] },
 }
 
-export const viewport: Viewport = { themeColor: '#EFE9DF' }
+export const viewport: Viewport = { themeColor: '#F4F0E9' }
 
 const personLd = {
   '@context': 'https://schema.org',
@@ -69,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${display.variable} ${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: TIME_BOOT_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       </head>
       <body>
@@ -78,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <Reveal />
+        <TimeSelector />
       </body>
     </html>
   )

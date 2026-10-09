@@ -17,14 +17,19 @@ const DARK_TOP = ['/contact']
 export default function Nav() {
   const path = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const [overRoom, setOverRoom] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24)
+      const room = document.querySelector('[data-room]')
+      setOverRoom(!!room && room.getBoundingClientRect().bottom > 80)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [path])
 
   useEffect(() => setOpen(false), [path])
 
@@ -42,7 +47,7 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`nav${solid ? ' nav--solid' : ''}${onDark ? ' nav--on-dark' : ''}`}>
+      <header className={`nav${solid ? ' nav--solid' : ''}${onDark ? ' nav--on-dark' : ''}${overRoom && !scrolled && !open ? ' nav--clear' : ''}`}>
         <div className="wrap nav__inner">
           <Link href="/" className="nav__brand" aria-label="Femi Falade — home">
             <span className="nav__mono" aria-hidden="true">FF</span>
