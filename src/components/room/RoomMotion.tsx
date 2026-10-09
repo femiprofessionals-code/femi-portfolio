@@ -137,7 +137,31 @@ export default function RoomMotion() {
 
     sizeCanvas(); seedMotes(); place(); startPan()
     if (reduced.matches) draw(0); else raf = requestAnimationFrame(loop)
-    const onTime = () => { if (reduced.matches) draw(0) }
+    // ── Motion clips: load and play only the active light's video ──
+    const videos = Array.from(room.querySelectorAll<HTMLVideoElement>('video[data-light]'))
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+    const syncVideo = () => {
+      const stage = document.documentElement.dataset.time || 'morning'
+      for (const v of videos) {
+        const on = v.dataset.light === stage && !reduced.matches && !saveData
+        if (on) {
+          if (!v.src) v.src = v.dataset.src || ''
+          v.onplaying = () => { v.classList.add('is-playing'); room.classList.add('has-clip') }
+          if (visible) v.play().catch(() => {})
+        } else {
+          v.pause()
+          v.classList.remove('is-playing')
+          if (!videos.some(x => x.classList.contains('is-playing'))) room.classList.remove('has-clip')
+        }
+      }
+    }
+    syncVideo()
+    const vio = new IntersectionObserver(([en]) => {
+      for (const v of videos) { if (en.isIntersecting && v.classList.contains('is-playing')) v.play().catch(() => {}); else if (!en.isIntersecting) v.pause() }
+      if (en.isIntersecting) syncVideo()
+    })
+    vio.observe(room)
+    const onTime = () => { syncVideo(); if (reduced.matches) draw(0) }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
@@ -147,6 +171,7 @@ export default function RoomMotion() {
     return () => {
       cancelAnimationFrame(raf)
       io.disconnect()
+      vio.disconnect()
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       window.removeEventListener('pointermove', onPointer)

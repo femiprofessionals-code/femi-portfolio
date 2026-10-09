@@ -8,6 +8,9 @@ import { HERO, PERSON } from '@/content/site'
 import portrait from '../../../public/images/femi-portrait.webp'
 import RoomMotion from './RoomMotion'
 
+/** Optional looping clips: drop /public/room/{morning,golden,night}.mp4 in and they play over the stills. */
+const CLIPS = (['morning', 'golden', 'night'] as const).filter(s => fs.existsSync(path.join(process.cwd(), 'public', 'room', `${s}.mp4`)))
+
 const pct = (v: number, of: number) => `${(v / of) * 100}%`
 const rectStyle = ([x, y, w, h]: Frame['rect']) => ({
   left: pct(x, SCENE.w), top: pct(y, SCENE.h), width: pct(w, SCENE.w), height: pct(h, SCENE.h),
@@ -71,6 +74,10 @@ export default function GalleryRoom() {
             {(['morning', 'golden', 'night'] as const).map(s => (
               // eslint-disable-next-line @next/next/no-img-element
               <img key={s} src={`/room/${s}.webp`} alt="" className="scene__img" data-light={s} width={2508} height={1235} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
+            ))}
+            {/* Generated motion clips (Higgsfield), loaded only for the active light — see RoomMotion */}
+            {CLIPS.map(s => (
+              <video key={s} className="scene__img scene__video" data-light={s} data-src={`/room/${s}.mp4`} muted loop playsInline preload="none" aria-hidden="true" />
             ))}
 
             {/* Light & air */}
