@@ -650,3 +650,33 @@ html[data-time='night'] .nav--clear :is(.nav__name, .nav__mono, .nav__links a, .
 
 /* Clips carry their own motion: retire the overlapping CSS/canvas effects */
 .has-clip .fx--particles, .has-clip .fx--glows, .has-clip .fx--plane { opacity: 0; }
+
+/* ── Drawn frames on a bare wall ─────────────────────── */
+.frames, .lamps { font-size: calc(100cqw / 1672); }      /* 1em = 1 px of the room photograph */
+.gf__moulding {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #5a4026 0%, #b99258 20%, #7b5934 42%, #caa56c 64%, #8a6539 82%, #5c4126 100%);
+  box-shadow:
+    inset 0 0 0 .7em rgba(255, 228, 180, .07),
+    inset 0 0 .5em rgba(20, 12, 6, .55),
+    0 .5em 1em rgba(28, 17, 9, .28),
+    0 1.8em 3.2em -.6em rgba(28, 17, 9, .42);
+  transition: filter 2s ease, box-shadow 2s ease, transform .45s var(--ease);
+}
+.gf__inner { box-shadow: inset 0 0 0 1px rgba(30, 20, 10, .35), inset 0 .3em .8em rgba(0, 0, 0, .18); transition: filter 2s ease, transform .45s var(--ease); }
+.gf--light .gf__inner { box-shadow: inset 0 0 0 1px rgba(30, 20, 10, .3), inset 0 .3em .9em rgba(60, 40, 20, .16); }
+html[data-time='golden'] .gf__moulding { box-shadow: inset 0 0 0 .7em rgba(255, 210, 150, .1), inset 0 0 .5em rgba(20, 12, 6, .5), .8em .6em 1.2em rgba(60, 30, 10, .3), 2.4em 2em 3.6em -.6em rgba(60, 30, 10, .42); }
+html[data-time='night'] .gf__moulding { filter: brightness(.42) saturate(.8); box-shadow: inset 0 0 .5em rgba(0, 0, 0, .6), 0 1em 2.4em rgba(0, 0, 0, .55); }
+html[data-time='night'] .gf--lit .gf__moulding { filter: brightness(.95) saturate(1.05); }
+.gf:hover .gf__inner, .gf:focus-visible .gf__inner { transform: translateY(-.35em); box-shadow: inset 0 0 0 1px rgba(30, 20, 10, .3); }
+.gf:hover .gf__moulding, .gf:focus-visible .gf__moulding { transform: translateY(-.35em); box-shadow: inset 0 0 0 .7em rgba(255, 228, 180, .1), inset 0 0 .5em rgba(20, 12, 6, .5), 0 0 0 .2em rgba(201, 165, 108, .9), 0 2.6em 4em -.6em rgba(28, 17, 9, .5); }
+
+/* Brass picture lights */
+.lamps { position: absolute; inset: 0; pointer-events: none; }
+.lamps i { position: absolute; height: 19em; }
+.lamps i::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 5em; border-radius: 2.5em; background: linear-gradient(180deg, #e7c890, #a57a45 55%, #5c3f22); box-shadow: 0 .6em 1em rgba(30, 18, 8, .35); transition: box-shadow 2s ease; }
+.lamps i::after { content: ''; position: absolute; left: calc(50% - 1.5em); width: 3em; top: 4.5em; bottom: 0; background: linear-gradient(90deg, #6b4c2b, #b88d55, #6b4c2b); }
+html[data-time='night'] .lamps i::before { box-shadow: 0 .8em 1.6em rgba(255, 196, 120, .85), 0 .3em .5em rgba(255, 220, 160, .9); }
+html[data-time='night'] .lamps i::after { filter: brightness(.6); }
+
+.gf__label { font-size: clamp(9px, 6.6cqw, 13px); letter-spacing: .08em; overflow-wrap: anywhere; }

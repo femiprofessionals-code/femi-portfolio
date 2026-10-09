@@ -13,9 +13,15 @@ import { CarlylePlate, TRowePlate } from '@/components/BrandMarks'
 const CLIPS = (['morning', 'golden', 'night'] as const).filter(s => fs.existsSync(path.join(process.cwd(), 'public', 'room', `${s}.mp4`)))
 
 const pct = (v: number, of: number) => `${(v / of) * 100}%`
-const rectStyle = ([x, y, w, h]: Frame['rect']) => ({
+/** The wall in the photograph is bare — every frame is drawn here: gilt moulding, mat and picture. */
+const MOULD = 9 // moulding width, scene px
+const outerStyle = ([x, y, w, h]: Frame['rect']) => ({
   left: pct(x, SCENE.w), top: pct(y, SCENE.h), width: pct(w, SCENE.w), height: pct(h, SCENE.h),
 })
+const innerInset = ([, , w, h]: Frame['rect']) => {
+  const ix = pct(MOULD, w), iy = pct(MOULD, h)
+  return { left: ix, right: ix, top: iy, bottom: iy }
+}
 
 /** Official marks live in /public/logos/{gs,carlyle,trowe}.svg — a typeset name stands in until a file exists. */
 function logoSrc(key: string) {
@@ -104,6 +110,13 @@ export default function GalleryRoom() {
               </div>
             </div>
 
+            {/* Brass picture lights */}
+            <div className="lamps" aria-hidden="true">
+              {PICTURE_LIGHTS.map(([x, y, w]) => (
+                <i key={x} style={{ left: pct(x - w * 0.36, SCENE.w), top: pct(y - 6, SCENE.h), width: pct(w * 0.72, SCENE.w) }} />
+              ))}
+            </div>
+
             {/* The collection — each frame opens a page */}
             <nav className="frames" aria-label="The gallery">
               {FRAMES.map(f => (
@@ -111,10 +124,11 @@ export default function GalleryRoom() {
                   key={f.id}
                   href={f.href}
                   className={`gf gf--${f.kind} gf--${f.tone}${f.lit ? ' gf--lit' : ''}${f.rect[0] > 1240 ? ' gf--edge' : ''}`}
-                  style={rectStyle(f.rect)}
+                  style={outerStyle(f.rect)}
                   aria-label={`${f.title} — ${f.caption}`}
                 >
-                  <span className="gf__inner"><FrameBody f={f} /></span>
+                  <span className="gf__moulding" aria-hidden="true" />
+                  <span className="gf__inner" style={innerInset(f.rect)}><FrameBody f={f} /></span>
                   <span className="gf__card" aria-hidden="true">
                     <span className="gf__card-title">{f.title}</span>
                     <span className="gf__card-caption">{f.caption}</span>
