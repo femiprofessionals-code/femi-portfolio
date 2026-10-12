@@ -608,17 +608,18 @@ html[data-time='night'] .gf:hover .gf__inner, html[data-time='night'] .gf:focus-
 .plaques .plaques__legend { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
 /* ── Time-of-day selector ───────────────────────────── */
-.tod { position: fixed; left: 18px; bottom: 18px; z-index: 120; font-family: var(--sans); }
-.tod__toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 14px; border: 1px solid var(--rule); background: color-mix(in srgb, var(--ivory) 88%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--ink); cursor: pointer; font: 500 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; transition: background .4s, color .4s, border-color .4s; }
-.tod__toggle:hover { border-color: var(--bronze); }
-.tod__clock { color: var(--stone); letter-spacing: .08em; padding-left: 10px; border-left: 1px solid var(--rule); }
-.tod__menu { position: absolute; left: 0; bottom: calc(100% + 8px); min-width: 250px; padding: 6px; display: grid; gap: 2px; background: color-mix(in srgb, var(--ivory) 96%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(0, 0, 0, .14); }
+.tod { position: relative; font-family: var(--sans); flex-shrink: 0; }
+.tod__toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: inherit; cursor: pointer; font: 500 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; transition: background .4s, color .4s, border-color .4s; }
+.tod__toggle:hover .tod__now { text-decoration: underline; text-underline-offset: .4em; }
+.tod__clock { opacity: .7; letter-spacing: .08em; padding-left: 10px; border-left: 1px solid currentColor; }
+.tod__menu { position: absolute; right: 0; top: calc(100% + 10px); min-width: 250px; padding: 6px; display: grid; gap: 2px; background: color-mix(in srgb, var(--ivory) 96%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--rule); box-shadow: 0 12px 30px rgba(0, 0, 0, .14); }
 .tod__menu[hidden] { display: none; }
 .tod__opt { display: grid; grid-template-columns: 18px 1fr auto; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: var(--ink); cursor: pointer; text-align: left; font: 500 .85rem/1.2 var(--sans); }
 .tod__opt:hover { background: var(--surface); }
 .tod__opt[aria-checked='true'] { background: var(--surface); box-shadow: inset 2px 0 0 var(--bronze); }
 .tod__opt-hint { font-size: .75rem; color: var(--stone); }
-@media (max-width: 520px) { .tod__now { display: none; } .tod { left: 12px; bottom: 12px; } }
+@media (max-width: 1180px) { .tod__clock { display: none; } }
+@media (max-width: 960px) { .tod__now { display: none; } .tod { margin-left: auto; } }
 @media print { .tod { display: none; } }
 
 /* ── Company plates (logos framed like prints) ──────── */
@@ -700,8 +701,8 @@ html[data-time='night'] .gallery-room--ai .masthead__cta--solid:hover { color: v
 .room3 { position: relative; background: #12100E; --paint: #2A221B; --paint-soft: #5A4A3C; --paint-blend: multiply; }
 html[data-time='golden'] .room3 { --paint: #2B1C0F; --paint-soft: #5E4129; }
 html[data-time='night'] .room3 { --paint: #EDE1CD; --paint-soft: #CDBBA2; --paint-blend: normal; }
-.room3__viewport { position: relative; overflow: hidden; }
-.room3__viewport .room3__scene { position: relative; }
+.room3__viewport { position: relative; overflow: hidden; aspect-ratio: 1672 / 775; }   /* trims floor */
+.room3__viewport .room3__scene { position: absolute; top: 0; left: 0; }
 .room3__scene { position: relative; width: 100%; aspect-ratio: 1672 / 823; container-type: inline-size; }
 .room3__layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
 html:not([data-time]) .room3__layer[data-light='morning'],
@@ -731,8 +732,8 @@ html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { tex
 
 /* Phones & narrow tablets: a tighter slice of the room; text continues below it */
 @media (max-width: 760px) {
-  .room3__viewport { aspect-ratio: 1060 / 823; }
-  .room3__viewport .room3__scene { position: absolute; top: 0; width: 157.74%; left: -16.6%; }
+  .room3__viewport { aspect-ratio: 900 / 790; }
+  .room3__viewport .room3__scene { width: 185.78%; left: -27.33%; }
   .walltitle { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .hang__caption { display: none; }
   .room3__mobile { display: grid; gap: .9rem; padding: 2rem var(--gutter) 2.5rem; background: var(--ivory); border-bottom: 1px solid var(--rule); }
@@ -744,3 +745,7 @@ html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { tex
   .room3__lr { grid-column: 1; font-size: .92rem; color: var(--stone); }
   .room3__ly { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: .6rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--stone); }
 }
+
+@media (max-width: 960px) { .nav__mobile { margin-left: .75rem; } }
+.nav__name { white-space: nowrap; }
+@media (max-width: 420px) { .nav__name { font-size: .82rem; letter-spacing: .2em; } .nav__brand { gap: .6rem; } .nav__mobile { gap: .75rem; } }

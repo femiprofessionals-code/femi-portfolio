@@ -12,7 +12,7 @@ export const WALL = { x0: 192, x1: 1180, cx: 694 }
 export const TITLE = { cx: 694, y: 104, w: 760 }
 
 /** Phones see this slice of the room. */
-export const MOBILE_CROP = { x0: 176, x1: 1236 }
+export const MOBILE_CROP = { x0: 246, x1: 1146 }
 
 export type HungFrame = {
   id: 'trowe' | 'carlyle' | 'gs'

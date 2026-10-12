@@ -3,7 +3,6 @@ import { Cormorant_Garamond, EB_Garamond, Inter } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import Reveal from '@/components/Reveal'
-import TimeSelector from '@/components/TimeSelector'
 import { TIME_BOOT_SCRIPT } from '@/lib/time'
 import { PERSON, INSTITUTIONS } from '@/content/site'
 import './globals.css'
@@ -80,7 +79,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <Reveal />
-        <TimeSelector />
       </body>
     </html>
   )

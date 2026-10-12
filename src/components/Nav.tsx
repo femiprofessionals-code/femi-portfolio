@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Arrow from './Arrow'
+import TimeSelector from './TimeSelector'
 
 export const NAV_LINKS = [
   { label: 'Work', href: '/work' },
@@ -62,6 +63,7 @@ export default function Nav() {
               ))}
             </ul>
           </nav>
+          <TimeSelector />
           <Link href="/contact" className="nav__cta" aria-current={current('/contact')}>
             Contact <Arrow />
           </Link>
