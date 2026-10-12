@@ -7,9 +7,9 @@ import { HERO, PERSON } from '@/content/site'
 import RoomMotion from './RoomMotion'
 
 const STAGES = ['morning', 'golden', 'night'] as const
-const BASE = '/room/v3'
+const BASE = '/room/v4'
 const u = (v: number, of: number) => `${(v / of) * 100}%`
-const hasClip = (s: string) => fs.existsSync(path.join(process.cwd(), 'public', 'room', 'v3', `${s}.mp4`))
+const hasClip = (s: string) => fs.existsSync(path.join(process.cwd(), 'public', 'room', 'v4', `${s}.mp4`))
 
 /**
  * The homepage room. One photograph per light of day (plus a gentle motion loop for each);
@@ -23,7 +23,7 @@ export default function GalleryRoom() {
         <div className="room3__scene" data-scene style={{ ['--crop-x0' as string]: MOBILE_CROP.x0, ['--crop-x1' as string]: MOBILE_CROP.x1 }}>
           {STAGES.map(s => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={s} src={`${BASE}/${s}.webp`} alt="" className="room3__layer" data-light={s} width={2508} height={1234} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
+            <img key={s} src={`${BASE}/${s}.webp`} alt="" className="room3__layer" data-light={s} width={2304} height={1536} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
           ))}
           {STAGES.filter(hasClip).map(s => (
             <video key={s} className="room3__layer room3__video" data-light={s} data-src={`${BASE}/${s}.mp4`} muted loop playsInline preload="none" aria-hidden="true" />

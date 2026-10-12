@@ -696,14 +696,14 @@ html[data-time='night'] .gallery-room--ai .masthead__cta--solid { color: #F4EDE2
 html[data-time='night'] .gallery-room--ai .masthead__cta--solid:hover { color: var(--room-ink); }
 
 /* ═════════════════════════════════════════════════════════
-   ROOM v3 — one photograph per light, prints hung in-camera
+   ROOM — one photograph per light, prints hung in-camera
    ═════════════════════════════════════════════════════════ */
 .room3 { position: relative; background: #12100E; --paint: #2A221B; --paint-soft: #5A4A3C; --paint-blend: multiply; }
 html[data-time='golden'] .room3 { --paint: #2B1C0F; --paint-soft: #5E4129; }
 html[data-time='night'] .room3 { --paint: #EDE1CD; --paint-soft: #CDBBA2; --paint-blend: normal; }
-.room3__viewport { position: relative; overflow: hidden; aspect-ratio: 1672 / 775; }   /* trims floor */
+.room3__viewport { position: relative; overflow: hidden; aspect-ratio: 1536 / 960; }
 .room3__viewport .room3__scene { position: absolute; top: 0; left: 0; }
-.room3__scene { position: relative; width: 100%; aspect-ratio: 1672 / 823; container-type: inline-size; }
+.room3__scene { position: relative; width: 100%; aspect-ratio: 1536 / 1024; container-type: inline-size; }
 .room3__layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
 html:not([data-time]) .room3__layer[data-light='morning'],
 html[data-time='morning'] .room3__layer[data-light='morning'],
@@ -714,7 +714,7 @@ html[data-time='night'] .room3__layer[data-light='night'] { opacity: 1; }
 /* Wall title, painted onto the plaster */
 .walltitle { position: absolute; text-align: center; color: var(--paint); mix-blend-mode: var(--paint-blend); display: grid; justify-items: center; gap: .55cqw; }
 .walltitle__eyebrow { white-space: nowrap; font: 500 max(10px, .7cqw)/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--paint-soft); }
-.walltitle__name { font-family: var(--display); font-weight: 500; font-size: 3.6cqw; line-height: .98; letter-spacing: .01em; color: var(--paint); }
+.walltitle__name { font-family: var(--display); font-weight: 500; font-size: 3.9cqw; line-height: .98; letter-spacing: .01em; color: var(--paint); }
 .walltitle__line { font-family: var(--serif); font-size: max(13px, 1.22cqw); line-height: 1.35; color: var(--paint); }
 html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { text-shadow: 0 0 1.2cqw rgba(0, 0, 0, .55); }
 
@@ -732,8 +732,8 @@ html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { tex
 
 /* Phones & narrow tablets: a tighter slice of the room; text continues below it */
 @media (max-width: 760px) {
-  .room3__viewport { aspect-ratio: 900 / 790; }
-  .room3__viewport .room3__scene { width: 185.78%; left: -27.33%; }
+  .room3__viewport { aspect-ratio: 840 / 880; }
+  .room3__viewport .room3__scene { width: 182.86%; left: -42.86%; }
   .walltitle { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .hang__caption { display: none; }
   .room3__mobile { display: grid; gap: .9rem; padding: 2rem var(--gutter) 2.5rem; background: var(--ivory); border-bottom: 1px solid var(--rule); }
