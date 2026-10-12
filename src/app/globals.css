@@ -749,3 +749,9 @@ html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { tex
 @media (max-width: 960px) { .nav__mobile { margin-left: .75rem; } }
 .nav__name { white-space: nowrap; }
 @media (max-width: 420px) { .nav__name { font-size: .82rem; letter-spacing: .2em; } .nav__brand { gap: .6rem; } .nav__mobile { gap: .75rem; } }
+
+/* Boards sit above the room layers and video; they cross-fade with the light but never move */
+.boards { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.room3__layer.board { position: absolute; inset: auto; object-fit: fill; }
+.walltitle, .hang { z-index: 2; }
+.hang { position: absolute; inset: 0; }

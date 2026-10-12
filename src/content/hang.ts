@@ -14,6 +14,17 @@ export const TITLE = { cx: 777, y: 70, w: 720 }
 /** Phones see this slice of the room. */
 export const MOBILE_CROP = { x0: 360, x1: 1200 }
 
+/**
+ * Each framed board (moulding, mat, print and picture light) is a separate transparent layer cut from
+ * the photograph, laid over the room so it never moves with the background video.
+ * box = [x, y, w, h] of the cut-out in photograph px.
+ */
+export const BOARDS: { id: HungFrame['id']; box: [number, number, number, number] }[] = [
+  { id: 'trowe', box: [436, 214, 218, 260] },
+  { id: 'carlyle', box: [666, 214, 218, 260] },
+  { id: 'gs', box: [898, 214, 220.67, 260] },
+]
+
 export type HungFrame = {
   id: 'trowe' | 'carlyle' | 'gs'
   rect: [number, number, number, number]

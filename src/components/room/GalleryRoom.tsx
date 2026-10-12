@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { HUNG, MOBILE_CROP, ROOM, TITLE } from '@/content/hang'
+import { BOARDS, HUNG, MOBILE_CROP, ROOM, TITLE } from '@/content/hang'
 import { HERO, PERSON } from '@/content/site'
 import RoomMotion from './RoomMotion'
 
@@ -28,6 +28,15 @@ export default function GalleryRoom() {
           {STAGES.filter(hasClip).map(s => (
             <video key={s} className="room3__layer room3__video" data-light={s} data-src={`${BASE}/${s}.mp4`} muted loop playsInline preload="none" aria-hidden="true" />
           ))}
+
+          {/* Framed boards: fixed layer above the room and its video */}
+          <div className="boards" aria-hidden="true">
+            {BOARDS.map(b => STAGES.map(s => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={`${s}-${b.id}`} src={`${BASE}/boards/${s}-${b.id}.webp`} alt="" className="board room3__layer" data-light={s}
+                style={{ left: u(b.box[0], ROOM.w), top: u(b.box[1], ROOM.h), width: u(b.box[2], ROOM.w), height: u(b.box[3], ROOM.h), right: 'auto', bottom: 'auto' }} />
+            )))}
+          </div>
 
           {/* Painted on the wall */}
           <div className="walltitle" style={{ left: u(TITLE.cx - TITLE.w / 2, ROOM.w), top: u(TITLE.y, ROOM.h), width: u(TITLE.w, ROOM.w) }}>
