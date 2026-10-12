@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import Wordmark from '@/components/Wordmark'
 import GalleryRoom from '@/components/room/GalleryRoom'
-import { Apex, Bars, Crescent, Disc, Monolith, Ring, Rings } from '@/components/Icons'
 import { BRIEF_IMAGES } from '@/content/images'
 import {
   CAREER_ARC, CLOSING, FEATURED, INSTITUTIONS, METRICS, PERSON, PILLARS, ROLES, THESES,
@@ -11,36 +10,24 @@ import {
 import library from '../../public/images/rooms/philosophy-library.webp'
 import lounge from '../../public/images/rooms/contact-lounge.webp'
 
-const PILLAR_ICON = { ring: Ring, apex: Apex, rings: Rings, bars: Bars }
-
-const PHILOSOPHY_TILES = [
-  { art: Crescent, value: '31', label: 'business units aligned' },
-  { art: Monolith, value: '120 days', label: 'from a 12-month plan' },
-  { art: Disc, value: '33%', label: 'faster investor onboarding' },
-]
-
-export default function HomeView({ room = 'rendered' }: { room?: 'rendered' | 'ai' }) {
+export default function HomeView() {
   return (
     <>
       {/* 01 — The gallery: a room that follows the light in New York */}
-      <GalleryRoom variant={room} />
+      <GalleryRoom />
 
       {/* 02 — Positioning & proof */}
       <section className="plaques" aria-labelledby="proof-title">
         <h2 id="proof-title" className="sr-only">Positioning and institutional scale</h2>
         <ul className="pillars pillars--flush" aria-label="Positioning">
-          {PILLARS.map((p, i) => {
-            const Icon = PILLAR_ICON[p.icon]
-            return (
-              <li key={p.title} className="pillar reveal" data-delay={String(i)}>
-                <span className={`pillar__icon pillar__icon--${p.tone}`}><Icon size={40} /></span>
-                <span>
-                  <span className="pillar__title">{p.title}</span>
-                  <span className="pillar__body">{p.body}</span>
-                </span>
-              </li>
-            )
-          })}
+          {PILLARS.map((p, i) => (
+            <li key={p.title} className="pillar reveal" data-delay={String(i)}>
+              <span>
+                <span className="pillar__title">{p.title}</span>
+                <span className="pillar__body">{p.body}</span>
+              </span>
+            </li>
+          ))}
         </ul>
         <dl className="wrap plaques__legend">
           {METRICS.map(m => (
@@ -135,15 +122,6 @@ export default function HomeView({ room = 'rendered' }: { room?: 'rendered' | 'a
           <p className="dark-room__body reveal" data-delay="2">
             The fastest teams are not always moving first; they are aligned on the right problem first.
           </p>
-          <ul className="tiles" aria-label="Proof of operating model">
-            {PHILOSOPHY_TILES.map((t, i) => (
-              <li key={t.label} className="tile reveal" data-delay={String(i + 1)}>
-                <t.art />
-                <span className="tile__value">{t.value}</span>
-                <span className="tile__label">{t.label}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
