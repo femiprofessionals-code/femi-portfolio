@@ -755,3 +755,6 @@ html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { tex
 .room3__layer.board { position: absolute; inset: auto; object-fit: fill; }
 .walltitle, .hang { z-index: 2; }
 .hang { position: absolute; inset: 0; }
+/* Night: captions sit in the pool of picture light, so they read in dark ink */
+html[data-time='night'] .hang__caption { color: #2A1C12; mix-blend-mode: normal; text-shadow: none; }
+html[data-time='night'] .hang__caption .hang__years { color: #4A3424; }
