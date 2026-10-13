@@ -116,7 +116,7 @@ export default function HomeView() {
 
       {/* 05 — Operating philosophy: walnut library */}
       <section className="dark-room dark" aria-labelledby="pov-title">
-        <Image src={library} alt="" placeholder="blur" sizes="100vw" className="dark-room__img" />
+        <Image src={library} alt="" placeholder="blur" sizes="100vw" unoptimized className="dark-room__img" />
         <div className="wrap dark-room__inner">
           <p className="eyebrow reveal">Operating philosophy</p>
           <h2 id="pov-title" className="dark-room__title reveal" data-delay="1">Clarity Before Motion</h2>
@@ -128,7 +128,7 @@ export default function HomeView() {
 
       {/* 06 — Contact: dark hospitality */}
       <section className="dark-room dark-room--contact dark" aria-labelledby="contact-title">
-        <Image src={lounge} alt="" placeholder="blur" sizes="100vw" className="dark-room__img" />
+        <Image src={lounge} alt="" placeholder="blur" sizes="100vw" unoptimized className="dark-room__img" />
         <div className="wrap dark-room__inner">
           <p className="eyebrow reveal">Contact</p>
           <h2 id="contact-title" className="dark-room__title reveal" data-delay="1">Leading What&rsquo;s Next</h2>
