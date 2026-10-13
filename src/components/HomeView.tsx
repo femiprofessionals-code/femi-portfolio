@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import Wordmark from '@/components/Wordmark'
+import CountUp from '@/components/CountUp'
 import GalleryRoom from '@/components/room/GalleryRoom'
 import { BRIEF_IMAGES } from '@/content/images'
 import {
@@ -31,7 +32,7 @@ export default function HomeView() {
         </ul>
         <dl className="wrap plaques__legend">
           {METRICS.map(m => (
-            <div key={m.value} className="reveal"><dt>{m.value}</dt><dd>{m.label}</dd></div>
+            <div key={m.value} className="reveal"><dt><CountUp value={m.value} /></dt><dd>{m.label}</dd></div>
           ))}
         </dl>
       </section>
