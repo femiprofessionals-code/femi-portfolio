@@ -22,7 +22,7 @@ export const MOBILE_CROP = { x0: 360, x1: 1200 }
 export const BOARDS: { id: HungFrame['id']; box: [number, number, number, number] }[] = [
   { id: 'trowe', box: [436, 214, 218, 260] },
   { id: 'carlyle', box: [666, 214, 218, 260] },
-  { id: 'gs', box: [898, 214, 220.67, 260] },
+  { id: 'gs', box: [898, 214, 221, 260] },
 ]
 
 export type HungFrame = {
