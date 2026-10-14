@@ -54,3 +54,10 @@ Assets: `public/room/v5/motion/`. Generator: `docs/asset-lock/scripts/motion_ass
 - Reduced motion: no request and no video.
 - `sky-what-moves.jpg`: only cloud pixels change.
 - Real-time sample: `home-sky-realtime-sample.mp4`.
+
+## Revision: sharp side extensions (Femi: "both sides appear blurry")
+- The blurred edge stretch is replaced by **real room detail from Femi's clip**: the clip is zoomed out, so its frames show about 155 source px more on the left and 107 on the right. Frame 191, the best-aligned at the edges, is AI-upscaled ×4 (Real-ESRGAN), locked into the master's coordinates and saved at 2× source resolution, 180 px per side (`edge-{left,right}-{light}.webp`).
+- **Golden hour and night sides** are relit with a smooth per-row light ratio measured on the room's own outer columns. The first attempt, a banded linear fit, produced colour blocks and was rejected.
+- Beyond the clip's coverage, which only ultra-wide screens reach, the sides fade into the dark surround.
+- **The moving sky now spans the extended width** (`sky2.py`, band 1896×480), so clouds also drift through the side windows. VP9 and H.264 were re-encoded.
+- Screens: `sides-{1366x657,1536x730,1920x970,2560x1080}-{light}.png`.

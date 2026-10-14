@@ -722,7 +722,7 @@ html[data-time='golden'] .room5 img[data-light='golden'],
 html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 
 /* Moving sky band (source rows 0–480), masked to open sky; fades in once playing */
-.room5__sky { position: absolute; left: 0; top: 0; width: 100%; height: 46.875%; object-fit: fill; opacity: 0; transition: opacity 1.2s ease;
+.room5__sky { position: absolute; left: -11.71875%; top: 0; width: 123.4375%; height: 46.875%; object-fit: fill; opacity: 0; transition: opacity 1.2s ease;
   -webkit-mask: url('/room/v5/motion/mask-sky-band.png') 0 0 / 100% 100% no-repeat; mask: url('/room/v5/motion/mask-sky-band.png') 0 0 / 100% 100% no-repeat; pointer-events: none; }
 .room5__sky.is-on { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .room5__sky { display: none; } }
@@ -833,7 +833,7 @@ html[data-time='golden'] .m5 [data-mode='golden']::before { animation-play-state
 @media (prefers-reduced-motion: reduce) { .m5 { display: none; } }
 
 /* Edge extensions (only used by the wall layout) */
-.room5__ext { display: none; position: absolute; top: 0; height: 100%; width: 30%; }
+.room5__ext { display: none; position: absolute; top: 0; height: 100%; width: 11.71875%; }
 .room5__ext--left { right: 100%; } .room5__ext--right { left: 100%; }
 .room5__ext img { position: absolute; inset: 0; width: 100%; height: 100%; }
 
