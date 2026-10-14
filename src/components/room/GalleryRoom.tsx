@@ -8,7 +8,7 @@ import RoomLights from './RoomLights'
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
 /** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
-const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 646px) min(100vw, calc((100svh - 72px) * 1.5)), 100vw'
+const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 528px) min(100vw, calc((100svh - 100px) * 2.008)), 100vw'
 
 /**
  * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
@@ -23,6 +23,15 @@ export default function GalleryRoom() {
     <section className="room5" data-room>
       <div className="room5__stage" style={crop}>
         <div className="room5__scene">
+          {/* Wide, short screens: the room's own window edges continue into any spare width */}
+          {(['left', 'right'] as const).map(side => (
+            <div key={side} className={`room5__ext room5__ext--${side}`} aria-hidden="true">
+              {ROOM_MODES.map(m => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={m} data-light={m} data-src={`${ROOM_BASE}/edge-${side}-${m}.webp`} alt="" suppressHydrationWarning />
+              ))}
+            </div>
+          ))}
           {/* One image per light, same geometry (docs/asset-lock.md). Sources are attached by LOAD_ACTIVE_LIGHT / RoomLights. */}
           {ROOM_MODES.map(m => (
             // eslint-disable-next-line @next/next/no-img-element

@@ -99,7 +99,7 @@ export default function TimeSelector() {
       >
         <Icon id={stage} />
         <span className="tod__now">{current.label}</span>
-        <span className="tod__clock" suppressHydrationWarning>{mode === 'auto' ? `NYC ${clock}` : 'Manual'}</span>
+        {mode === 'auto' && clock && <span className="tod__clock" suppressHydrationWarning>NYC {clock}</span>}
       </button>
       <div id="tod-menu" className="tod__menu" role="group" aria-label="Light in the gallery" hidden={!open}>
         {options.map(o => (

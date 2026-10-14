@@ -709,7 +709,7 @@ html[data-time='night'] .room5 { --id-ink: #FFF6E8; --cap-ink: #140D07; --id-was
 .room5__scene { position: relative; width: 100%; aspect-ratio: 1536 / 1024; container-type: inline-size; }
 /* soft ivory scrim under the clear nav so the brand and links read over sky and window frames */
 .room5__stage::after { content: ''; position: absolute; inset: 0 0 auto 0; height: calc(var(--nav-h) + 28px); background: linear-gradient(color-mix(in srgb, var(--ivory) 62%, transparent), transparent); pointer-events: none; z-index: 1; }
-@media (max-width: 859px), (max-height: 645px) { .room5__stage::after { display: none; } }
+@media (max-width: 859px), (max-height: 527px) { .room5__stage::after { display: none; } }
 .room5__layer { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* Without JavaScript the light layers never get a source; show the morning room and paintings as backgrounds (fetched only then) */
 html:not(.js) .room5__scene { background: center / cover url('/room/v5/morning-2048.webp'); }
@@ -739,8 +739,8 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 .room5__intro { font-family: var(--serif); font-size: max(14px, 1.2cqw); line-height: 1.4; max-width: 30cqw; }
 .room5__frame { position: absolute; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: .3cqw; padding-bottom: .5cqw; text-align: center; text-decoration: none; color: var(--cap-ink); outline-offset: .3cqw; pointer-events: auto; }
 .room5__frame:focus-visible { outline: 2px solid #9A7448; }
-.room5__company { font-family: var(--serif); font-size: max(13px, 1.04cqw); line-height: 1.2; }
-.room5__dates { font: 600 max(10px, .64cqw)/1.2 var(--sans); letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.room5__company { font-family: var(--serif); font-weight: 500; font-size: max(13px, 1.08cqw); line-height: 1.2; }
+.room5__dates { font: 500 max(10px, .58cqw)/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; opacity: .92; }
 .room5__frame:hover .room5__company, .room5__frame:focus-visible .room5__company { text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 
 /* Identity and company links below the room (full and crop layouts) */
@@ -766,18 +766,24 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 }
 
 /* Whole room fits the screen: it carries the identity and captions, and fills any spare width with its own light */
-/* The scene is drawn min(100vw, (100svh - strip) × 1.5) wide; wall text is readable once that is ≥ 860px */
-@media (min-width: 860px) and (min-height: 646px) {
+/* Edge extensions (only used by the wall layout) */
+.room5__ext { display: none; position: absolute; top: 0; height: 100%; width: 30%; }
+.room5__ext--left { right: 100%; } .room5__ext--right { left: 100%; }
+.room5__ext img { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Wall layout: the room fills the screen. Only the band from the wall text (src y≈150, plus room for the nav)
+   down to the rug's edge (src y≈915) must be visible, so ceiling and floor are trimmed before any width is given up:
+   W = min(100vw, (100svh − 100px) × 2.008); the scene is anchored so the rug ends 16px above the screen's bottom edge. */
+@media (min-width: 860px) and (min-height: 528px) {
+  .room5 { --W: min(100vw, calc((100svh - 100px) * 2.008)); --H: min(100svh, calc(var(--W) / 1.5)); }
+  .room5__stage { margin-top: 0; height: var(--H); overflow: hidden; background: #2b2520; }
+  .room5__scene { position: absolute; width: var(--W); left: 50%; margin-left: calc(var(--W) / -2);
+    top: clamp(calc(var(--H) - var(--W) / 1.5), calc(var(--H) - var(--W) * 0.5957 - 16px), 0px); }
+  .room5__ext { display: block; }
   .room5__touch { display: none; }
-  .room5__stage { margin-top: 0; height: min(calc(100svh - var(--strip-h)), calc(100vw / 1.5)); display: flex; align-items: center; justify-content: center; background: #cdbfa9 center / cover no-repeat url('/room/v5/surround-morning.webp'); }
-  html[data-time='golden'] .room5__stage { background-image: url('/room/v5/surround-golden.webp'); }
-  html[data-time='night'] .room5__stage { background-image: url('/room/v5/surround-night.webp'); }
-  .room5__scene { width: min(100%, calc((100svh - var(--strip-h)) * 1.5)); }
   .room5__identity, .room5__frame { display: flex; }
   .room5__hang { display: block; }
-  .room5__below { display: none; }
-  .home-actions__row { height: var(--strip-h); padding: 0; justify-content: center; align-items: center; }
-  .home-actions .btn { min-height: 48px; }
+  .room5__below, .home-actions { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) { .room5 img[data-light] { transition: none; } }
