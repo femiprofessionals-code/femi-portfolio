@@ -12,8 +12,8 @@ Conflicts are flagged, not merged: see [discrepancies.md](discrepancies.md). Dec
 | Redesign branch `claude/dazzling-mayer-dsymdu` @ [`9977c81`](https://github.com/femiprofessionals-code/femi-portfolio/tree/9977c81d04fbad3f630c28003a939d78ad0e0090) | Read; routes tested locally | Current preview. Content mostly derived from the spec PDF, **not** from the website. |
 | `Femi_Website_Redesign_Spec.pdf` (uploaded; two identical copies, md5 `1a5572b4…`) | Read | A second source. It cites a "résumé source of truth" that has not been provided. |
 | `Femi_Website_Visual_Spec.pdf` (uploaded; two identical copies, md5 `036c63fa…`) | Read | Design reference only |
-| `content-source.json` | **Not provided.** Not in any branch, upload or file on disk. | — |
-| `AGENTS.md` | **Not in this repo.** The only AGENTS.md on disk belongs to the unrelated Amtrak-Price-Watch repo. | — |
+| `content-source.json` (portfolio pack, received mid-stage; copied to `docs/reference/portfolio-pack/`) | Read. It summarises the live site as retrieved on 2026-10-14. | **Corroborates main:** its titles, dates, six projects, four service categories and three contact channels all match (DL-01a). It adds the user-selected positioning "Strategic Transformation" and a *proposed* summary line. |
+| `AGENTS.md` | **Not in this repo or the pack.** The only AGENTS.md on disk belongs to the unrelated Amtrak-Price-Watch repo. | — |
 | Résumé PDF | **None exists** in any branch or upload | — |
 
 Shorthand below:

@@ -1,0 +1,74 @@
+[
+  {
+    "file": "assets/carlyle-supplied-artwork.jpeg",
+    "sha256": "5cd46e90975561691d8b12df332d8ca61739b2dd09b8c9122eebf96534268afd",
+    "bytes": 380206,
+    "status": "Concept; final integration/QA required",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "provenance": "User supplied, unchanged"
+  },
+  {
+    "file": "assets/cloud-overlay.svg",
+    "sha256": "e5ccae8f6d4257c0aebecd93dee5aad75b990af8a9a84f4cdde3738c0c2f8a57",
+    "bytes": 323,
+    "status": "Concept; final integration/QA required",
+    "provenance": "Code-native SVG effect input"
+  },
+  {
+    "file": "assets/leaf-shadow-overlay.svg",
+    "sha256": "1ef70f10b676bba6370705d5f4377b4cb5fb51d4deba1839ffaa07df8bbce3a3",
+    "bytes": 2564,
+    "status": "Concept; final integration/QA required",
+    "provenance": "Code-native SVG effect input"
+  },
+  {
+    "file": "assets/picture-light-glow.svg",
+    "sha256": "5a6e7bcb668425f0e7324e420e9baf5be98ab3fe18880f0e53aefd7aeb342abf",
+    "bytes": 283,
+    "status": "Concept; final integration/QA required",
+    "provenance": "Code-native SVG effect input"
+  },
+  {
+    "file": "assets/plane-silhouette.svg",
+    "sha256": "b9e9fda131ea92443a7ac9b8c0f00e6abd310e7ce5e379853aa61f5c58e08cac",
+    "bytes": 183,
+    "status": "Concept; final integration/QA required",
+    "provenance": "Code-native SVG effect input"
+  },
+  {
+    "file": "assets/room-golden-hour.png",
+    "sha256": "8301e6a26bfb39a06f1a83896519630370bb019c49c0294912b868abec042591",
+    "bytes": 2582677,
+    "status": "Concept; final integration/QA required",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "provenance": "Built-in image generation"
+  },
+  {
+    "file": "assets/room-master-morning.png",
+    "sha256": "cf276d3e182e09c9a152fe123dabc56036e3dda4bf52a1a7b4931695c77c0959",
+    "bytes": 2699494,
+    "status": "Concept; final integration/QA required",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "provenance": "Built-in image generation"
+  },
+  {
+    "file": "assets/room-night.png",
+    "sha256": "bab15114dbff52b7f9fbdebc53491f6c1dd0d469ae764f9325e21e79df440e46",
+    "bytes": 2462226,
+    "status": "Concept; final integration/QA required",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "provenance": "Built-in image generation"
+  }
+]

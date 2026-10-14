@@ -1,0 +1,55 @@
+{
+  "status": "Approximate anchors for supplied concept; verify against final approved master before production. Coordinates normalized to image; frame bounds are outer bounds, not insertion mats.",
+  "aspect_ratio": "3:2",
+  "frames": [
+    {
+      "company": "T. Rowe Price",
+      "rect": [
+        0.326,
+        0.335,
+        0.098,
+        0.148
+      ]
+    },
+    {
+      "company": "The Carlyle Group",
+      "rect": [
+        0.439,
+        0.335,
+        0.098,
+        0.148
+      ]
+    },
+    {
+      "company": "Goldman Sachs",
+      "rect": [
+        0.552,
+        0.335,
+        0.098,
+        0.148
+      ]
+    }
+  ],
+  "identity_rect": [
+    0.315,
+    0.13,
+    0.345,
+    0.17
+  ],
+  "window_region_hints": [
+    [
+      0,
+      0.04,
+      0.3,
+      0.66
+    ],
+    [
+      0.674,
+      0.04,
+      0.326,
+      0.63
+    ]
+  ],
+  "occlusion": "Window hints are NOT final masks; subtract tree, furniture, mullions and plaster. Do not animate clouds over foreground.",
+  "mobile_crop": "Use center pictures/bench view; HTML text and company links below."
+}

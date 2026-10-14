@@ -47,3 +47,24 @@ md5 is truncated to 10 characters. Visual overview: [`docs/assets/asset-contact-
 - Résumé PDF (D-14)
 - Official Goldman Sachs logo file (D-23)
 - `mockups.html` / `content-source.json` from the pack (DL-02)
+
+## Portfolio pack (`docs/reference/portfolio-pack/`, received 14 Oct 2026)
+Copied unchanged from `Femi_Falade_Portfolio_Claude_Pack.zip`. Checksums are listed in the pack's own `asset-manifest.json`; `room-master-morning.png` was re-verified as sha256 `cf276d3e…`.
+
+| File | Dimensions | Provenance (per pack) | Status |
+|---|---|---|---|
+| `assets/room-master-morning.png` | 1536×1024 | Built-in image generation (concept) | ⚠️ used in Stage 2 Home mockup only; swap not approved (DL-14) |
+| `assets/room-golden-hour.png`, `assets/room-night.png` | 1536×1024 | Built-in image generation (concepts) | not used; alignment QA is a later stage |
+| `assets/carlyle-supplied-artwork.jpeg` | 1254×1254 | User supplied, unchanged. Byte-identical to `docs/assets/supplied-art/carlyle-painting-supplied.jpg` (380206 bytes) | ⚠️ art asset, not a logo |
+| `assets/*.svg` (cloud, leaf shadow, picture-light glow, plane) | vector | Code-native effect inputs | not used (static stage) |
+
+## Mockup derivatives (`docs/mockups/img/`)
+| File | Derived from |
+|---|---|
+| `room-master-morning.webp` | Pack master PNG, WebP q86, same 1536×1024 |
+| `room-existing-morning.webp` | `public/room/v4/morning.webp`, downscaled to 1536×1024 |
+| `carlyle.webp`, `trowe.webp`, `gs.svg`, `femi-portrait.webp` | Byte copies of `public/` files |
+| `fonts/*.woff2` | Latin subsets of EB Garamond, Cormorant Garamond and Inter from the site's own Next.js font build |
+
+## Received inline, not on disk (DL-18)
+Three room interiors (armchair corner by day; credenza with lamp at night; office with desk and bookshelf), a painted T. Rowe Price ram canvas and a painted Goldman Sachs canvas. These are not stored in this environment. If used, the painted canvases are **artwork, not official marks**.
