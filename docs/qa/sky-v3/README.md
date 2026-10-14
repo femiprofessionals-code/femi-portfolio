@@ -33,3 +33,27 @@
 - **Low source resolution:** the source is 720p, zoomed out 1.41×, so the clouds are softer than the still's sky.
 - **No locked camera:** the camera moves, so the skyline and tree can't come from the clip and stay static.
 - A locked-off (tripod) clip at 1080p or higher, with clouds drifting slowly in one direction, would fix both.
+
+## Golden hour and night (Femi's clips, 14 Oct)
+| Light | Clip | Camera | Clouds | Result |
+|---|---|---|---|---|
+| Golden | `Clouds_drift_outside_apartment_w…` | Pushes in ~3.5% over 8 s; wall locked ≤ 0.5 px | Drift coherently, ~0.2 px/frame to the left | `sky-golden.{webm,mp4}`, 12 s loop, 302/342 KB |
+| Night | `Clouds_drifting_over_Manhattan_s…` | Pushes in ~5.5%; wall locked ≤ 0.8 px | Nearly still (< 0.1 px/frame); two planes cross the sky | `sky-night.{webm,mp4}`, 12 s loop, 243/338 KB |
+
+Method (`docs/asset-lock/scripts/lock-clip.py`, `sky4.py`):
+- Same as morning v3, with these differences:
+  - The open-sky geometry comes from the morning master. All lights share one geometry, and an orange or navy sky can't be found by colour.
+  - Leaves are detected per light: dark or busy at golden hour, warm and lamp-lit at night.
+  - The sun stays the still's.
+- Playback is slowed 2×.
+- The loop is closed with an **optical-flow morph**, not a plain crossfade, so drifting clouds never double up.
+
+Site:
+- Each light has its own mask (`mask-sky-band-{light}.png`, chosen by `data-clip`).
+- Only the active light's clip is requested. Switching light swaps the clip.
+- Verified in Chromium at 1920×1080 and 1366×657 (`golden-night-live.png`).
+
+Limits:
+- The sources are 720p, so the clouds are softer than the stills' skies.
+- Planes vanish briefly behind the soft "hold" above the Empire State Building.
+- The skyline and city lights are static, because both clips' cameras move.

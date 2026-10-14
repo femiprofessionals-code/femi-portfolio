@@ -2,11 +2,16 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Real moving sky for the room: Femi's generated clip, locked to the room and composited so only open sky changes
- * (scripts: docs/asset-lock/scripts/sky3.py). The sharp still stays underneath; the paintings, text and links sit above.
- * Loaded after the page, only for lights that have a clip, paused off-screen / hidden, never with reduced motion.
+ * Real moving sky for the room: Femi's generated clips, locked to the room and composited so only open sky changes
+ * (scripts: docs/asset-lock/scripts/sky3.py for morning, sky4.py for golden and night). The sharp still stays
+ * underneath; the paintings, text and links sit above. Loaded after the page, only the active light's clip, paused
+ * off-screen / hidden, never with reduced motion or Save-Data.
  */
-const CLIPS: Record<string, string> = { morning: '/room/v5/motion/sky-morning' }
+const CLIPS: Record<string, string> = {
+  morning: '/room/v5/motion/sky-morning',
+  golden: '/room/v5/motion/sky-golden',
+  night: '/room/v5/motion/sky-night',
+}
 
 export default function RoomSky() {
   const ref = useRef<HTMLVideoElement>(null)
@@ -23,6 +28,7 @@ export default function RoomSky() {
       const run = !!clip && !reduced.matches && !saveData && onScreen && !document.hidden
       if (clip && loadedFor !== light && run) {
         loadedFor = light
+        v.dataset.clip = light
         v.src = clip + (v.canPlayType('video/webm; codecs="vp9"') === 'probably' ? '.webm' : '.mp4')
       }
       v.classList.toggle('is-on', !!clip && loadedFor === light && !reduced.matches && !saveData && v.readyState >= 3)
