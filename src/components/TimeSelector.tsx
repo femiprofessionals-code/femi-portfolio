@@ -58,13 +58,18 @@ export default function TimeSelector() {
     return () => window.clearInterval(id)
   }, [])
 
+  const toggle = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     if (!open) return
+    // move focus to the current choice so keyboard users land inside the menu
+    root.current?.querySelector<HTMLButtonElement>('.tod__opt[aria-pressed="true"]')?.focus()
     const onDoc = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false) }
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(false); toggle.current?.focus() } }
+    const onFocus = (e: FocusEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false) }
     document.addEventListener('mousedown', onDoc)
     document.addEventListener('keydown', onKey)
-    return () => { document.removeEventListener('mousedown', onDoc); document.removeEventListener('keydown', onKey) }
+    document.addEventListener('focusin', onFocus)
+    return () => { document.removeEventListener('mousedown', onDoc); document.removeEventListener('keydown', onKey); document.removeEventListener('focusin', onFocus) }
   }, [open])
 
   const choose = (m: Mode) => {
@@ -84,6 +89,7 @@ export default function TimeSelector() {
   return (
     <div className={`tod${open ? ' tod--open' : ''}`} ref={root}>
       <button
+        ref={toggle}
         type="button"
         className="tod__toggle"
         aria-expanded={open}
@@ -95,15 +101,14 @@ export default function TimeSelector() {
         <span className="tod__now">{current.label}</span>
         <span className="tod__clock" suppressHydrationWarning>{mode === 'auto' ? `NYC ${clock}` : 'Manual'}</span>
       </button>
-      <div id="tod-menu" className="tod__menu" role="radiogroup" aria-label="Light in the gallery" hidden={!open}>
+      <div id="tod-menu" className="tod__menu" role="group" aria-label="Light in the gallery" hidden={!open}>
         {options.map(o => (
           <button
             key={o.id}
             type="button"
-            role="radio"
-            aria-checked={mode === o.id}
+            aria-pressed={mode === o.id}
             className="tod__opt"
-            onClick={() => { choose(o.id); setOpen(false) }}
+            onClick={() => { choose(o.id); setOpen(false); toggle.current?.focus() }}
           >
             <Icon id={o.id as Stage | 'auto'} />
             <span className="tod__opt-label">{o.label}</span>

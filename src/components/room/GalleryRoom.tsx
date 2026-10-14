@@ -2,10 +2,13 @@ import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import { FRAMES, IDENTITY, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from '@/content/scene'
 import { PERSON } from '@/content/site'
+import { LOAD_ACTIVE_LIGHT } from '@/lib/roomLights'
+import RoomLights from './RoomLights'
 
 const WIDTHS = [1536, 2048, 3072]
+const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
 /** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
-const SIZES = '(max-width: 599px) 252vw, (min-width: 980px) and (min-height: 700px) min(100vw, calc((100svh - 72px) * 1.5)), 100vw'
+const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 646px) min(100vw, calc((100svh - 72px) * 1.5)), 100vw'
 
 /**
  * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
@@ -20,17 +23,20 @@ export default function GalleryRoom() {
     <section className="room5" data-room>
       <div className="room5__stage" style={crop}>
         <div className="room5__scene">
+          {/* One image per light, same geometry (docs/asset-lock.md). Sources are attached by LOAD_ACTIVE_LIGHT / RoomLights. */}
           {ROOM_MODES.map(m => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={m} className="room5__layer" data-light={m}
-              alt={m === 'morning' ? 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.' : ''}
-              src={`${ROOM_BASE}/${m}-2048.webp`} srcSet={WIDTHS.map(w => `${ROOM_BASE}/${m}-${w}.webp ${w}w`).join(', ')} sizes={SIZES}
-              width={SCENE.w} height={SCENE.h} decoding="async" fetchPriority={m === 'morning' ? 'high' : 'low'} />
+            <img key={m} className="room5__layer" data-light={m} alt="" suppressHydrationWarning width={SCENE.w} height={SCENE.h} decoding="async"
+              data-src={`${ROOM_BASE}/${m}-2048.webp`} data-srcset={WIDTHS.map(w => `${ROOM_BASE}/${m}-${w}.webp ${w}w`).join(', ')} data-sizes={SIZES} />
           ))}
+          <p className="sr-only">{ROOM_DESCRIPTION}</p>
           {FRAMES.map(f => (
-            <div key={f.id} className="room5__art" style={rectStyle(f.mat)} aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`${f.art}.webp`} alt="" width={480} height={480} decoding="async" />
+            <div key={f.id} className="room5__art" style={{ ...rectStyle(f.mat), ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }} aria-hidden="true">
+              {/* Each painting lit by that light's own lamp and daylight (public/art/lit, docs/decision-log.md DL-31) */}
+              {ROOM_MODES.map(m => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-${f.id}.webp`} alt="" width={480} height={480} decoding="async" />
+              ))}
             </div>
           ))}
           <div className="room5__identity" style={rectStyle(ZONES.identity)}>
@@ -47,7 +53,14 @@ export default function GalleryRoom() {
               </Link>
             ))}
           </nav>
+          {/* Tablet/phone layouts: the paintings stay clickable. Keyboard and screen-reader users use the labelled list below. */}
+          <div className="room5__touch" aria-hidden="true">
+            {FRAMES.map(f => (
+              <Link key={f.id} href={f.href} tabIndex={-1} className="room5__tap" style={rectStyle(f.hitbox)} />
+            ))}
+          </div>
         </div>
+        <script dangerouslySetInnerHTML={{ __html: LOAD_ACTIVE_LIGHT }} />
       </div>
 
       <div className="room5__below wrap">
@@ -71,6 +84,7 @@ export default function GalleryRoom() {
           </ul>
         </nav>
       </div>
+      <RoomLights />
     </section>
   )
 }
