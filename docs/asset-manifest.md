@@ -83,3 +83,10 @@ Three room interiors: an armchair corner by day, a credenza with lamp at night, 
 - Checksums: [asset-lock.md](asset-lock.md#files).
 - Provenance: pack concepts (built-in image generation), AI-upscaled with Real-ESRGAN; masks derived programmatically.
 - Not yet used by the app.
+
+## Stage 4 additions
+| File | Source | Notes |
+|---|---|---|
+| `public/art/{trowe,carlyle,gs}-painting.webp` (480²) and `-thumb.webp` (120²) | Femi's supplied paintings (`docs/assets/supplied-art/`) | Display derivatives; the originals are unchanged |
+| `public/room/v5/surround-{morning,golden,night}.webp` (48×32) | The v5 room, heavily smoothed | Fills the side bars when the room is fitted inside a wider screen |
+| `docs/assets/supplied-interiors/interior-{armchair-day,credenza-night,office-day}.webp` (1536×1024) | Femi, 14 Oct 2026 (sha256 9d11cf24…, 3ead8563…, c0781c94…) | For Stage 5 inner pages (DL-20) |

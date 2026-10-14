@@ -1,89 +1,76 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { BOARDS, HUNG, MOBILE_CROP, ROOM, TITLE } from '@/content/hang'
-import { HERO, PERSON } from '@/content/site'
-import RoomMotion from './RoomMotion'
+import { FRAMES, IDENTITY, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from '@/content/scene'
+import { PERSON } from '@/content/site'
 
-const STAGES = ['morning', 'golden', 'night'] as const
-const BASE = '/room/v4'
-const u = (v: number, of: number) => `${(v / of) * 100}%`
-const hasClip = (s: string) => fs.existsSync(path.join(process.cwd(), 'public', 'room', 'v4', `${s}.mp4`))
+const WIDTHS = [1536, 2048, 3072]
+/** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
+const SIZES = '(max-width: 599px) 252vw, (min-width: 980px) and (min-height: 700px) min(100vw, calc((100svh - 72px) * 1.5)), 100vw'
 
 /**
- * The homepage room. One photograph per light of day (plus a gentle motion loop for each);
- * the framed prints are part of the photograph, and this component lays the real links,
- * captions and painted wall title over them.
+ * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
+ * wall  — the whole room fits the screen and carries the identity and the company captions;
+ * full  — the whole room, with identity and company links underneath (tablets, short screens);
+ * crop  — phones see the pictures and bench up close (the scene is positioned inside a window), text underneath.
  */
 export default function GalleryRoom() {
+  const [cx, cy, cw, ch] = ZONES.mobileCrop
+  const crop = { ['--crop-x' as string]: cx, ['--crop-y' as string]: cy, ['--crop-w' as string]: cw, ['--crop-h' as string]: ch }
   return (
-    <section className="room3" aria-labelledby="room-title" data-room>
-      <div className="room3__viewport">
-        <div className="room3__scene" data-scene style={{ ['--crop-x0' as string]: MOBILE_CROP.x0, ['--crop-x1' as string]: MOBILE_CROP.x1 }}>
-          {STAGES.map(s => (
+    <section className="room5" data-room>
+      <div className="room5__stage" style={crop}>
+        <div className="room5__scene">
+          {ROOM_MODES.map(m => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={s} src={`${BASE}/${s}.webp`} alt="" className="room3__layer" data-light={s} width={2304} height={1536} decoding="async" fetchPriority={s === 'night' ? 'low' : 'high'} />
+            <img key={m} className="room5__layer" data-light={m}
+              alt={m === 'morning' ? 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.' : ''}
+              src={`${ROOM_BASE}/${m}-2048.webp`} srcSet={WIDTHS.map(w => `${ROOM_BASE}/${m}-${w}.webp ${w}w`).join(', ')} sizes={SIZES}
+              width={SCENE.w} height={SCENE.h} decoding="async" fetchPriority={m === 'morning' ? 'high' : 'low'} />
           ))}
-          {STAGES.filter(hasClip).map(s => (
-            <video key={s} className="room3__layer room3__video" data-light={s} data-src={`${BASE}/${s}.mp4`} muted loop playsInline preload="none" aria-hidden="true" />
+          {FRAMES.map(f => (
+            <div key={f.id} className="room5__art" style={rectStyle(f.mat)} aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`${f.art}.webp`} alt="" width={480} height={480} decoding="async" />
+            </div>
           ))}
-
-          {/* Framed boards: fixed layer above the room and its video */}
-          <div className="boards" aria-hidden="true">
-            {BOARDS.map(b => STAGES.map(s => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={`${s}-${b.id}`} src={`${BASE}/boards/${s}-${b.id}.webp`} alt="" className="board room3__layer" data-light={s}
-                style={{ left: u(b.box[0], ROOM.w), top: u(b.box[1], ROOM.h), width: u(b.box[2], ROOM.w), height: u(b.box[3], ROOM.h), right: 'auto', bottom: 'auto' }} />
-            )))}
+          <div className="room5__identity" style={rectStyle(ZONES.identity)}>
+            <p className="room5__eyebrow">{IDENTITY.positioning}</p>
+            <h1 className="room5__name">{PERSON.name}</h1>
+            <p className="room5__intro">{IDENTITY.intro}</p>
           </div>
-
-          {/* Painted on the wall */}
-          <div className="walltitle" style={{ left: u(TITLE.cx - TITLE.w / 2, ROOM.w), top: u(TITLE.y, ROOM.h), width: u(TITLE.w, ROOM.w) }}>
-            <p className="walltitle__eyebrow">{PERSON.positioning.join('  ·  ')}</p>
-            <h1 id="room-title" className="walltitle__name">{PERSON.name}</h1>
-            <p className="walltitle__line">{HERO.headline}</p>
-          </div>
-
-          {/* The prints on the wall are links to the career story */}
-          <nav className="hang" aria-label="Career">
-            {HUNG.map(f => {
-              const [x, y, w, h] = f.rect
-              return (
-                <div key={f.id}>
-                  <Link href={f.href} className="hang__frame" style={{ left: u(x, ROOM.w), top: u(y, ROOM.h), width: u(w, ROOM.w), height: u(h, ROOM.h) }}>
-                    <span className="sr-only">{f.company}, {f.role}, {f.years}</span>
-                    <span className="hang__glint" aria-hidden="true" />
-                  </Link>
-                  <p className="hang__caption" aria-hidden="true" style={{ left: u(x - 20, ROOM.w), top: u(y + h + 16, ROOM.h), width: u(w + 40, ROOM.w) }}>
-                    <span className="hang__company">{f.company}</span>
-                    <span className="hang__years">{f.years}</span>
-                  </p>
-                </div>
-              )
-            })}
+          <nav className="room5__hang" aria-label="Career">
+            {FRAMES.map(f => (
+              <Link key={f.id} href={f.href} className="room5__frame" style={rectStyle(f.hitbox)}>
+                <span className="room5__company">{f.company}</span>
+                <span className="room5__dates" aria-hidden="true">{f.years}</span>
+                <span className="sr-only">, {f.role}, {f.dates}</span>
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
 
-      {/* Phones: the wall reads too small to carry text, so it continues here */}
-      <div className="room3__mobile">
-        <p className="eyebrow">{PERSON.positioning.join(' · ')}</p>
-        <p className="room3__mname">{PERSON.name}</p>
-        <p className="room3__mline">{HERO.headline}</p>
-        <ul className="room3__list">
-          {HUNG.map(f => (
-            <li key={f.id}>
-              <Link href={f.href}>
-                <span className="room3__lc">{f.company}</span>
-                <span className="room3__lr">{f.role}</span>
-                <span className="room3__ly">{f.years} <Arrow /></span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="room5__below wrap">
+        <p className="eyebrow">{IDENTITY.positioning}</p>
+        <h1 className="room5__bname">{PERSON.name}</h1>
+        <p className="room5__bintro">{IDENTITY.intro}</p>
+        <nav aria-label="Career">
+          <ul className="room5__list">
+            {FRAMES.map(f => (
+              <li key={f.id}>
+                <Link href={f.href}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`${f.art}-thumb.webp`} alt="" width={56} height={56} loading="lazy" />
+                  <span className="room5__lc">{f.company}</span>
+                  <span className="room5__ld">{f.dates}</span>
+                  <span className="sr-only">, {f.role}</span>
+                  <Arrow />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <RoomMotion />
     </section>
   )
 }

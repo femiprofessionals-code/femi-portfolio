@@ -88,6 +88,7 @@ export default function TimeSelector() {
         className="tod__toggle"
         aria-expanded={open}
         aria-controls="tod-menu"
+        aria-label={`Light in the gallery: ${current.label}${mode === 'auto' ? ', following New York time' : ', chosen manually'}`}
         onClick={() => setOpen(o => !o)}
       >
         <Icon id={stage} />

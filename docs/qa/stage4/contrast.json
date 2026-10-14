@@ -1,0 +1,392 @@
+{
+ "1440x900-morning": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 6.85,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 49.7,
+   "contrast_worst": 7.32,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14.9,
+   "contrast_worst": 7.82,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 8.26,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 7.99,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 8.58,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 8.01,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 8.58,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 8.7,
+   "needs": 4.5,
+   "pass": true
+  }
+ ],
+ "1440x900-golden": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 10.12,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 49.7,
+   "contrast_worst": 11.61,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14.9,
+   "contrast_worst": 8.02,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 8.44,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 7.67,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 9.27,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 8.64,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 7.85,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 8.46,
+   "needs": 4.5,
+   "pass": true
+  }
+ ],
+ "1440x900-night": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 10.5,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 49.7,
+   "contrast_worst": 10.09,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14.9,
+   "contrast_worst": 7.27,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 7.68,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 5.9,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 9.6,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 9.19,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 7.84,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 5.47,
+   "needs": 4.5,
+   "pass": true
+  }
+ ],
+ "1024x768-morning": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 6.48,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 41.0,
+   "contrast_worst": 7.21,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14,
+   "contrast_worst": 7.82,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 8.22,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 8.07,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 8.52,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 8.02,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 8.48,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 8.71,
+   "needs": 4.5,
+   "pass": true
+  }
+ ],
+ "1024x768-golden": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 7.83,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 41.0,
+   "contrast_worst": 11.5,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14,
+   "contrast_worst": 8.81,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 8.38,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 7.76,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 9.18,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 8.67,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 7.54,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 7.13,
+   "needs": 4.5,
+   "pass": true
+  }
+ ],
+ "1024x768-night": [
+  {
+   "text": "Strategic Transformation",
+   "px": 10,
+   "contrast_worst": 9.71,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Femi Falade",
+   "px": 41.0,
+   "contrast_worst": 10.14,
+   "needs": 3.0,
+   "pass": true
+  },
+  {
+   "text": "Transformation, financia",
+   "px": 14,
+   "contrast_worst": 7.52,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "T. Rowe Price",
+   "px": 13,
+   "contrast_worst": 7.34,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2019 \u2013 2021",
+   "px": 10,
+   "contrast_worst": 5.63,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "The Carlyle Group",
+   "px": 13,
+   "contrast_worst": 9.59,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2021 \u2013 2023",
+   "px": 10,
+   "contrast_worst": 9.17,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "Goldman Sachs",
+   "px": 13,
+   "contrast_worst": 7.36,
+   "needs": 4.5,
+   "pass": true
+  },
+  {
+   "text": "2023 \u2013 Present",
+   "px": 10,
+   "contrast_worst": 4.9,
+   "needs": 4.5,
+   "pass": true
+  }
+ ]
+}

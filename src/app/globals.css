@@ -696,65 +696,84 @@ html[data-time='night'] .gallery-room--ai .masthead__cta--solid { color: #F4EDE2
 html[data-time='night'] .gallery-room--ai .masthead__cta--solid:hover { color: var(--room-ink); }
 
 /* ═════════════════════════════════════════════════════════
-   ROOM — one photograph per light, prints hung in-camera
+   ROOM (v5) — one scene at its intrinsic 3:2 ratio; every overlay
+   is placed in % of that scene (src/content/scene.ts)
+   Layouts: crop (< 600px) · full (default) · wall (≥ 980 × 700)
    ═════════════════════════════════════════════════════════ */
-.room3 { position: relative; background: #12100E; --paint: #2A221B; --paint-soft: #5A4A3C; --paint-blend: multiply; }
-html[data-time='golden'] .room3 { --paint: #2B1C0F; --paint-soft: #5E4129; }
-html[data-time='night'] .room3 { --paint: #EDE1CD; --paint-soft: #CDBBA2; --paint-blend: normal; }
-.room3__viewport { position: relative; overflow: hidden; aspect-ratio: 1536 / 960; }
-.room3__viewport .room3__scene { position: absolute; top: 0; left: 0; }
-.room3__scene { position: relative; width: 100%; aspect-ratio: 1536 / 1024; container-type: inline-size; }
-.room3__layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
-html:not([data-time]) .room3__layer[data-light='morning'],
-html[data-time='morning'] .room3__layer[data-light='morning'],
-html[data-time='golden'] .room3__layer[data-light='golden'],
-html[data-time='night'] .room3__layer[data-light='night'] { opacity: 1; }
-.room3__video:not(.is-playing) { opacity: 0 !important; }
+.room5 { --strip-h: 72px; --id-ink: #1A120B; --cap-ink: #1A120B; --id-wash: transparent; --cap-wash: transparent; --id-shadow: none; background: var(--ivory); }
+/* Wall text contrast is measured against the rendered room (docs/qa/stage4/contrast.json); washes read as plaster light */
+html[data-time='golden'] .room5 { --id-ink: #140D07; --cap-ink: #140D07; --id-wash: rgba(255, 238, 210, .68); --cap-wash: rgba(255, 236, 205, .42); }
+html[data-time='night'] .room5 { --id-ink: #FFF6E8; --cap-ink: #140D07; --id-wash: rgba(18, 11, 6, .38); --cap-wash: rgba(255, 228, 190, .55); --id-shadow: 0 1px .5cqw rgba(0, 0, 0, .45); }
+.room5__stage { position: relative; margin-top: var(--nav-h); }
+.room5__scene { position: relative; width: 100%; aspect-ratio: 1536 / 1024; container-type: inline-size; }
+/* soft ivory scrim under the clear nav so the brand and links read over sky and window frames */
+.room5__stage::after { content: ''; position: absolute; inset: 0 0 auto 0; height: calc(var(--nav-h) + 28px); background: linear-gradient(color-mix(in srgb, var(--ivory) 62%, transparent), transparent); pointer-events: none; z-index: 1; }
+@media (max-width: 979px), (max-height: 699px) { .room5__stage::after { display: none; } }
+.room5__layer { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease; }
+html:not([data-time]) .room5__layer[data-light='morning'],
+html[data-time='morning'] .room5__layer[data-light='morning'],
+html[data-time='golden'] .room5__layer[data-light='golden'],
+html[data-time='night'] .room5__layer[data-light='night'] { opacity: 1; }
 
-/* Wall title, painted onto the plaster */
-.walltitle { position: absolute; text-align: center; color: var(--paint); mix-blend-mode: var(--paint-blend); display: grid; justify-items: center; gap: .55cqw; }
-.walltitle__eyebrow { white-space: nowrap; font: 500 max(10px, .7cqw)/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--paint-soft); }
-.walltitle__name { font-family: var(--display); font-weight: 500; font-size: 3.9cqw; line-height: .98; letter-spacing: .01em; color: var(--paint); }
-.walltitle__line { font-family: var(--serif); font-size: max(13px, 1.22cqw); line-height: 1.35; color: var(--paint); }
-html[data-time='night'] .walltitle, html[data-time='night'] .hang__caption { text-shadow: 0 0 1.2cqw rgba(0, 0, 0, .55); }
+/* Artwork in the mats: a live layer, never painted into the room image */
+.room5__art { position: absolute; overflow: hidden; background: #d8cbb6; }
+.room5__art img { width: 100%; height: 100%; object-fit: cover; transition: filter 1.2s ease; }
+.room5__art::after { content: ''; position: absolute; inset: 0; box-shadow: inset .14cqw .22cqw .38cqw rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(0, 0, 0, .14); pointer-events: none; }
+html[data-time='golden'] .room5__art img { filter: sepia(.14) saturate(1.04) brightness(.97); }
+html[data-time='night'] .room5__art img { filter: sepia(.2) brightness(1.02) contrast(.96); }
 
-/* Links over the prints, and their wall captions */
-.hang__frame { position: absolute; display: block; border-radius: 1px; outline-offset: .5cqw; }
-.hang__glint { position: absolute; inset: 0; background: radial-gradient(70% 60% at 35% 25%, rgba(255, 244, 222, .22), rgba(255, 244, 222, 0) 70%); mix-blend-mode: screen; opacity: 0; transition: opacity .45s var(--ease); }
-.hang__frame:hover .hang__glint, .hang__frame:focus-visible .hang__glint { opacity: 1; }
-.hang__frame:focus-visible { outline: 2px solid #C9A46C; }
-.hang__caption { position: absolute; display: grid; gap: .25cqw; justify-items: center; text-align: center; color: var(--paint); mix-blend-mode: var(--paint-blend); pointer-events: none; }
-.hang__company { font-family: var(--serif); font-size: max(12px, 1.02cqw); line-height: 1.2; }
-.hang__years { font: 500 max(10px, .62cqw)/1.2 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--paint-soft); }
-.hang div:has(.hang__frame:hover) .hang__caption .hang__company { text-decoration: underline; text-underline-offset: .35em; text-decoration-thickness: 1px; }
+/* Wall text and captions exist only in the wall layout */
+.room5__identity, .room5__hang { display: none; }
+.room5__hang { position: absolute; inset: 0; pointer-events: none; }
+.room5__hang::before { content: ''; position: absolute; left: 31%; width: 35%; top: 47.8%; height: 10.4%; background: radial-gradient(ellipse 58% 75% at 50% 50%, var(--cap-wash) 55%, transparent 100%); }
+.room5__identity { position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: .5cqw; text-align: center; color: var(--id-ink); text-shadow: var(--id-shadow); isolation: isolate; }
+.room5__identity::before { content: ''; position: absolute; inset: -14% -6% -10%; z-index: -1; background: radial-gradient(ellipse 56% 62% at 50% 52%, var(--id-wash) 55%, transparent 100%); pointer-events: none; }
+.room5__eyebrow { font: 600 max(10px, .74cqw)/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; }
+.room5__name { font-family: var(--display); font-weight: 500; font-size: 4cqw; line-height: .98; letter-spacing: .01em; }
+.room5__intro { font-family: var(--serif); font-size: max(14px, 1.2cqw); line-height: 1.4; max-width: 30cqw; }
+.room5__frame { position: absolute; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: .3cqw; padding-bottom: .5cqw; text-align: center; text-decoration: none; color: var(--cap-ink); outline-offset: .3cqw; pointer-events: auto; }
+.room5__frame:focus-visible { outline: 2px solid #9A7448; }
+.room5__company { font-family: var(--serif); font-size: max(13px, 1.04cqw); line-height: 1.2; }
+.room5__dates { font: 600 max(10px, .64cqw)/1.2 var(--sans); letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.room5__frame:hover .room5__company, .room5__frame:focus-visible .room5__company { text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 
-.room3__mobile { display: none; }
+/* Identity and company links below the room (full and crop layouts) */
+.room5__below { padding-top: 2.25rem; padding-bottom: .5rem; }
+.room5__bname { font-family: var(--display); font-weight: 500; font-size: clamp(2.5rem, 7vw, 3.6rem); line-height: 1; color: var(--ink); margin: .5rem 0 .9rem; }
+.room5__bintro { font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.5; color: var(--ink); max-width: 40ch; }
+.room5__list { list-style: none; margin-top: 1.75rem; border-top: 1px solid var(--rule); }
+.room5__list a { display: grid; grid-template-columns: 56px 1fr auto; grid-template-rows: auto auto; column-gap: 1rem; align-items: center; padding: .9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); min-height: 44px; }
+.room5__list img { grid-row: 1 / span 2; width: 56px; height: 56px; object-fit: cover; }
+.room5__lc { font-family: var(--display); font-weight: 600; font-size: 1.35rem; line-height: 1.2; align-self: end; }
+.room5__ld { grid-column: 2; font: 500 .74rem/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--stone); align-self: start; }
+.room5__list a > svg { grid-column: 3; grid-row: 1 / span 2; }
 
-/* Phones & narrow tablets: a tighter slice of the room; text continues below it */
-@media (max-width: 760px) {
-  .room3__viewport { aspect-ratio: 840 / 880; }
-  .room3__viewport .room3__scene { width: 182.86%; left: -42.86%; }
-  .walltitle { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .hang__caption { display: none; }
-  .room3__mobile { display: grid; gap: .9rem; padding: 2rem var(--gutter) 2.5rem; background: var(--ivory); border-bottom: 1px solid var(--rule); }
-  .room3__mname { font-family: var(--display); font-weight: 500; font-size: clamp(2.4rem, 11vw, 3.2rem); line-height: 1; color: var(--ink); }
-  .room3__mline { font-family: var(--serif); font-size: 1.15rem; line-height: 1.45; color: var(--ink); }
-  .room3__list { list-style: none; margin-top: .75rem; border-top: 1px solid var(--rule); }
-  .room3__list a { display: grid; grid-template-columns: 1fr auto; gap: .15rem 1rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); min-height: 44px; }
-  .room3__lc { font-family: var(--display); font-weight: 600; font-size: 1.35rem; }
-  .room3__lr { grid-column: 1; font-size: .92rem; color: var(--stone); }
-  .room3__ly { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: inline-flex; align-items: center; gap: .6rem; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--stone); }
+.home-actions { background: var(--ivory); }
+.home-actions__row { display: flex; flex-wrap: wrap; gap: .75rem; padding-top: 1.5rem; padding-bottom: 3rem; }
+
+/* Phones: the pictures and bench up close; the scene is positioned inside a fixed window */
+@media (max-width: 599px) {
+  .room5__stage { overflow: hidden; aspect-ratio: 610 / 450; }
+  .room5__scene { position: absolute; width: calc(100% * 1536 / var(--crop-w)); left: calc(-100% * var(--crop-x) / var(--crop-w)); top: calc(-100% * var(--crop-y) / var(--crop-h)); }
+  .home-actions__row { flex-direction: column; }
+  .home-actions__row .btn { justify-content: space-between; width: 100%; }
 }
+
+/* Whole room fits the screen: it carries the identity and captions, and fills any spare width with its own light */
+@media (min-width: 980px) and (min-height: 700px) {
+  .room5__stage { margin-top: 0; height: calc(100svh - var(--strip-h)); display: flex; align-items: center; justify-content: center; background: #cdbfa9 center / cover no-repeat url('/room/v5/surround-morning.webp'); }
+  html[data-time='golden'] .room5__stage { background-image: url('/room/v5/surround-golden.webp'); }
+  html[data-time='night'] .room5__stage { background-image: url('/room/v5/surround-night.webp'); }
+  .room5__scene { width: min(100%, calc((100svh - var(--strip-h)) * 1.5)); }
+  .room5__identity, .room5__frame { display: flex; }
+  .room5__hang { display: block; }
+  .room5__below { display: none; }
+  .home-actions__row { height: var(--strip-h); padding: 0; justify-content: center; align-items: center; }
+  .home-actions .btn { min-height: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) { .room5__layer, .room5__art img { transition: none; } }
 
 @media (max-width: 960px) { .nav__mobile { margin-left: .75rem; } }
 .nav__name { white-space: nowrap; }
 @media (max-width: 420px) { .nav__name { font-size: .82rem; letter-spacing: .2em; } .nav__brand { gap: .6rem; } .nav__mobile { gap: .75rem; } }
-
-/* Boards sit above the room layers and video; they cross-fade with the light but never move */
-.boards { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.room3__layer.board { position: absolute; inset: auto; object-fit: fill; }
-.walltitle, .hang { z-index: 2; }
-.hang { position: absolute; inset: 0; }
-/* Night: captions sit in the pool of picture light, so they read in dark ink */
-html[data-time='night'] .hang__caption { color: #2A1C12; mix-blend-mode: normal; text-shadow: none; }
-html[data-time='night'] .hang__caption .hang__years { color: #4A3424; }
