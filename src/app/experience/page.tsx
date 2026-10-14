@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import Wordmark from '@/components/Wordmark'
+import { FRAMES } from '@/content/scene'
 import { EDUCATION, INSTITUTIONS, ROLES } from '@/content/site'
 
 export const metadata: Metadata = {
@@ -32,6 +33,13 @@ export default function ExperiencePage() {
             {ROLES.map(r => (
               <article key={r.company} id={r.company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} className="career__row reveal" style={{ scrollMarginTop: 'calc(var(--nav-h) + 1.5rem)' }}>
                 <div className="career__mark">
+                  {/* The same framed painting that hangs for this company on Home (docs/decision-log.md DL-44) */}
+                  {(() => { const art = FRAMES.find(f => f.id === r.institution)?.art; return art && (
+                    <span className="career__art">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={`${art}.webp`} alt="" width={480} height={480} loading="lazy" decoding="async" />
+                    </span>
+                  ) })()}
                   <Wordmark inst={INSTITUTIONS.find(i => i.key === r.institution)!} />
                   <span className="meta">{r.dates}</span>
                   <span className="meta">{r.location}</span>
