@@ -24,3 +24,33 @@
 - No canvas, no JS animation loop, no new dependencies.
 
 Assets: `public/room/v5/motion/`. Generator: `docs/asset-lock/scripts/motion_assets.py`.
+
+---
+## Revision: real clouds from Femi's clip (replaces the code layers, DL-38/39)
+**Input:** `Apartment_interior_with_drifting__20261014184208.mp4` (Femi, AI image-to-video from the v5 morning master), 1280×720, 8 s.
+
+**Findings**
+- The camera trucks sideways about 30 source px, so the skyline, tree and sofa show parallax against the wall: 24 px early, 4 px late (`clip-parallax-map.jpg`).
+- The clip is zoomed out ~1.41× with outpainted sides, so it is softer than the still.
+
+**Approach** (scripts: `docs/asset-lock/scripts/lock.py`, `sky.py`)
+- Every frame is locked to the **wall plane** (SIFT + RANSAC + temporal smoothing). The wall residual is ≤ 1 px.
+- **Only open sky** is taken from the clip. It is colour-graded to the still's sky and masked by the still's own open-sky mask, so the skyline, tree and frames always come from the sharp still and nothing slides.
+- Clip artefacts inside the sky are removed per frame, filled from neighbouring sky in each row:
+  - the AI-shifted window bars;
+  - the parallax-ghosted Empire State spire;
+  - leaves drifting by parallax.
+- Seamless 6 s loop (48-frame crossfade). Encoded at 1536×480 for the sky band only: VP9 647 KB / H.264 271 KB.
+
+**On the site:** `RoomSky`
+- A masked video band over the still, under the paintings and text.
+- Loads after the page and only in morning light; golden and night have no clip yet.
+- Pauses off-screen or in a hidden tab; never loads with reduced motion or Save-Data.
+
+**Verified:**
+- Video playing.
+- Overlay geometry unchanged during playback.
+- Paused in a hidden tab.
+- Reduced motion: no request and no video.
+- `sky-what-moves.jpg`: only cloud pixels change.
+- Real-time sample: `home-sky-realtime-sample.mp4`.

@@ -721,6 +721,12 @@ html[data-time='morning'] .room5 img[data-light='morning'],
 html[data-time='golden'] .room5 img[data-light='golden'],
 html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 
+/* Moving sky band (source rows 0–480), masked to open sky; fades in once playing */
+.room5__sky { position: absolute; left: 0; top: 0; width: 100%; height: 46.875%; object-fit: fill; opacity: 0; transition: opacity 1.2s ease;
+  -webkit-mask: url('/room/v5/motion/mask-sky-band.png') 0 0 / 100% 100% no-repeat; mask: url('/room/v5/motion/mask-sky-band.png') 0 0 / 100% 100% no-repeat; pointer-events: none; }
+.room5__sky.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .room5__sky { display: none; } }
+
 /* Artwork in the mats: a live layer, never painted into the room image */
 .room5__art { position: absolute; overflow: hidden; background: #d8cbb6; }
 .room5__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
