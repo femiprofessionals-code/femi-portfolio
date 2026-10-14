@@ -243,6 +243,18 @@ PRINCIPLES = [
 ]
 INTERESTS_NOTE = ('INTERESTS — not supplied. The only candidate is the unlinked Travel page, whose counts do not reconcile (D-12). '
                   'Awaiting approved interests from Femi; nothing is written here until then.')
+TRAVEL = [('North America', 'United States, Canada, Mexico'),
+          ('Europe', 'United Kingdom, France, Germany, Italy, Spain, Netherlands, Portugal, Switzerland, Sweden, Norway'),
+          ('Africa', 'Nigeria, Ghana, South Africa, Kenya, Morocco'),
+          ('Asia', 'Japan, Singapore, United Arab Emirates, Thailand, Hong Kong'),
+          ('Caribbean', 'Jamaica, Barbados, Trinidad and Tobago')]
+TRAVEL_BLOCK = (
+    '<section class="travel" aria-labelledby="travel-title"><p class="eyebrow">Beyond work · 30+ countries · 60+ cities</p>'
+    '<h3 class="h3" id="travel-title" style="font:400 30px/1.15 var(--display)">The world, in motion.</h3>'
+    '<p style="margin:0 0 14px;color:var(--ink-2)">DC to Lagos. London to Tokyo. The map keeps growing.</p>'
+    '<dl class="regions">' + ''.join(f'<div><dt>{r}</dt><dd>{c}</dd></div>' for r, c in TRAVEL) + '</dl>'
+    + rv('From the website Travel page (M:src/app/travel/page.tsx#L8-30), used per Femi: "use the content on femifalade.com". Counts (30+) vs 26 countries listed — D-12. "Photography and travel writing coming soon." omitted (a promise).', True)
+    + '</section>')
 TIMELINE = [
     ('Nov 2023 — Present', 'Goldman Sachs', 'Senior Associate, Global Banking and Markets Transformation', ''),
     ('Jun 2021 — Nov 2023', 'The Carlyle Group', 'Associate, EMEA Fund Operations', 'D-01 · D-03'),
@@ -260,7 +272,7 @@ about_body = f'''{nav('About')}
     <div><p class="eyebrow">The story</p><h2 class="h2">Operational discipline, built inside the hardest rooms.</h2>
       {''.join(f'<p style="color:var(--ink-2)">{p}</p>' for p in STORY)}
       {rv('Website paragraph 5 (the three ventures) not shown (DL-10).', True)}
-      <div class="interests">{rv(INTERESTS_NOTE, True)}</div>
+      {TRAVEL_BLOCK}
     </div>
   </section>
   <section style="margin-top:72px"><p class="eyebrow">Operating principles</p>
@@ -273,6 +285,7 @@ about_body = f'''{nav('About')}
 .story{{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}}
 .pgrid{{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}} .pgrid>div{{background:var(--paper);padding:26px}}
 .trow{{display:grid;grid-template-columns:240px 1fr;gap:24px;border-top:1px solid var(--line);padding:22px 0}} .tdate{{margin:0;font:400 22px/1.3 var(--display);color:var(--brass)}}
+.travel{{margin-top:36px;padding-top:26px;border-top:1px solid var(--line)}} .regions{{margin:0;display:grid;gap:8px}} .regions div{{display:grid;grid-template-columns:130px 1fr;gap:12px}} .regions dt{{font:500 11px/1.9 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}} .regions dd{{margin:0;font:400 16px/1.5 var(--serif);color:var(--ink-2)}}
 @media(max-width:1100px){{.pgrid{{grid-template-columns:1fr 1fr}}}}
 @media(max-width:760px){{.story{{grid-template-columns:1fr;gap:28px}}.story figure{{max-width:260px}}.pgrid{{grid-template-columns:1fr}}.trow{{grid-template-columns:1fr;gap:4px}}}}
 </style>'''

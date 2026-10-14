@@ -56,7 +56,7 @@ Every string below is website wording, from repo `main` @182768d, which the pack
 |---|---|---|
 | Head | Website H1, plus the intro with the ventures sentence removed | M:about#L63, #L68 (D-06 flag on "Six years") |
 | Story | Portrait (`femi-portrait.webp`) + website paragraphs 1–4. Paragraph 3's figure is withheld; paragraph 5 (ventures) is omitted. | M:about#L153-156 |
-| Interests | **Review annotation only.** Nothing designed in. | D-12, DL-09 |
+| Personal ("Beyond work") | Website Travel content: "The world, in motion." / "DC to Lagos. London to Tokyo. The map keeps growing." / five regions with their countries / "30+ countries · 60+ cities" | M:travel#L8-30 (DL-21; counts D-12) |
 | Principles | Four website principles, verbatim | M:about#L16-21 |
 | Timeline | Four website rows, with ⚑ flags | M:about#L9-14 |
 

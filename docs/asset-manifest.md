@@ -77,3 +77,9 @@ The mockups use 600×600 WebP derivatives of these: `docs/mockups/img/{trowe,gs,
 
 ## Received inline only, not on disk (DL-20)
 Three room interiors: an armchair corner by day, a credenza with lamp at night, and an office with a desk and bookshelf. They are intended for other pages, but they are not stored in this environment and must be re-sent as files.
+
+## Locked room assets — Stage 3 (`public/room/v5/`)
+- Room in 3 modes × 3 widths, plus 3 masks and `scene.json`, all in the 1536×1024 master coordinate system.
+- Checksums: [asset-lock.md](asset-lock.md#files).
+- Provenance: pack concepts (built-in image generation), AI-upscaled with Real-ESRGAN; masks derived programmatically.
+- Not yet used by the app.

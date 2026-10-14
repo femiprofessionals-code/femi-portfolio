@@ -1,0 +1,80 @@
+{
+ "room-golden-hour": {
+  "matches": 1268,
+  "median_identity_px": 0.77,
+  "p90_identity_px": 2.21,
+  "homography_inliers": 1131,
+  "homography_resid_px": 0.66,
+  "regions": {
+   "frames+lamps": {
+    "matches": 75,
+    "median_px": 0.89,
+    "p90_px": 5.56
+   },
+   "bench": {
+    "matches": 95,
+    "median_px": 0.77,
+    "p90_px": 1.56
+   },
+   "tree": {
+    "matches": 452,
+    "median_px": 0.62,
+    "p90_px": 1.84
+   },
+   "sofa": {
+    "matches": 128,
+    "median_px": 0.86,
+    "p90_px": 2.16
+   },
+   "left windows": {
+    "matches": 463,
+    "median_px": 0.62,
+    "p90_px": 1.84
+   },
+   "right windows": {
+    "matches": 111,
+    "median_px": 0.59,
+    "p90_px": 2.01
+   }
+  }
+ },
+ "room-night": {
+  "matches": 163,
+  "median_identity_px": 0.74,
+  "p90_identity_px": 4.71,
+  "homography_inliers": 136,
+  "homography_resid_px": 0.7,
+  "regions": {
+   "frames+lamps": {
+    "matches": 17,
+    "median_px": 170.08,
+    "p90_px": 224.47
+   },
+   "bench": {
+    "matches": 17,
+    "median_px": 0.87,
+    "p90_px": 1.94
+   },
+   "tree": {
+    "matches": 63,
+    "median_px": 0.59,
+    "p90_px": 1.56
+   },
+   "sofa": {
+    "matches": 23,
+    "median_px": 0.99,
+    "p90_px": 2.96
+   },
+   "left windows": {
+    "matches": 65,
+    "median_px": 0.59,
+    "p90_px": 1.56
+   },
+   "right windows": {
+    "matches": 11,
+    "median_px": 0.84,
+    "p90_px": 2.07
+   }
+  }
+ }
+}
