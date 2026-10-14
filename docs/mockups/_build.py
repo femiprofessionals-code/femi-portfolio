@@ -42,9 +42,9 @@ def page(name, title, body, current=''):
 
 # ── shared bits
 COMPANIES = [  # website dates/titles (about page timeline), attributed draft
-    dict(id='trowe', name='T. Rowe Price', dates='Oct 2019 – Jun 2021', flag='D-02 · D-04', role='Analyst, Central Operations', x=(502, 650), mat=(526, 368, 625, 470), logo='trowe.webp'),
-    dict(id='carlyle', name='The Carlyle Group', dates='Jun 2021 – Nov 2023', flag='D-01 · D-03', role='Associate, EMEA Fund Operations', x=(674, 822), mat=(698, 368, 798, 470), logo='carlyle.webp'),
-    dict(id='gs', name='Goldman Sachs', dates='Nov 2023 – Present', flag='D-13', role='Senior Associate, Global Banking and Markets Transformation', x=(845, 994), mat=(870, 368, 970, 470), logo='gs.svg'),
+    dict(id='trowe', name='T. Rowe Price', dates='Oct 2019 – Jun 2021', flag='D-02 · D-04', role='Analyst, Central Operations', x=(502, 650), mat=(526, 368, 625, 470), logo='trowe.webp', art='trowe-painting.webp'),
+    dict(id='carlyle', name='The Carlyle Group', dates='Jun 2021 – Nov 2023', flag='D-01 · D-03', role='Associate, EMEA Fund Operations', x=(674, 822), mat=(698, 368, 798, 470), logo='carlyle.webp', art='carlyle-painting.webp'),
+    dict(id='gs', name='Goldman Sachs', dates='Nov 2023 – Present', flag='D-13', role='Senior Associate, Global Banking and Markets Transformation', x=(845, 994), mat=(870, 368, 970, 470), logo='gs.svg', art='gs-painting.webp'),
 ]
 W, H = 1536, 1024
 pct = lambda v, d: f'{v / d * 100:.3f}%'
@@ -59,10 +59,14 @@ def logo_chip(c):
     return f'<span class="logo-chip logo-chip--{c["id"]}"><img src="img/{c["logo"]}" alt=""></span>'
 
 
-def scene(room='room-master-morning.webp', wall=True):
+def art_chip(c):
+    return f'<span class="logo-chip"><img src="img/{c["art"]}" alt=""></span>'
+
+
+def scene(room='room-master-morning.webp', wall=True, art=True):
     mats = ''.join(
-        f'<div class="mat mat--{c["id"]}" style="left:{pct(c["mat"][0], W)};top:{pct(c["mat"][1], H)};width:{pct(c["mat"][2] - c["mat"][0], W)};height:{pct(c["mat"][3] - c["mat"][1], H)}">'
-        f'<img src="img/{c["logo"]}" alt=""></div>' for c in COMPANIES)
+        f'<div class="mat {"mat--art" if art else "mat--" + c["id"]}" style="left:{pct(c["mat"][0], W)};top:{pct(c["mat"][1], H)};width:{pct(c["mat"][2] - c["mat"][0], W)};height:{pct(c["mat"][3] - c["mat"][1], H)}">'
+        f'<img src="img/{c["art"] if art else c["logo"]}" alt=""></div>' for c in COMPANIES)
     caps = ''.join(
         f'<a class="caption" href="company-goldman-sachs.html" style="left:{pct((c["x"][0] + c["x"][1]) / 2 - 100, W)}">'
         f'<b>{c["name"]}</b><span>{c["dates"]}</span></a>' for c in COMPANIES) if wall else ''
@@ -71,11 +75,11 @@ def scene(room='room-master-morning.webp', wall=True):
 
 
 # ── HOME
-def home(room, fname, label):
+def home(room, fname, label, art=True):
     body = f'''{nav(over=True)}
 <main>
   <section class="home-desktop" aria-label="Gallery room">
-    <div style="position:relative">{scene(room)}
+    <div style="position:relative">{scene(room, art=art)}
       <span class="rv rv--pin" style="left:30.5%;top:9.5%">Identity line: pack "proposed synthesis" — needs Femi's approval</span>
       <span class="rv rv--pin" style="left:31%;top:56.4%">Dates = website About timeline (attributed draft) · ⚑ D-01–D-04 · each caption opens its company view</span>
       <span class="rv rv--pin" style="left:1.5%;top:93%">{label}</span>
@@ -86,14 +90,14 @@ def home(room, fname, label):
     </div>
   </section>
   <section class="home-mobile" aria-label="Gallery room (mobile)">
-    <div class="crop">{scene(room, wall=False)}</div>
+    <div class="crop">{scene(room, wall=False, art=art)}</div>
     <div class="wrap" style="padding-top:26px">
       <p class="eyebrow">{IDENTITY["positioning"]}</p>
       <h1 class="display" style="font-size:44px">{IDENTITY["name"]}</h1>
       <p class="lede" style="font-size:19px;margin:12px 0 4px">{IDENTITY["intro"]}</p>
       {rv("Identity line: proposed synthesis — needs approval")}
       <ul style="list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--line)">
-        {"".join(f'<li style="border-bottom:1px solid var(--line)"><a href="company-goldman-sachs.html" style="display:flex;gap:14px;align-items:center;padding:14px 0;text-decoration:none">{logo_chip(c)}<span style="flex:1"><b style="display:block;font:500 20px/1.2 var(--serif)">{c["name"]}</b><span class="eyebrow" style="margin:4px 0 0;display:block">{c["dates"]}</span></span><span aria-hidden="true">→</span></a></li>' for c in COMPANIES)}
+        {"".join(f'<li style="border-bottom:1px solid var(--line)"><a href="company-goldman-sachs.html" style="display:flex;gap:14px;align-items:center;padding:14px 0;text-decoration:none">{art_chip(c) if art else logo_chip(c)}<span style="flex:1"><b style="display:block;font:500 20px/1.2 var(--serif)">{c["name"]}</b><span class="eyebrow" style="margin:4px 0 0;display:block">{c["dates"]}</span></span><span aria-hidden="true">→</span></a></li>' for c in COMPANIES)}
       </ul>
       <div style="display:grid;gap:10px;margin-top:22px"><a class="btn btn--solid" href="work.html" style="justify-content:center">View work</a><a class="btn" aria-disabled="true" role="link" tabindex="0" style="justify-content:center">Résumé</a><a class="btn" href="contact.html" style="justify-content:center">Contact</a></div>
       {rv("Résumé inert until the real PDF is supplied (D-14)", True)}
@@ -104,7 +108,9 @@ def home(room, fname, label):
     page(fname, 'Home', body)
 
 
-home('room-master-morning.webp', 'home.html', 'Background: pack concept room-master-morning.png — replacement of the existing room NOT yet approved (DL-14)')
+ART_NOTE = 'Frames: Femi\'s supplied paintings, shown as artwork (not official marks); company names carried by the captions (DL-19)'
+home('room-master-morning.webp', 'home.html', 'Background: pack concept room-master-morning.png — swap not yet approved (DL-14) · ' + ART_NOTE)
+home('room-master-morning.webp', 'home-official-marks.html', 'Comparison: official company marks in the frames instead of the paintings', art=False)
 home('room-existing-morning.webp', 'home-existing-room.html', 'Comparison: existing room (public/room/v4/morning.webp) — rug and sofa are cropped in this image')
 
 

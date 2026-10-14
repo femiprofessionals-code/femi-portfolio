@@ -40,7 +40,8 @@ img { display: block; max-width: 100%; }
 .nav a { text-decoration: none; font: 500 12.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; padding: 16px 0; display: inline-block; }
 .nav a[aria-current] { border-bottom: 1px solid currentColor; }
 .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 22px; border: 1px solid currentColor; font: 500 12.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; background: transparent; color: inherit; }
-.nav .btn { padding: 0 18px; }
+.nav .btn { display: inline-flex; padding: 0 18px; }
+.nav .brand { display: flex; padding: 0; min-height: 44px; }
 .btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .btn[aria-disabled] { cursor: not-allowed; }
 .menu-btn { display: none; }
@@ -60,6 +61,8 @@ img { display: block; max-width: 100%; }
 .mat--trowe img { width: 88%; height: auto; }
 .mat--carlyle img { object-fit: cover; object-position: 50% 50%; }
 .mat--gs img { object-fit: cover; }
+.mat--art img { object-fit: cover; }
+.mat--art { box-shadow: inset 1px 2px 4px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.12); }
 .walltext { position: absolute; left: 30.1%; width: 37%; top: 13.6%; text-align: center; color: var(--ink); }
 .walltext .eyebrow { font-size: max(10px, .78cqw); margin-bottom: .9cqw; color: #5b4c3c; }
 .walltext h1 { font: 400 4.1cqw/1 var(--display); margin: 0 0 .9cqw; }
@@ -93,7 +96,7 @@ img { display: block; max-width: 100%; }
 /* ── design-review layer (yellow). Not part of the design. */
 .rv { font: 500 11px/1.35 var(--sans); letter-spacing: 0; text-transform: none; color: #4a3800; background: #FFE58A; border: 1px dashed #A07A00; padding: 3px 7px; border-radius: 3px; display: inline-block; vertical-align: middle; }
 .rv--block { display: block; margin: 10px 0; padding: 10px 12px; font-size: 12.5px; }
-.rv--pin { position: absolute; z-index: 6; white-space: nowrap; }
+.rv--pin { position: absolute; z-index: 6; max-width: 66%; }
 .reviewbar { background: #2b2410; color: #FFE58A; font: 500 12px/1.4 var(--sans); padding: 8px var(--gutter); letter-spacing: .02em; }
 .no-review .rv, .no-review .reviewbar { display: none !important; }
 

@@ -66,5 +66,14 @@ Copied unchanged from `Femi_Falade_Portfolio_Claude_Pack.zip`. Checksums are lis
 | `carlyle.webp`, `trowe.webp`, `gs.svg`, `femi-portrait.webp` | Byte copies of `public/` files |
 | `fonts/*.woff2` | Latin subsets of EB Garamond, Cormorant Garamond and Inter from the site's own Next.js font build |
 
-## Received inline, not on disk (DL-18)
-Three room interiors (armchair corner by day; credenza with lamp at night; office with desk and bookshelf), a painted T. Rowe Price ram canvas and a painted Goldman Sachs canvas. These are not stored in this environment. If used, the painted canvases are **artwork, not official marks**.
+## Supplied paintings (Femi, 14 Oct 2026) — artwork for the Home frames (DL-19)
+| File | Dimensions | sha256 (16) | Status |
+|---|---|---|---|
+| `docs/assets/supplied-art/trowe-painting-supplied.webp` | 1254×1254 | af61a2097d1b51a0 | ⚠️ artwork, not an official mark; its lettering differs from the official wordmark |
+| `docs/assets/supplied-art/gs-painting-supplied.webp` | 1254×1254 | f263ec440d867c13 | ⚠️ artwork, not an official mark |
+| `docs/assets/supplied-art/carlyle-painting-supplied.jpg` | 1254×1254 | 5cd46e9097556169 | ⚠️ artwork; re-sent copy byte-identical (also identical to the pack's `carlyle-supplied-artwork.jpeg`) |
+
+The mockups use 600×600 WebP derivatives of these: `docs/mockups/img/{trowe,gs,carlyle}-painting.webp`.
+
+## Received inline only, not on disk (DL-20)
+Three room interiors: an armchair corner by day, a credenza with lamp at night, and an office with a desk and bookshelf. They are intended for other pages, but they are not stored in this environment and must be re-sent as files.

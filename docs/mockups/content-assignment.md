@@ -17,7 +17,7 @@ Every string below is website wording, from repo `main` @182768d, which the pack
 | Slot | Content | Source |
 |---|---|---|
 | Background | Desktop: the pack concept `room-master-morning.png`, with rug, tree and sofa all in view. Comparison page: the existing room. | Pack asset (sha256 `cf276d3e…`); replacement **not yet approved** (DL-14) |
-| Frames (L→R) | T. Rowe Price, The Carlyle Group, Goldman Sachs: official marks set into the concept's mat openings | `public/logos/*` (DL-06; GS provenance D-23) |
+| Frames (L→R) | T. Rowe Price, The Carlyle Group, Goldman Sachs: **Femi's supplied paintings**, as artwork. `home-official-marks.html` shows the official marks for comparison. | `docs/assets/supplied-art/*` (DL-19) |
 | Above frames | "Strategic Transformation" / "Femi Falade" / "Transformation, financial operations, and AI-enabled workflows across institutional finance." | Positioning is user-selected (pack). The sentence is the pack's *proposed synthesis* and needs approval. |
 | Captions below frames | Company name + "Oct 2019 – Jun 2021" / "Jun 2021 – Nov 2023" / "Nov 2023 – Present"; each opens its company view | Website About timeline M:about#L10-12 (⚑ D-01–D-04) |
 | Actions | View work · Résumé (inert) · Contact, in the nav and in a strip directly under the room | Brief; website "View work" label M:VideoHero |
