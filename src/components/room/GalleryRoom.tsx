@@ -4,8 +4,6 @@ import { FRAMES, IDENTITY, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from
 import { PERSON } from '@/content/site'
 import { LOAD_ACTIVE_LIGHT } from '@/lib/roomLights'
 import RoomLights from './RoomLights'
-import RoomMovement from './RoomMovement'
-import RoomMovementControl from './RoomMovementControl'
 
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
@@ -41,7 +39,6 @@ export default function GalleryRoom() {
               data-src={`${ROOM_BASE}/${m}-2048.webp`} data-srcset={WIDTHS.map(w => `${ROOM_BASE}/${m}-${w}.webp ${w}w`).join(', ')} data-sizes={SIZES} />
           ))}
           <p className="sr-only">{ROOM_DESCRIPTION}</p>
-          <RoomMovement />
           {FRAMES.map(f => (
             <div key={f.id} className="room5__art" style={{ ...rectStyle(f.mat), ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }} aria-hidden="true">
               {/* Each painting lit by that light's own lamp and daylight (public/art/lit, docs/decision-log.md DL-31) */}
@@ -97,7 +94,6 @@ export default function GalleryRoom() {
         </nav>
       </div>
       <RoomLights />
-      <RoomMovementControl />
     </section>
   )
 }
