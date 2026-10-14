@@ -14,7 +14,7 @@ cov = cv2.erode(cov, np.ones((9, 9), np.uint8))
 # light falloff toward the outer edge, ending in the page's dark surround where the clip has no picture
 xs = np.arange(Wc, dtype=np.float32)[None, :] / S
 edge_d = np.minimum(xs, (1536 + 2 * E) - xs)                       # distance (source px) from the outer edge
-vign = np.clip(edge_d / 120, 0, 1) ** .7
+vign = np.ones_like(edge_d)   # no vignette: the fill layout never shows past real coverage
 cov = cv2.GaussianBlur(cov, (0, 0), 6)
 dark = np.array([32, 37, 43], np.float32)                           # #2b2520 BGR
 morning3072 = cv2.imread(R + 'morning-3072.webp').astype(np.float32)
@@ -30,6 +30,13 @@ for mode in ('morning', 'golden', 'night'):
             ratio = np.clip((num + 2) / (den + 2), .05, 3.0)
             ratio = cv2.GaussianBlur(ratio[None].astype(np.float32), (0, 0), sigmaX=24, sigmaY=0)[0] if False else cv2.GaussianBlur(ratio.reshape(-1, 1, 3).astype(np.float32), (1, 0), sigmaX=0, sigmaY=10).reshape(-1, 3)
             img[:, sl] = img[:, sl] * ratio[:, None, :]
+    # exposure match at the seam: per row, scale each side so its inner columns equal the room's edge columns
+    for side in ('L', 'R'):
+        if side == 'L': inner = img[:, E * S - 24:E * S - 4]; edge = room[:, 4:24]; sl = slice(0, E * S)
+        else: inner = img[:, Wc - E * S + 4:Wc - E * S + 24]; edge = room[:, -24:-4]; sl = slice(Wc - E * S, Wc)
+        g = (np.median(edge, axis=1) + 3) / (np.median(inner, axis=1) + 3)
+        g = cv2.GaussianBlur(np.clip(g, .5, 2).reshape(-1, 1, 3).astype(np.float32), (1, 0), sigmaX=0, sigmaY=14).reshape(-1, 3)
+        img[:, sl] = img[:, sl] * g[:, None, :]
     img = img * (cov * vign)[..., None] + dark * (1 - cov * vign)[..., None]
     # seam: the outermost columns of the actual room take over within 10 px of the edge (no visible line)
     for side in ('L', 'R'):

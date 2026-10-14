@@ -9,7 +9,7 @@ import RoomSky from './RoomSky'
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
 /** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
-const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 528px) min(100vw, calc((100svh - 100px) * 2.008)), 100vw'
+const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 528px) and (min-aspect-ratio: 4/3) max(88vw, calc(100svh * 1.5)), 100vw'
 
 /**
  * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
