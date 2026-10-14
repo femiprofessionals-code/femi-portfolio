@@ -2,12 +2,15 @@
 Same method as sky3.py (morning): wall-locked, only open sky taken from the clip, the clip's own bars inpainted, the
 tree excluded along its real leaves. Differences: sky geometry comes from the morning master (all lights share geometry,
 docs/asset-lock.md) because colour tests can't find an orange sky; leaves are found by darkness/texture, not green;
-the loop is closed with a motion-compensated (optical-flow) blend so drifting clouds never double up.
+every frame is exposure-matched to the still (the clips' light drifts), and the loop is a long crossfade.
 Lock first with lock-clip.py. Usage: sky4.py clip.mp4 params.npy outdir golden|night"""
 import cv2, numpy as np, subprocess, sys
 CLIP, PARAMS, OUT, MODE = sys.argv[1:5]
 R = '/home/user/femi-portfolio/public/room/v5/'
-E = 180; WF = 1536 + 2 * E; H0 = 480; SLOW = 2; K = 48
+E = 180; WF = 1536 + 2 * E; H0 = 480; SLOW = 2
+# source range and crossfade length per clip: night starts after a flicker in its first second (frames 13-25) and
+# crossfades only where no plane is in view (planes: 0-12, 108-150), so the plane flies through whole, mid-loop
+START, K = {'golden': (0, 72), 'night': (34, 36)}[MODE]
 P = np.load(PARAMS); cap = cv2.VideoCapture(CLIP); F = []; valid = None
 while True:
     ok, f = cap.read()
@@ -17,7 +20,7 @@ while True:
     F.append(cv2.warpAffine(f, A, (WF, H0), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_CONSTANT))
     v = cv2.warpAffine(np.full(f.shape[:2], 255, np.uint8), A, (WF, H0), flags=cv2.INTER_NEAREST) > 0
     valid = v if valid is None else valid & v
-F = np.array(F)
+F = np.array(F)[START:]
 valid = cv2.erode(valid.astype(np.uint8), np.ones((15, 15), np.uint8))
 def still(mode):
     m = np.zeros((H0, WF, 3), np.float32)
@@ -63,11 +66,17 @@ thin = dark & (1 - cv2.morphologyEx(dark, cv2.MORPH_OPEN, np.ones((1, 19), np.ui
 bars = cv2.morphologyEx(thin, cv2.MORPH_OPEN, np.ones((31, 1), np.uint8))
 struct = cv2.dilate(bars, np.ones((5, 9), np.uint8)) & (skyMask > .01).astype(np.uint8)
 m = skyMask > .5
-cs = np.concatenate([F[i][m] for i in range(0, len(F), 8)]).astype(np.float32); ms = Mst[m]
-gain = np.clip(ms.std(0) / (cs.std(0) + 1e-3), .7, 1.25); off = ms.mean(0) - cs.mean(0) * gain
+# per-frame grade (smoothed over time): the clips' exposure drifts (night darkens ~50% in 8 s), so every frame is held
+# to the still's sky level; otherwise the loop flashes bright once per cycle
+ms = Mst[m]; mu = np.array([F[i][m].mean(0) for i in range(len(F))], np.float32); sd = np.array([F[i][m].std(0) for i in range(len(F))], np.float32)
+kk = np.hanning(25); kk /= kk.sum()
+sm = lambda a: np.stack([np.convolve(np.pad(a[:, j], 12, mode='edge'), kk, 'valid') for j in range(3)], 1)
+mu, sd = sm(mu), sm(sd)
+G = np.clip(ms.std(0) / (sd + 1e-3), .6, 1.6); O = ms.mean(0) - mu * G
+gain = G.mean(0)
 bands = []
-for f in F:
-    g = np.clip(f.astype(np.float32) * gain + off, 0, 255).astype(np.uint8)
+for i, f in enumerate(F):
+    g = np.clip(f.astype(np.float32) * G[i] + O[i], 0, 255).astype(np.uint8)
     if struct.any(): g = cv2.inpaint(g, struct, 7, cv2.INPAINT_TELEA)
     bands.append(g)
 # slow down with in-between frames
@@ -76,20 +85,11 @@ for i in range(len(bands) - 1):
     a, b = bands[i].astype(np.float32), bands[i + 1].astype(np.float32)
     for k in range(SLOW): t = k / SLOW; S.append(a * (1 - t) + b * t)
 S.append(bands[-1].astype(np.float32))
-# loop: blend the tail into the head along the optical flow between them, so clouds morph instead of ghosting
+# loop: the tail crossfades into the head
 KS = K * SLOW; Lp = len(S) - KS
-dis = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_MEDIUM)
-gx, gy = np.meshgrid(np.arange(WF, dtype=np.float32), np.arange(H0, dtype=np.float32))
-def morph(a, b, t):
-    ga, gb = (cv2.cvtColor(x.astype(np.uint8), cv2.COLOR_BGR2GRAY) for x in (a, b))
-    fl = dis.calc(ga, gb, None)                       # a(x) ~ b(x + fl)
-    fl = cv2.GaussianBlur(fl, (0, 0), 3)
-    aw = cv2.remap(a, gx - t * fl[..., 0], gy - t * fl[..., 1], cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
-    bw = cv2.remap(b, gx + (1 - t) * fl[..., 0], gy + (1 - t) * fl[..., 1], cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
-    return aw * (1 - t) + bw * t
-def loopframe(i):
-    if i < KS:
-        t = i / KS; t = t * t * (3 - 2 * t); return morph(S[i + Lp], S[i], t)
+def loopframe(i):                                     # long, gentle crossfade: soft clouds dissolve into each other
+    if i < KS:                                       # (the flow morph smeared tree and bar edges into the sky)
+        t = i / KS; t = t * t * (3 - 2 * t); return S[i + Lp] * (1 - t) + S[i] * t
     return S[i]
 w3 = skyMask[..., None]
 enc = [('webm', ['-c:v', 'libvpx-vp9', '-pix_fmt', 'yuv420p', '-crf', '36', '-b:v', '0', '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2']),
@@ -106,4 +106,4 @@ a = (np.clip(skyMask, 0, 1) * 255).astype(np.uint8)
 cv2.imwrite(f'{OUT}/mask-sky-band-{MODE}.png', np.dstack([np.full_like(a, 255)] * 3 + [a]))
 cv2.imwrite('review.jpg', np.vstack([review[k] for k in sorted(review)]), [1, 88])
 cv2.imwrite('mask.png', a); cv2.imwrite('struct.png', struct * 255)
-print('frames', Lp, 'seconds', round(Lp / 24, 1), 'gain', gain.round(2), 'off', off.round(1), 'struct px', int(struct.sum()))
+print('frames', Lp, 'seconds', round(Lp / 24, 1), 'gain', gain.round(2), 'exposure range', mu.mean(1).min().round(1), mu.mean(1).max().round(1), 'struct px', int(struct.sum()))

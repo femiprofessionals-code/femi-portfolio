@@ -57,3 +57,17 @@ Limits:
 - The sources are 720p, so the clouds are softer than the stills' skies.
 - Planes vanish briefly behind the soft "hold" above the Empire State Building.
 - The skyline and city lights are static, because both clips' cameras move.
+
+## Golden and night, revision 2 (Femi: "the golden hour and night video did not go well")
+What was wrong:
+- **Golden:** the optical-flow loop blend smeared dark ghost shapes into the sky beside the Empire State Building for about 3 s every loop.
+- **Night, brightness:** the clip darkens steadily, about −50% over 8 s, as dusk turns to night. The sky flashed bright and faded once per loop (sky luminance 22–42).
+- **Night, flicker:** the clip has a flicker in its first second (frames 13–25).
+- **Night, planes:** planes ghosted while the loop crossfaded.
+
+Fixes (`sky4.py`):
+- **Every frame is exposure-matched** to the still's sky (smoothed over 1 s). Sky luminance now holds within 0.5 level at night and 0.4 at golden hour.
+- **The loop is a plain, long crossfade.** The flow morph is removed. Golden hour crossfades over 6 s.
+- **Night starts at source frame 34**, after the flicker. It crossfades only over 1.5 s stretches with no plane in view (frames 34–69 and 156–191), so the plane crosses whole, mid-loop.
+
+Loops: golden 10 s, night 10.1 s. Frames are in `golden-v2-frames.jpg` and `night-v2-frames.jpg`.
