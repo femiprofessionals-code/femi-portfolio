@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 
 /**
  * Real moving sky for the room: Femi's generated clip, locked to the room and composited so only open sky changes
- * (scripts: docs/asset-lock/scripts/sky.py). The sharp still stays underneath; the paintings, text and links sit above.
+ * (scripts: docs/asset-lock/scripts/sky3.py). The sharp still stays underneath; the paintings, text and links sit above.
  * Loaded after the page, only for lights that have a clip, paused off-screen / hidden, never with reduced motion.
  */
 const CLIPS: Record<string, string> = { morning: '/room/v5/motion/sky-morning' }
