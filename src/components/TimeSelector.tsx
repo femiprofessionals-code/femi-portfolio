@@ -58,6 +58,14 @@ export default function TimeSelector() {
     return () => window.clearInterval(id)
   }, [])
 
+  // the New York clock counts every second, ticking on the second boundary
+  useEffect(() => {
+    let t = 0
+    const step = () => { setClock(nyClock()); t = window.setTimeout(step, 1000 - (Date.now() % 1000) + 5) }
+    step()
+    return () => window.clearTimeout(t)
+  }, [])
+
   const toggle = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     if (!open) return
