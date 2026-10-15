@@ -22,7 +22,7 @@ export function stageForHour(h: number): Stage {
 }
 
 export function nyClock(d = new Date()) {
-  return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' }).format(d)
+  return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', second: '2-digit' }).format(d)
 }
 
 /** Runs in <head> before first paint so the right light is there from the first frame. */
