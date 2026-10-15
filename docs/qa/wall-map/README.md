@@ -25,4 +25,4 @@ Femi's choices: widen the wall in the room image, and hang the map beside the Go
 - **Caption contrast** (rendered pixels, low hang): "Travel" 9.9–12.4, "30+ countries" 6.7–10.6, all ≥ 4.5.
 
 ## Content note
-The artwork's own text reads **"30 countries visited · 60+ cities explored"**. The website says "30+ countries · 60+ cities". The wall caption uses the website wording (D-25).
+The artwork read "30 countries visited". At Femi's request it now reads **"30+ countries visited · 60+ cities explored"** (D-25). The '+' is the artwork's own glyph from "60+", and the line is re-centred.

@@ -48,9 +48,9 @@ export const FRAMES: Frame[] = [
 /** The travel map, hung low on the widened wall beside the bench's empty end (Femi's supplied artwork; docs/decision-log.md DL-46). */
 export const MAP = {
   title: 'Travel',
-  /** Website wording (Travel page: "30+ countries · 60+ cities"; About: "more than thirty countries and counting"). */
+  /** Femi's figures (also the website's Travel page): 30+ countries, 60+ cities. */
   note: '30+ countries',
-  label: 'more than thirty countries and counting',
+  label: '30+ countries and 60+ cities',
   href: '/about#outside-work',
   art: '/art/map',
   mat: [1003, 548, 124, 80] as Rect,

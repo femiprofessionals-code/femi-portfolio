@@ -157,7 +157,7 @@ Branch B:src/content/site.ts#L47 and #L155 already display the spec version.
 - The work cards use initials only (M:src/app/page.tsx#L41-L50).
 - Earlier, Femi said "the earlier website has the logos". If so, **the live site may differ from `main`** — one more reason to verify the live pages.
 
-**D-25 🟡 Travel map wording**
+**D-25 ✅ Travel map wording (resolved 15 Oct)**
 - Femi's supplied map artwork reads "30 countries visited · 60+ cities explored".
 - The website's Travel page says "30+ countries · 60+ cities", and About says "more than thirty countries and counting".
-- The wall caption and link text use the website wording. The artwork's own text is unchanged, and it's too small to read in the room. **Ask Femi** which count is current.
+- **Resolved:** Femi: "please correct to 30+, 60+". The artwork's text now reads "30+ countries visited · 60+ cities explored", re-set from its own glyphs (`docs/asset-lock/scripts/map-text-fix.py`; original kept as `travel-map-supplied.webp`). The caption and link text say 30+ countries and 60+ cities.
