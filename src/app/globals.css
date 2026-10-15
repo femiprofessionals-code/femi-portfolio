@@ -745,12 +745,36 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 .room5__art--map { background: #e9dfcc; }
 .room5__art--map::after { box-shadow: none; }      /* the map carries its own frame; the wall shadow is in the room image */
 .room5__hang--map::before { display: none; }
-.room5__frame--map::before { content: ''; position: absolute; left: -10%; right: -10%; bottom: -6%; height: 50%; z-index: -1; background: radial-gradient(ellipse 52% 50% at 50% 54%, var(--map-wash) 64%, transparent 100%); }
+.room5__frame--map::before { content: ''; position: absolute; left: -10%; right: -10%; bottom: -6%; height: 50%; z-index: -1; background: radial-gradient(ellipse 54% 52% at 50% 54%, var(--map-wash) 0%, var(--map-wash) 40%, transparent 100%); }
 /* the low wall sits in the bench's shade and the sun streaks, so this caption always gets a soft wash */
 .room5 { --map-wash: rgba(250, 243, 230, .6); }
 html[data-time='golden'] .room5 { --map-wash: rgba(255, 236, 205, .62); }
 html[data-time='night'] .room5 { --map-wash: rgba(255, 228, 190, .7); }
 .room5__frame--map { isolation: isolate; }
+/* Hover / keyboard focus on a painting: its picture light warms up and a soft glass glare drifts across the artwork.
+   The light is a warm cone from the lamp, added with 'screen' so it brightens the room's own pixels rather than painting over them. */
+.room5__glow { position: absolute; z-index: 1; pointer-events: none; opacity: 0; mix-blend-mode: screen; transition: opacity .7s cubic-bezier(.2, .7, .2, 1);
+  background: radial-gradient(ellipse 50% 82% at 50% 0%, rgba(255, 218, 168, .62) 0%, rgba(255, 206, 144, .3) 40%, rgba(255, 200, 130, .08) 62%, rgba(255, 200, 130, 0) 78%); }
+.room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 228, 190, .45) 0%, rgba(255, 220, 176, .2) 46%, rgba(255, 220, 176, 0) 78%); }
+html[data-time='night'] .room5__glow { background: radial-gradient(ellipse 50% 84% at 50% 0%, rgba(255, 196, 128, .7) 0%, rgba(255, 184, 110, .34) 40%, rgba(255, 180, 100, .09) 62%, rgba(255, 180, 100, 0) 78%); }
+html[data-time='night'] .room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 206, 150, .5) 0%, rgba(255, 196, 136, .22) 46%, rgba(255, 196, 136, 0) 78%); }
+.room5__art img { transition: filter .7s cubic-bezier(.2, .7, .2, 1); }
+.room5__glare { position: absolute; inset: -20% -60%; z-index: 1; pointer-events: none; opacity: 0;
+  background: linear-gradient(112deg, transparent 36%, rgba(255, 250, 240, .14) 44%, rgba(255, 255, 255, .4) 50%, rgba(255, 250, 240, .14) 56%, transparent 64%);
+  transform: translateX(-45%); transition: transform 1.4s cubic-bezier(.25, .6, .2, 1), opacity .5s ease; }
+.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__glow[data-frame='trowe'] { opacity: 1; }
+.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__art[data-frame='trowe'] img { filter: brightness(1.13) saturate(1.06); }
+.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__art[data-frame='trowe'] .room5__glare { opacity: 1; transform: translateX(45%); }
+.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__glow[data-frame='carlyle'] { opacity: 1; }
+.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__art[data-frame='carlyle'] img { filter: brightness(1.13) saturate(1.06); }
+.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__art[data-frame='carlyle'] .room5__glare { opacity: 1; transform: translateX(45%); }
+.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__glow[data-frame='gs'] { opacity: 1; }
+.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__art[data-frame='gs'] img { filter: brightness(1.13) saturate(1.06); }
+.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__art[data-frame='gs'] .room5__glare { opacity: 1; transform: translateX(45%); }
+.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__glow[data-frame='map'] { opacity: 1; }
+.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__art[data-frame='map'] img { filter: brightness(1.13) saturate(1.06); }
+.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__art[data-frame='map'] .room5__glare { opacity: 1; transform: translateX(45%); }
+@media (prefers-reduced-motion: reduce) { .room5__glare { display: none; } .room5__glow, .room5__art img { transition: none; } }
 .room5__art::after { content: ''; position: absolute; inset: 0; box-shadow: inset .14cqw .22cqw .38cqw rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(0, 0, 0, .14); pointer-events: none; }
 
 /* Wall text and captions exist only in the wall layout */
@@ -760,10 +784,11 @@ html[data-time='night'] .room5 { --map-wash: rgba(255, 228, 190, .7); }
 .room5__hang { position: absolute; inset: 0; pointer-events: none; }
 .room5__hang::before { content: ''; position: absolute; left: 31%; width: 35%; top: 47.8%; height: 10.4%; background: radial-gradient(ellipse 58% 75% at 50% 50%, var(--cap-wash) 55%, transparent 100%); }
 .room5__identity { position: absolute; flex-direction: column; justify-content: flex-end; align-items: center; gap: .5cqw; text-align: center; color: var(--id-ink); text-shadow: var(--id-shadow); isolation: isolate; }
-.room5__identity::before { content: ''; position: absolute; inset: -14% -6% -10%; z-index: -1; background: radial-gradient(ellipse 56% 62% at 50% 52%, var(--id-wash) 55%, transparent 100%); pointer-events: none; }
-.room5__eyebrow { font: 600 max(10px, .74cqw)/1.4 var(--sans); letter-spacing: .26em; text-transform: uppercase; }
-.room5__name { font-family: var(--display); font-weight: 500; font-size: 4cqw; line-height: .98; letter-spacing: .01em; }
-.room5__intro { font-family: var(--serif); font-size: max(14px, 1.2cqw); line-height: 1.4; max-width: 30cqw; }
+.room5__identity::before { content: ''; position: absolute; inset: -10% -4% -8%; z-index: -1; background: radial-gradient(ellipse 56% 62% at 50% 52%, var(--id-wash) 55%, transparent 100%); pointer-events: none; }
+.room5__eyebrow { font: 600 max(11px, .92cqw)/1.4 var(--sans); letter-spacing: .28em; text-transform: uppercase; }
+.room5__name { font-family: var(--display); font-weight: 500; font-size: 5.1cqw; line-height: .96; letter-spacing: .01em; }
+.room5__intro { font-family: var(--serif); font-size: max(15px, 1.5cqw); line-height: 1.38; max-width: 36cqw; text-wrap: balance; }
+.room5__intro .nw { white-space: nowrap; }
 .room5__frame { position: absolute; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: .3cqw; padding-bottom: .5cqw; text-align: center; text-decoration: none; color: var(--cap-ink); outline-offset: .3cqw; pointer-events: auto; }
 .room5__frame:focus-visible { outline: 2px solid #9A7448; }
 .room5__company { font-family: var(--serif); font-weight: 500; font-size: max(13px, 1.08cqw); line-height: 1.2; }

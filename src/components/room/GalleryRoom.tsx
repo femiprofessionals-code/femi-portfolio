@@ -42,28 +42,34 @@ export default function GalleryRoom() {
           <p className="sr-only">{ROOM_DESCRIPTION}</p>
           <RoomSky />
           {FRAMES.map(f => (
-            <div key={f.id} className="room5__art" style={{ ...rectStyle(f.mat), ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }} aria-hidden="true">
+            <div key={f.id} className="room5__art" data-frame={f.id} style={{ ...rectStyle(f.mat), ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }} aria-hidden="true">
               {/* Each painting lit by that light's own lamp and daylight (public/art/lit, docs/decision-log.md DL-31) */}
               {ROOM_MODES.map(m => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-${f.id}.webp`} alt="" width={480} height={480} decoding="async" />
               ))}
+              <i className="room5__glare" />
             </div>
           ))}
-          <div className="room5__art room5__art--map" style={{ ...rectStyle(MAP.mat), ['--art' as string]: `url(/art/lit/morning-map.webp)` }} aria-hidden="true">
+          <div className="room5__art room5__art--map" data-frame="map" style={{ ...rectStyle(MAP.mat), ['--art' as string]: `url(/art/lit/morning-map.webp)` }} aria-hidden="true">
             {ROOM_MODES.map(m => (
               // eslint-disable-next-line @next/next/no-img-element
               <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-map.webp`} alt="" width={480} height={311} decoding="async" />
             ))}
+            <i className="room5__glare" />
           </div>
+          {/* Hover: the picture light warms up over the painting and the wall around it */}
+          {[...FRAMES.map(f => ({ id: f.id, glow: f.glow })), { id: 'map', glow: MAP.glow }].map(g => (
+            <i key={g.id} className={`room5__glow${g.id === 'map' ? ' room5__glow--soft' : ''}`} data-frame={g.id} style={rectStyle(g.glow)} aria-hidden="true" />
+          ))}
           <div className="room5__identity" style={rectStyle(ZONES.identity)}>
             <p className="room5__eyebrow">{IDENTITY.positioning}</p>
             <h1 className="room5__name">{PERSON.name}</h1>
-            <p className="room5__intro">{IDENTITY.intro}</p>
+            <p className="room5__intro">{IDENTITY.intro.split(/(AI-enabled)/).map((t, i) => (i % 2 ? <span key={i} className="nw">{t}</span> : t))}</p>
           </div>
           <nav className="room5__hang" aria-label="Career">
             {FRAMES.map(f => (
-              <Link key={f.id} href={f.href} className="room5__frame" style={rectStyle(f.hitbox)}>
+              <Link key={f.id} href={f.href} className="room5__frame" data-frame={f.id} style={rectStyle(f.hitbox)}>
                 <span className="room5__company">{f.company}</span>
                 <span className="room5__dates" aria-hidden="true">{f.years}</span>
                 <span className="sr-only">, {f.role}, {f.dates}</span>
@@ -71,7 +77,7 @@ export default function GalleryRoom() {
             ))}
           </nav>
           <div className="room5__hang room5__hang--map">
-            <Link href={MAP.href} className="room5__frame room5__frame--map" style={rectStyle(MAP.hitbox)}>
+            <Link href={MAP.href} className="room5__frame room5__frame--map" data-frame="map" style={rectStyle(MAP.hitbox)}>
               <span className="room5__company">{MAP.title}</span>
               <span className="room5__dates" aria-hidden="true">{MAP.note}</span>
               <span className="sr-only">: {MAP.label}</span>
