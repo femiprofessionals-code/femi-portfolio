@@ -4,11 +4,12 @@ Master px (1536x1024); renders are 3072 (S=2). Wall: x 462-1030, y 112-~697. New
 Light: each new column continues the wall's own edge light along the measured sun-streak direction (so streaks carry on);
 plaster texture is the wall's own fine detail; the edge profile (light falloff at the corner) is moved to the new edge."""
 import cv2, numpy as np, sys
-R = '/home/user/femi-portfolio/public/room/v5/'; OUT = sys.argv[1]
+R = sys.argv[2] if len(sys.argv) > 2 else '/home/user/femi-portfolio/public/room/v5/'; OUT = sys.argv[1]   # R: the unwidened renders
 S = 2; T, B = 112, 693
 L0, L1, R0, R1 = 462, 422, 1030, 1150
 SLOPE = {'morning': .324, 'golden': .394, 'night': 0.0}
-MAP = (1020, 384, 102, 66)                 # travel map rect (master): the supplied frame is 1500x971 (1.545)
+MAP = (1003, 548, 124, 80)                 # travel map (master), hung low beside the bench's empty end; frame ratio 1.545
+LAMP = False                               # no picture light at this height
 tree = cv2.resize(cv2.imread(R + 'masks/tree.png', 0), (3072, 2048), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255
 mo = cv2.imread(R + 'morning-3072.webp').astype(np.float32)
 lum = mo @ np.array([.114, .587, .299], np.float32)
@@ -71,28 +72,31 @@ for mode in ('morning', 'golden', 'night'):
     sh = np.zeros((H, W), np.float32); cv2.rectangle(sh, ((x + 1) * S, (y + 3) * S), ((x + w + 1) * S, (y + h + 3) * S), 1, -1)
     sh = cv2.GaussianBlur(sh, (0, 0), 2.5 * S)
     new *= (1 - .32 * sh)[..., None]
-    # picture light: the Goldman Sachs lamp, scaled to the map's width, with its wall glow
-    lamp_box = (880, 314, 84, 22)                                         # lamp over the GS frame (master)
-    lx, ly, lw, lh = lamp_box
-    patch = im[ly * S:(ly + lh) * S, lx * S:(lx + lw) * S]
-    wall_ref = im[(ly - 14) * S:(ly - 4) * S, lx * S:(lx + lw) * S].mean((0, 1))
-    plum = patch @ np.array([.114, .587, .299], np.float32); wlum = wall_ref @ np.array([.114, .587, .299], np.float32)
-    alpha = np.clip((wlum - 18 - plum) / 30, 0, 1)
-    alpha = cv2.GaussianBlur(alpha, (0, 0), .8)
-    sc = 0.72; nw, nh = int(lw * S * sc), int(lh * S * sc)
-    patch = cv2.resize(patch, (nw, nh), interpolation=cv2.INTER_AREA); alpha = cv2.resize(alpha, (nw, nh))[..., None]
-    cx = (x + w / 2) * S; py = int((y - 4) * S - nh)
-    px = int(cx - nw / 2)
-    # glow on the wall below the lamp: measured from the GS lamp (wall just under it vs the plain margin, same rows)
-    glow_gs = im[(ly + lh) * S:(ly + lh + 12) * S, (lx + 10) * S:(lx + lw - 10) * S].mean() / (im[(ly + lh) * S:(ly + lh + 12) * S, 1000 * S:1026 * S].mean() + 1)
-    gy, gx = np.mgrid[0:H, 0:W].astype(np.float32)
-    cone = np.exp(-(((gx - cx) / (w * .42 * S)) ** 2) - ((gy - py - h * .3 * S) / (h * .75 * S)) ** 2)
-    gain = max(glow_gs - 1, 0)
-    new *= (1 + gain * cone)[..., None]
-    reg = new[py:py + nh, px:px + nw]
-    new[py:py + nh, px:px + nw] = reg * (1 - alpha) + patch * alpha
-    out[mode] = np.clip(new, 0, 255)
-    print(mode, 'lamp glow gain', round(float(gain), 3))
+    if not LAMP:
+        out[mode] = np.clip(new, 0, 255); print(mode, 'no lamp')
+    if LAMP:
+        # picture light: the Goldman Sachs lamp, scaled to the map's width, with its wall glow
+        lamp_box = (880, 314, 84, 22)                                         # lamp over the GS frame (master)
+        lx, ly, lw, lh = lamp_box
+        patch = im[ly * S:(ly + lh) * S, lx * S:(lx + lw) * S]
+        wall_ref = im[(ly - 14) * S:(ly - 4) * S, lx * S:(lx + lw) * S].mean((0, 1))
+        plum = patch @ np.array([.114, .587, .299], np.float32); wlum = wall_ref @ np.array([.114, .587, .299], np.float32)
+        alpha = np.clip((wlum - 18 - plum) / 30, 0, 1)
+        alpha = cv2.GaussianBlur(alpha, (0, 0), .8)
+        sc = 0.72; nw, nh = int(lw * S * sc), int(lh * S * sc)
+        patch = cv2.resize(patch, (nw, nh), interpolation=cv2.INTER_AREA); alpha = cv2.resize(alpha, (nw, nh))[..., None]
+        cx = (x + w / 2) * S; py = int((y - 4) * S - nh)
+        px = int(cx - nw / 2)
+        # glow on the wall below the lamp: measured from the GS lamp (wall just under it vs the plain margin, same rows)
+        glow_gs = im[(ly + lh) * S:(ly + lh + 12) * S, (lx + 10) * S:(lx + lw - 10) * S].mean() / (im[(ly + lh) * S:(ly + lh + 12) * S, 1000 * S:1026 * S].mean() + 1)
+        gy, gx = np.mgrid[0:H, 0:W].astype(np.float32)
+        cone = np.exp(-(((gx - cx) / (w * .42 * S)) ** 2) - ((gy - py - h * .3 * S) / (h * .75 * S)) ** 2)
+        gain = max(glow_gs - 1, 0)
+        new *= (1 + gain * cone)[..., None]
+        reg = new[py:py + nh, px:px + nw]
+        new[py:py + nh, px:px + nw] = reg * (1 - alpha) + patch * alpha
+        out[mode] = np.clip(new, 0, 255)
+        print(mode, 'lamp glow gain', round(float(gain), 3))
     for wd in (3072, 2048, 1536):
         cv2.imwrite(f'{OUT}/{mode}-{wd}.webp', cv2.resize(out[mode], (wd, wd * 2 // 3), interpolation=cv2.INTER_AREA).astype(np.uint8), [cv2.IMWRITE_WEBP_QUALITY, 88])
 # review: before/after, all lights

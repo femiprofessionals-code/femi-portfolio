@@ -45,7 +45,7 @@ export const FRAMES: Frame[] = [
   { id: 'gs', company: 'Goldman Sachs', role: 'Senior Associate, Global Banking and Markets Transformation', dates: 'Nov 2023 – Present', years: '2023 – Present', href: '/experience#goldman-sachs', art: '/art/gs-painting', mat: [870, 368, 100, 102], hitbox: [841, 339, 157, 247] },
 ]
 
-/** The travel map hung beside the paintings on the widened wall (Femi's supplied artwork; docs/decision-log.md DL-46). */
+/** The travel map, hung low on the widened wall beside the bench's empty end (Femi's supplied artwork; docs/decision-log.md DL-46). */
 export const MAP = {
   title: 'Travel',
   /** Website wording (Travel page: "30+ countries · 60+ cities"; About: "more than thirty countries and counting"). */
@@ -53,8 +53,8 @@ export const MAP = {
   label: 'more than thirty countries and counting',
   href: '/about#outside-work',
   art: '/art/map',
-  mat: [1020, 384, 102, 66] as Rect,
-  hitbox: [1004, 339, 136, 247] as Rect,
+  mat: [1003, 548, 124, 80] as Rect,
+  hitbox: [995, 540, 142, 142] as Rect,
 }
 
 export const pct = (v: number, of: number) => `${(v / of) * 100}%`
