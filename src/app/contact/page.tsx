@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import { PERSON } from '@/content/site'
-import lounge from '../../../public/images/rooms/contact-lounge.webp'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -16,7 +14,6 @@ const big = { fontFamily: 'var(--display)', fontSize: 'clamp(1.6rem, 3vw, 2.4rem
 export default function ContactPage() {
   return (
     <section className="dark-room dark-room--contact dark" style={{ minHeight: '100vh', paddingTop: 'calc(var(--nav-h) + 4rem)' }} aria-labelledby="contact-title">
-      <Image src={lounge} alt="" priority placeholder="blur" sizes="100vw" unoptimized className="dark-room__img" />
       <div className="wrap dark-room__inner">
         <p className="eyebrow reveal">Contact</p>
         <h1 id="contact-title" className="dark-room__title reveal" data-delay="1" style={{ maxWidth: '11em' }}>

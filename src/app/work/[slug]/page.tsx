@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Arrow from '@/components/Arrow'
 import { Columns, Compass, Globe, Layers } from '@/components/Icons'
-import { BRIEF_IMAGES } from '@/content/images'
 import { BRIEFS, PERSON, institutionName } from '@/content/site'
 
 type Props = { params: { slug: string } }
@@ -23,7 +21,6 @@ export default function BriefPage({ params }: Props) {
   const i = BRIEFS.findIndex(b => b.slug === params.slug)
   if (i < 0) notFound()
   const b = BRIEFS[i]
-  const img = BRIEF_IMAGES[b.slug]
   const subline = b.eyebrow.split(' / ').slice(0, 2).concat('Scale').join('  /  ')
   const others = [1, 2, 3, 4].map(k => BRIEFS[(i + k) % BRIEFS.length])
 
@@ -64,9 +61,6 @@ export default function BriefPage({ params }: Props) {
               <div className="fact"><Layers /><dt>Scope</dt><dd>{b.domain}</dd></div>
               <div className="fact"><Globe /><dt>Reach</dt><dd>{b.reach}</dd></div>
             </dl>
-          </div>
-          <div className="brief-hero__photo reveal" data-delay="1">
-            <Image src={img.src} alt="" priority placeholder="blur" sizes="(max-width: 960px) 100vw, 58vw" style={{ objectPosition: img.position }} />
           </div>
         </div>
 
@@ -122,12 +116,8 @@ export default function BriefPage({ params }: Props) {
         <p className="eyebrow" style={{ color: 'var(--ink)', marginBottom: '1.5rem' }}>Selected work</p>
         <div className="more-work">
           {others.map(o => {
-            const oi = BRIEF_IMAGES[o.slug]
             return (
-              <Link key={o.slug} href={`/work/${o.slug}`} className="card">
-                <div className="card__img">
-                  <Image src={oi.src} alt="" placeholder="blur" sizes="(max-width: 560px) 100vw, 25vw" style={{ objectPosition: oi.position }} />
-                </div>
+              <Link key={o.slug} href={`/work/${o.slug}`} className="card card--text">
                 <div className="card__label"><span>{o.domain}</span><Arrow /></div>
                 <span className="card__title">{o.title}</span>
               </Link>

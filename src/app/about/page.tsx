@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Arrow from '@/components/Arrow'
 import { PRINCIPLES } from '@/content/site'
 import portrait from '../../../public/images/femi-portrait.webp'
-import residence from '../../../public/images/rooms/residence-light.webp'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -74,13 +73,8 @@ export default function AboutPage() {
       </section>
 
       <section id="outside-work" className="room room--plaster" aria-label="Outside work" style={{ scrollMarginTop: 'var(--nav-h)' }}>
-        <div className="wrap split" style={{ alignItems: 'center' }}>
-          <div className="frame reveal">
-            <div className="frame__inner" style={{ aspectRatio: '1 / 1' }}>
-              <Image src={residence} alt="" sizes="(max-width: 860px) 90vw, 36vw" placeholder="blur" />
-            </div>
-          </div>
-          <div style={{ display: 'grid', gap: '2rem' }} className="reveal" data-delay="1">
+        <div className="wrap">
+          <div style={{ display: 'grid', gap: '2rem', maxWidth: '44rem' }} className="reveal">
             <p className="h3 italic">
               Outside of work: New York, architecture and interiors, and travel — more than thirty countries and
               counting.

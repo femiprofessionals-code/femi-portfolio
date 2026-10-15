@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import PageHero from '@/components/PageHero'
 import Wordmark from '@/components/Wordmark'
 import { FRAMES } from '@/content/scene'
 import { EDUCATION, INSTITUTIONS, ROLES } from '@/content/site'
@@ -28,7 +27,6 @@ export default function ExperiencePage() {
         </div>
       </header>
 
-      <PageHero name="experience-office" position="64% 55%" alt="A walnut desk with a monitor and travertine sculpture by a window high above Manhattan, in late-afternoon sun." />
 
       <section className="room" style={{ paddingTop: 0 }} aria-label="Roles">
         <div className="wrap">
