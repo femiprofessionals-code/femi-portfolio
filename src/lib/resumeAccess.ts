@@ -1,7 +1,7 @@
 import { createHash, scryptSync, timingSafeEqual } from 'node:crypto'
 
 /**
- * The résumé is available on request, behind a passcode (Femi, 15 Oct 2026).
+ * The resume is available on request, behind a passcode (Femi, 15 Oct 2026).
  * The repository is public, so the passcode itself is never stored here, only a slow, salted scrypt hash of it.
  * To change the passcode without a code change, set RESUME_PASSCODE in the hosting environment (Vercel → Settings →
  * Environment Variables); when it is set, it replaces the hash below.

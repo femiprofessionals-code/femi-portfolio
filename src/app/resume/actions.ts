@@ -15,7 +15,7 @@ export type ResumeData = {
 
 export type UnlockResult = { ok: true; resume: ResumeData } | { ok: false; error: string }
 
-/** Checks the passcode on the server; only then is the résumé sent to the browser. */
+/** Checks the passcode on the server; only then is the resume sent to the browser. */
 export async function unlockResume(passcode: string): Promise<UnlockResult> {
   if (!passcodeMatches(passcode)) {
     await new Promise(r => setTimeout(r, 900))            // slow down guessing

@@ -2,10 +2,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Arrow from '@/components/Arrow'
 import { unlockResume, type ResumeData } from './actions'
+import RequestAccess from './RequestAccess'
 
-const KEY = 'ff-resume-pass'   // this tab only: re-opening the résumé in the same tab doesn't ask again
+const KEY = 'ff-resume-pass'   // this tab only: re-opening the resume in the same tab doesn't ask again
 
-export default function ResumeGate({ email }: { email: string }) {
+export default function ResumeGate() {
   const [resume, setResume] = useState<ResumeData | null>(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -35,20 +36,19 @@ export default function ResumeGate({ email }: { email: string }) {
 
   if (resume) return <ResumeDoc r={resume} />
 
-  const request = `mailto:${email}?subject=${encodeURIComponent('Résumé request')}&body=${encodeURIComponent('Hello Femi,\n\nI would like to request your résumé.\n\nName:\nOrganisation:\nRole / purpose:\n')}`
   return (
     <div className="resume-gate">
-      <p className="lede body">My résumé is available on request. If you have a passcode, enter it below; otherwise, request access and I’ll reply with one.</p>
+      <p className="lede body">My resume is available on request. If you have a passcode, enter it below; otherwise, request access and I’ll reply with one.</p>
       <form className="resume-gate__form" onSubmit={e => { e.preventDefault(); const v = field.current?.value || ''; if (v.trim()) tryUnlock(v) }}>
         <label htmlFor="resume-pass" className="eyebrow">Passcode</label>
         <div className="resume-gate__row">
           <input ref={field} id="resume-pass" name="passcode" type="password" autoComplete="off" spellCheck={false} required
             aria-invalid={!!error} aria-describedby={error ? 'resume-pass-error' : undefined} className="resume-gate__input" />
-          <button type="submit" className="btn btn--solid" disabled={busy}>{busy ? 'Checking…' : <>View résumé <Arrow /></>}</button>
+          <button type="submit" className="btn btn--solid" disabled={busy}>{busy ? 'Checking…' : <>View resume <Arrow /></>}</button>
         </div>
         <p id="resume-pass-error" className="resume-gate__error" role="alert" aria-live="polite">{error}</p>
       </form>
-      <a href={request} className="btn">Request access <Arrow /></a>
+      <RequestAccess />
     </div>
   )
 }

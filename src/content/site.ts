@@ -1,6 +1,6 @@
 /**
  * Canonical source of truth for every public title, date, metric and project fact.
- * The website, résumé and LinkedIn should all reconcile to the values in this file.
+ * The website, resume and LinkedIn should all reconcile to the values in this file.
  * Do not edit copy inline in components — change it here.
  */
 
@@ -39,7 +39,7 @@ export const INSTITUTIONS: Institution[] = [
 /**
  * Metric register. `label` is the approved public wording.
  * Never describe $580M as "migration value" — it is annualized funding-cost savings
- * enabled by an enterprise implementation (see résumé).
+ * enabled by an enterprise implementation (see resume).
  */
 export type Metric = { value: string; short: string; label: string; source: string }
 

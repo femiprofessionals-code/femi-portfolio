@@ -66,7 +66,7 @@ export default function ExperiencePage() {
               ))}
             </ul>
             <div className="btn-row" style={{ marginTop: '3rem' }}>
-              <Link href="/resume" className="btn btn--solid">Résumé <Arrow /></Link>
+              <Link href="/resume" className="btn btn--solid">Resume <Arrow /></Link>
               <Link href="/work" className="btn">Selected work <Arrow /></Link>
             </div>
           </div>

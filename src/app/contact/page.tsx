@@ -25,7 +25,7 @@ export default function ContactPage() {
           <div><dt className="eyebrow">Based in</dt><dd style={big}>{PERSON.location}</dd></div>
         </dl>
         <div className="reveal" data-delay="3">
-          <Link href="/resume" className="btn btn--wide">Résumé <Arrow /></Link>
+          <Link href="/resume" className="btn btn--wide">Resume <Arrow /></Link>
         </div>
       </div>
     </section>
