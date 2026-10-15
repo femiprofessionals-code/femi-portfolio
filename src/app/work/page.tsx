@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import PageHero from '@/components/PageHero'
-import { BRIEF_IMAGES } from '@/content/images'
 import { BRIEFS, institutionName } from '@/content/site'
 
 export const metadata: Metadata = {
@@ -27,19 +24,15 @@ export default function WorkPage() {
         </div>
       </header>
 
-      <PageHero name="work-monitor" position="58% 52%" alt="A monitor on a stone console showing two panels of options joined through a single gold-outlined step, in warm afternoon light." />
 
       <section className="room" style={{ paddingTop: 0 }} aria-label="Accomplishment briefs">
-        <div className="wrap">
+        {/* same column as the page heading above */}
+        <div className="wrap" style={{ maxWidth: '64rem' }}>
           <hr className="rule" style={{ marginBottom: 'clamp(3rem, 6vw, 5rem)' }} />
           <div className="work-list">
             {BRIEFS.map(b => {
-              const img = BRIEF_IMAGES[b.slug]
               return (
                 <article key={b.slug} className="work-item reveal">
-                  <Link href={`/work/${b.slug}`} className="work-item__art" tabIndex={-1} aria-hidden="true">
-                    <Image src={img.src} alt="" placeholder="blur" sizes="(max-width: 860px) 100vw, 55vw" style={{ objectPosition: img.position }} />
-                  </Link>
                   <div className="work-item__copy">
                     <p className="eyebrow">{b.n} — {b.domain}</p>
                     <h2 className="h2"><Link href={`/work/${b.slug}`} style={{ textDecoration: 'none' }}>{b.title}</Link></h2>

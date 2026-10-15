@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import PageHero from '@/components/PageHero'
 import Wordmark from '@/components/Wordmark'
 import { FRAMES } from '@/content/scene'
 import { EDUCATION, INSTITUTIONS, ROLES } from '@/content/site'
@@ -28,7 +27,6 @@ export default function ExperiencePage() {
         </div>
       </header>
 
-      <PageHero name="experience-office" position="64% 55%" alt="A walnut desk with a monitor and travertine sculpture by a window high above Manhattan, in late-afternoon sun." />
 
       <section className="room" style={{ paddingTop: 0 }} aria-label="Roles">
         <div className="wrap">
@@ -40,7 +38,7 @@ export default function ExperiencePage() {
                   {(() => { const art = FRAMES.find(f => f.id === r.institution)?.art; return art && (
                     <span className="career__art">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`${art}.webp`} alt="" width={480} height={480} loading="lazy" decoding="async" />
+                      <img src={`${art}.webp`} srcSet={`${art}.webp 480w, ${art}-960.webp 960w`} sizes="(max-width: 760px) min(100vw, 360px), 320px" alt="" width={480} height={480} loading="lazy" decoding="async" />
                     </span>
                   ) })()}
                   <Wordmark inst={INSTITUTIONS.find(i => i.key === r.institution)!} />
