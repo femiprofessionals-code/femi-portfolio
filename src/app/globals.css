@@ -963,3 +963,4 @@ html[data-time='night'] .room5 { --floor-light: rgba(14, 9, 5, .45); }
 .resume-request__field input:focus-visible { outline: 2px solid #9A7448; outline-offset: 2px; }
 .resume-request__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .resume-request--done { gap: .5rem; }
+.resume-request__opt { font-weight: 400; letter-spacing: .04em; text-transform: none; color: var(--stone); }
