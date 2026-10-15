@@ -945,3 +945,12 @@ html[data-time='night'] .room5 { --floor-light: rgba(14, 9, 5, .45); }
 
 /* Text-only cards (inner pages carry no interior photography) */
 .card--text { padding: 1.25rem 0 0; border-top: 1px solid var(--rule); }
+
+/* Résumé on request (passcode gate) */
+.resume-gate { display: grid; gap: 1.75rem; max-width: 40rem; }
+.resume-gate__form { display: grid; gap: .6rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.resume-gate__row { display: flex; flex-wrap: wrap; gap: .75rem; }
+.resume-gate__input { flex: 1 1 14rem; min-height: 48px; padding: .7rem 1rem; font: 500 1.05rem/1.2 var(--sans); letter-spacing: .12em; color: var(--ink);
+  background: var(--surface, #fff); border: 1px solid var(--rule); border-radius: 0; }
+.resume-gate__input:focus-visible { outline: 2px solid #9A7448; outline-offset: 2px; }
+.resume-gate__error { min-height: 1.4em; color: #8A2B1E; font-size: .95rem; }
