@@ -73,7 +73,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="room room--plaster" aria-label="Outside work">
+      <section id="outside-work" className="room room--plaster" aria-label="Outside work" style={{ scrollMarginTop: 'var(--nav-h)' }}>
         <div className="wrap split" style={{ alignItems: 'center' }}>
           <div className="frame reveal">
             <div className="frame__inner" style={{ aspectRatio: '1 / 1' }}>

@@ -742,6 +742,11 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 /* Artwork in the mats: a live layer, never painted into the room image */
 .room5__art { position: absolute; overflow: hidden; background: #d8cbb6; }
 .room5__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.room5__art--map { background: #e9dfcc; }
+.room5__art--map::after { box-shadow: none; }      /* the map carries its own frame; the wall shadow is in the room image */
+.room5__hang--map::before { display: none; }
+.room5__frame--map::before { content: ''; position: absolute; left: -10%; right: -10%; bottom: -4%; height: 34%; z-index: -1; background: radial-gradient(ellipse 52% 50% at 50% 56%, var(--cap-wash) 62%, transparent 100%); }
+.room5__frame--map { isolation: isolate; }
 .room5__art::after { content: ''; position: absolute; inset: 0; box-shadow: inset .14cqw .22cqw .38cqw rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(0, 0, 0, .14); pointer-events: none; }
 
 /* Wall text and captions exist only in the wall layout */
@@ -777,7 +782,7 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 
 /* Phones: the pictures and bench up close; the scene is positioned inside a fixed window */
 @media (max-width: 599px) {
-  .room5__stage { overflow: hidden; aspect-ratio: 610 / 450; }
+  .room5__stage { overflow: hidden; aspect-ratio: 676 / 499; }
   .room5__scene { position: absolute; width: calc(100% * 1536 / var(--crop-w)); left: calc(-100% * var(--crop-x) / var(--crop-w)); top: calc(-100% * var(--crop-y) / var(--crop-h)); }
   .home-actions__row { flex-direction: column; }
   .home-actions__row .btn { justify-content: space-between; width: 100%; }

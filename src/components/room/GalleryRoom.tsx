@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { FRAMES, IDENTITY, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from '@/content/scene'
+import { FRAMES, IDENTITY, MAP, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from '@/content/scene'
 import { PERSON } from '@/content/site'
 import { LOAD_ACTIVE_LIGHT } from '@/lib/roomLights'
 import RoomLights from './RoomLights'
@@ -8,8 +8,8 @@ import RoomSky from './RoomSky'
 
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
-/** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
-const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 528px) and (min-aspect-ratio: 4/3) max(88vw, calc(100svh * 1.5)), 100vw'
+/** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 228vw, wall = contain-fit, else full width. */
+const SIZES = '(max-width: 599px) 228vw, (min-width: 860px) and (min-height: 528px) and (min-aspect-ratio: 4/3) max(88vw, calc(100svh * 1.5)), 100vw'
 
 /**
  * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
@@ -50,6 +50,12 @@ export default function GalleryRoom() {
               ))}
             </div>
           ))}
+          <div className="room5__art room5__art--map" style={{ ...rectStyle(MAP.mat), ['--art' as string]: `url(/art/lit/morning-map.webp)` }} aria-hidden="true">
+            {ROOM_MODES.map(m => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-map.webp`} alt="" width={480} height={311} decoding="async" />
+            ))}
+          </div>
           <div className="room5__identity" style={rectStyle(ZONES.identity)}>
             <p className="room5__eyebrow">{IDENTITY.positioning}</p>
             <h1 className="room5__name">{PERSON.name}</h1>
@@ -64,11 +70,19 @@ export default function GalleryRoom() {
               </Link>
             ))}
           </nav>
+          <div className="room5__hang room5__hang--map">
+            <Link href={MAP.href} className="room5__frame room5__frame--map" style={rectStyle(MAP.hitbox)}>
+              <span className="room5__company">{MAP.title}</span>
+              <span className="room5__dates" aria-hidden="true">{MAP.note}</span>
+              <span className="sr-only">: {MAP.label}</span>
+            </Link>
+          </div>
           {/* Tablet/phone layouts: the paintings stay clickable. Keyboard and screen-reader users use the labelled list below. */}
           <div className="room5__touch" aria-hidden="true">
             {FRAMES.map(f => (
               <Link key={f.id} href={f.href} tabIndex={-1} className="room5__tap" style={rectStyle(f.hitbox)} />
             ))}
+            <Link href={MAP.href} tabIndex={-1} className="room5__tap" style={rectStyle(MAP.hitbox)} />
           </div>
         </div>
         <script dangerouslySetInnerHTML={{ __html: LOAD_ACTIVE_LIGHT }} />

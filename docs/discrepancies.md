@@ -156,3 +156,6 @@ Branch B:src/content/site.ts#L47 and #L155 already display the spec version.
 **D-24 🟡 Main's website shows no company logos**
 - The work cards use initials only (M:src/app/page.tsx#L41-L50).
 - Earlier, Femi said "the earlier website has the logos". If so, **the live site may differ from `main`** — one more reason to verify the live pages.
+
+## D-25 Travel map wording
+Femi's supplied map artwork reads "30 countries visited · 60+ cities explored". The website's Travel page says "30+ countries · 60+ cities", and About says "more than thirty countries and counting". The wall caption and link text use the website wording. The artwork's own text is unchanged, and it's too small to read in the room. **Ask Femi** which count is current.
