@@ -10,7 +10,7 @@ import Arrow from '@/components/Arrow'
 const TO = 'femi@femifalade.com'
 const ENDPOINT = `https://formsubmit.co/ajax/${TO}`
 
-type State = 'idle' | 'open' | 'sending' | 'sent' | 'error'
+type State = 'idle' | 'open' | 'sending' | 'sent' | 'error' | 'setup'
 
 export default function RequestAccess() {
   const [state, setState] = useState<State>('idle')
@@ -32,8 +32,11 @@ export default function RequestAccess() {
           _subject: `Resume request from ${d.get('name')}`, _replyto: d.get('email'), _template: 'table', _captcha: 'false',
         }),
       })
-      const json = await res.json().catch(() => ({}))
-      setState(res.ok && String((json as { success?: unknown }).success) !== 'false' ? 'sent' : 'error')
+      const json = (await res.json().catch(() => ({}))) as { success?: unknown; message?: unknown }
+      const ok = res.ok && String(json.success) !== 'false'
+      if (!ok) console.warn('Resume request: FormSubmit replied', res.status, json)   // for troubleshooting
+      // FormSubmit holds every submission until the address owner clicks "Activate" in its one-time email
+      setState(ok ? 'sent' : /activat/i.test(String(json.message || '')) ? 'setup' : 'error')
     } catch { setState('error') }
   }
 
@@ -69,6 +72,11 @@ export default function RequestAccess() {
       <div className="btn-row">
         <button type="submit" className="btn btn--solid" disabled={state === 'sending'}>{state === 'sending' ? 'Sending…' : <>Send request <Arrow /></>}</button>
       </div>
+      {state === 'setup' && (
+        <p className="resume-gate__error" role="alert">
+          Requests are being switched on. For now, please email <a href={`mailto:${TO}?subject=${encodeURIComponent('Resume request')}`}>{TO}</a> with your name and phone number.
+        </p>
+      )}
       {state === 'error' && (
         <p className="resume-gate__error" role="alert">
           The request couldn’t be sent just now. Please try again, or email <a href={`mailto:${TO}?subject=${encodeURIComponent('Resume request')}`}>{TO}</a>.
