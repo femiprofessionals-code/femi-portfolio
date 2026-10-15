@@ -307,10 +307,12 @@ a { color: inherit; }
 .career__row { display: grid; grid-template-columns: minmax(200px, 1fr) 2fr; gap: clamp(1.5rem, 5vw, 5rem); padding: clamp(2.5rem, 5vw, 4rem) 0; border-bottom: 1px solid var(--rule); }
 .career__mark { display: grid; gap: .6rem; align-content: start; }
 /* The Home painting for each company, hung as a small framed picture: dark frame, cream mat */
-.career__art { display: block; width: clamp(120px, 12vw, 168px); aspect-ratio: 1; padding: clamp(10px, 1vw, 14px); margin-bottom: .9rem;
-  background: #efe6d6; border: clamp(4px, .45vw, 6px) solid #2a221b; box-shadow: 0 10px 24px -12px rgba(30, 20, 10, .45), inset 0 0 0 1px rgba(0, 0, 0, .08); }
-.career__art img { display: block; width: 100%; height: 100%; object-fit: cover; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
-.career__body { display: grid; gap: 1rem; }
+.career__art { display: block; justify-self: start; align-self: start; width: clamp(220px, 24vw, 320px); max-width: 100%; padding: clamp(12px, 1.3vw, 18px); margin-bottom: 1.25rem;
+  background: #efe6d6; border: clamp(5px, .5vw, 8px) solid #2a221b; box-shadow: 0 14px 30px -14px rgba(30, 20, 10, .55), inset 0 0 0 1px rgba(0, 0, 0, .08); }
+/* the whole painting at its own proportions: never cropped */
+.career__art img { display: block; width: 100%; height: auto; object-fit: contain; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+@media (max-width: 760px) { .career__art { width: min(100%, 360px); } }
+.career__body { display: grid; gap: 1rem; align-content: start; }
 .career__title { font-family: var(--display); font-weight: 500; font-size: clamp(1.5rem, 2.2vw, 2rem); color: var(--ink); line-height: 1.2; }
 .career__outcome { padding-left: 1.25rem; border-left: 2px solid var(--bronze); font-family: var(--serif); font-size: 1.2rem; color: var(--ink); line-height: 1.45; }
 @media (max-width: 760px) { .career__row { grid-template-columns: 1fr; } }

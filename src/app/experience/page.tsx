@@ -40,7 +40,7 @@ export default function ExperiencePage() {
                   {(() => { const art = FRAMES.find(f => f.id === r.institution)?.art; return art && (
                     <span className="career__art">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`${art}.webp`} alt="" width={480} height={480} loading="lazy" decoding="async" />
+                      <img src={`${art}.webp`} srcSet={`${art}.webp 480w, ${art}-960.webp 960w`} sizes="(max-width: 760px) min(100vw, 360px), 320px" alt="" width={480} height={480} loading="lazy" decoding="async" />
                     </span>
                   ) })()}
                   <Wordmark inst={INSTITUTIONS.find(i => i.key === r.institution)!} />
