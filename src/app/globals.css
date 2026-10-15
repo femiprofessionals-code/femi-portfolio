@@ -742,8 +742,6 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 /* Artwork in the mats: a live layer, never painted into the room image */
 .room5__art { position: absolute; overflow: hidden; background: #d8cbb6; }
 .room5__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.room5__art--map { background: #e9dfcc; }
-.room5__art--map::after { box-shadow: none; }      /* the map carries its own frame; the wall shadow is in the room image */
 .room5__hang--map::before { display: none; }
 .room5__frame--map::before { content: none; }
 /* the low wall sits in the bench's shade and the sun streaks, so this caption always gets a soft wash */
@@ -770,23 +768,10 @@ html[data-time='golden'] .room5__eyebrow { text-shadow: 0 0 .2cqw rgba(255, 240,
 .room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 228, 190, .45) 0%, rgba(255, 220, 176, .2) 46%, rgba(255, 220, 176, 0) 78%); }
 html[data-time='night'] .room5__glow { background: radial-gradient(ellipse 50% 84% at 50% 0%, rgba(255, 196, 128, .7) 0%, rgba(255, 184, 110, .34) 40%, rgba(255, 180, 100, .09) 62%, rgba(255, 180, 100, 0) 78%); }
 html[data-time='night'] .room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 206, 150, .5) 0%, rgba(255, 196, 136, .22) 46%, rgba(255, 196, 136, 0) 78%); }
-.room5__art img { transition: filter .7s cubic-bezier(.2, .7, .2, 1); }
-.room5__glare { position: absolute; inset: -20% -60%; z-index: 1; pointer-events: none; opacity: 0;
-  background: linear-gradient(112deg, transparent 36%, rgba(255, 250, 240, .14) 44%, rgba(255, 255, 255, .4) 50%, rgba(255, 250, 240, .14) 56%, transparent 64%);
-  transform: translateX(-45%); transition: transform 1.4s cubic-bezier(.25, .6, .2, 1), opacity .5s ease; }
 .room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__glow[data-frame='trowe'] { opacity: 1; }
-.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__art[data-frame='trowe'] img { filter: brightness(1.13) saturate(1.06); }
-.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__art[data-frame='trowe'] .room5__glare { opacity: 1; transform: translateX(45%); }
 .room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__glow[data-frame='carlyle'] { opacity: 1; }
-.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__art[data-frame='carlyle'] img { filter: brightness(1.13) saturate(1.06); }
-.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__art[data-frame='carlyle'] .room5__glare { opacity: 1; transform: translateX(45%); }
 .room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__glow[data-frame='gs'] { opacity: 1; }
-.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__art[data-frame='gs'] img { filter: brightness(1.13) saturate(1.06); }
-.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__art[data-frame='gs'] .room5__glare { opacity: 1; transform: translateX(45%); }
 .room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__glow[data-frame='map'] { opacity: 1; }
-.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__art[data-frame='map'] img { filter: brightness(1.13) saturate(1.06); }
-.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__art[data-frame='map'] .room5__glare { opacity: 1; transform: translateX(45%); }
-@media (prefers-reduced-motion: reduce) { .room5__glare { display: none; } .room5__glow, .room5__art img { transition: none; } }
 .room5__art::after { content: ''; position: absolute; inset: 0; box-shadow: inset .14cqw .22cqw .38cqw rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(0, 0, 0, .14); pointer-events: none; }
 
 /* Wall text and captions exist only in the wall layout */
@@ -823,7 +808,7 @@ html[data-time='night'] .room5__glow--soft { background: radial-gradient(ellipse
 
 /* Phones: the pictures and bench up close; the scene is positioned inside a fixed window */
 @media (max-width: 599px) {
-  .room5__stage { overflow: hidden; aspect-ratio: 676 / 499; }
+  .room5__stage { overflow: hidden; aspect-ratio: 610 / 450; }
   .room5__scene { position: absolute; width: calc(100% * 1536 / var(--crop-w)); left: calc(-100% * var(--crop-x) / var(--crop-w)); top: calc(-100% * var(--crop-y) / var(--crop-h)); }
   .home-actions__row { flex-direction: column; }
   .home-actions__row .btn { justify-content: space-between; width: 100%; }
@@ -925,3 +910,39 @@ html[data-time='golden'] .room5__dates, html[data-time='night'] .room5__hang:not
 html[data-time='golden'] .room5 { --line-light: rgba(255, 236, 208, .55); }
 html[data-time='night'] .room5 { --line-light: rgba(255, 226, 186, .55); }
 html[data-time='golden'] .room5__eyebrow { --line-light: rgba(255, 236, 208, .3); }
+
+/* ── Live frames (DL-50): each frame is an object over a frameless wall; hover or focus turns it to show its back ── */
+.room5__obj { position: absolute; z-index: 1; perspective: 42cqw; pointer-events: none; }   /* the link above it takes the pointer */
+.room5__flip { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1.05s cubic-bezier(.22, .74, .22, 1); }
+.room5__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.room5__face--front { box-shadow: var(--frame-shadow); }
+.room5__fimg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.room5__obj .room5__art { position: absolute; }
+/* the back of a framed picture: the dark wooden frame, kraft-paper backing, a hanging wire and a gallery label */
+.room5__face--back { transform: rotateY(180deg); background: #2b2018; box-shadow: var(--frame-shadow); padding: 3.2%;
+  display: flex; }
+.room5__face--back::before { content: ''; position: absolute; inset: 3.2%;
+  background: radial-gradient(120% 90% at 30% 20%, #c7a77b 0%, #b8956a 55%, #a5835a 100%); box-shadow: inset 0 0 .5cqw rgba(60, 35, 10, .35); }
+.room5__face--back::after { content: ''; position: absolute; left: 14%; right: 14%; top: 15%; height: 9%;
+  border-top: 1px solid rgba(70, 60, 50, .55); border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+.room5__label { position: relative; margin: auto 9% 12%; width: 100%; padding: 7% 7% 6%; background: #f6f1e6; box-shadow: 0 .05cqw .15cqw rgba(40, 25, 10, .3);
+  display: flex; flex-direction: column; gap: .25cqw; color: #1A120B; text-align: left; }
+.room5__label-co { font-family: var(--display); font-weight: 600; font-size: .98cqw; line-height: 1.1; }
+.room5__label-role { font-family: var(--serif); font-size: .6cqw; line-height: 1.25; }
+.room5__label-dates { font: 500 .5cqw/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+.room5__label-cta { margin-top: .2cqw; font: 600 .5cqw/1.3 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: #7A5A32; }
+.room5 { --frame-shadow: .18cqw .32cqw .55cqw rgba(60, 38, 16, .32), .05cqw .08cqw .12cqw rgba(40, 25, 10, .35); }
+html[data-time='golden'] .room5 { --frame-shadow: .3cqw .36cqw .6cqw rgba(70, 35, 8, .38), .06cqw .1cqw .14cqw rgba(50, 25, 8, .4); }
+html[data-time='night'] .room5 { --frame-shadow: 0 .45cqw .7cqw rgba(10, 6, 2, .5), 0 .1cqw .15cqw rgba(10, 6, 2, .45); }
+html:not(.js) .room5__face--front { background: center / 100% 100% var(--frame); }
+.room5__glow { z-index: 2; }
+.room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__obj[data-frame='trowe'] .room5__flip { transform: rotateY(180deg); }
+.room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__obj[data-frame='carlyle'] .room5__flip { transform: rotateY(180deg); }
+.room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__obj[data-frame='gs'] .room5__flip { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce) { .room5__flip { transition: none; } .room5__glow { transition: none; } }
+/* The travel caption sits on the floor beside the frame's contact shadow and the rug edge: same soft line light, all lights */
+.room5__hang--map .room5__company, .room5__hang--map .room5__dates { padding: .3em 1em; margin: -.3em -1em; border-radius: 50%;
+  background: radial-gradient(closest-side, var(--floor-light) 0%, var(--floor-light) 50%, transparent 100%); }
+.room5 { --floor-light: rgba(248, 240, 226, .78); }
+html[data-time='golden'] .room5 { --floor-light: rgba(255, 234, 204, .78); }
+html[data-time='night'] .room5 { --floor-light: rgba(14, 9, 5, .45); }

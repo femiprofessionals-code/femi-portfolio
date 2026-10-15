@@ -13,7 +13,7 @@ type Rect = [x: number, y: number, w: number, h: number]
 /** Wall text block (above the picture lights) and the slice phones see (frames + bench). */
 export const ZONES: { identity: Rect; mobileCrop: Rect } = {
   identity: [448, 124, 600, 186],   // centred on the three paintings (x 502-994 → 748)
-  mobileCrop: [472, 250, 676, 499],   // paintings, travel map and bench
+  mobileCrop: [440, 270, 610, 450],
 }
 
 /** Identity on the wall. Positioning is Femi's selected emphasis; the line is a synthesis of femifalade.com. */
@@ -38,26 +38,27 @@ export type Frame = {
   hitbox: Rect
   /** Where its picture light falls when the painting is hovered (lamp at y 318-344, frame 343-494). */
   glow: Rect
+  /** The whole frame: a live object (public/room/v5/frames) over the frameless wall, so it can turn on hover. */
+  outer: Rect
 }
 
 /** Hung left → right in career order. */
 export const FRAMES: Frame[] = [
-  { id: 'trowe', company: 'T. Rowe Price', role: 'Analyst, Central Operations', dates: 'Oct 2019 – Jun 2021', years: '2019 – 2021', href: '/experience#t-rowe-price', art: '/art/trowe-painting', mat: [526, 368, 99, 102], hitbox: [498, 339, 156, 247], glow: [456, 330, 240, 200] },
-  { id: 'carlyle', company: 'The Carlyle Group', role: 'Associate, EMEA Fund Operations', dates: 'Jun 2021 – Nov 2023', years: '2021 – 2023', href: '/experience#the-carlyle-group', art: '/art/carlyle-painting', mat: [698, 368, 100, 102], hitbox: [670, 339, 156, 247], glow: [628, 330, 240, 200] },
-  { id: 'gs', company: 'Goldman Sachs', role: 'Senior Associate, Global Banking and Markets Transformation', dates: 'Nov 2023 – Present', years: '2023 – Present', href: '/experience#goldman-sachs', art: '/art/gs-painting', mat: [870, 368, 100, 102], hitbox: [841, 339, 157, 247], glow: [799, 330, 240, 200] },
+  { id: 'trowe', company: 'T. Rowe Price', role: 'Analyst, Central Operations', dates: 'Oct 2019 – Jun 2021', years: '2019 – 2021', href: '/experience#t-rowe-price', art: '/art/trowe-painting', mat: [526, 368, 99, 102], hitbox: [498, 339, 156, 247], glow: [456, 330, 240, 200], outer: [502, 343, 148, 151] },
+  { id: 'carlyle', company: 'The Carlyle Group', role: 'Associate, EMEA Fund Operations', dates: 'Jun 2021 – Nov 2023', years: '2021 – 2023', href: '/experience#the-carlyle-group', art: '/art/carlyle-painting', mat: [698, 368, 100, 102], hitbox: [670, 339, 156, 247], glow: [628, 330, 240, 200], outer: [674, 343, 148, 151] },
+  { id: 'gs', company: 'Goldman Sachs', role: 'Senior Associate, Global Banking and Markets Transformation', dates: 'Nov 2023 – Present', years: '2023 – Present', href: '/experience#goldman-sachs', art: '/art/gs-painting', mat: [870, 368, 100, 102], hitbox: [841, 339, 157, 247], glow: [799, 330, 240, 200], outer: [845, 343, 149, 151] },
 ]
 
-/** The travel map, hung low on the widened wall beside the bench's empty end (Femi's supplied artwork; docs/decision-log.md DL-46). */
+/** The travel map, propped against the olive tree's planter (baked into the room in each light; docs/decision-log.md DL-50). */
 export const MAP = {
   title: 'Travel',
   /** Femi's figures (also the website's Travel page): 30+ countries, 60+ cities. */
   note: '30+ countries',
   label: '30+ countries and 60+ cities',
   href: '/about#outside-work',
-  art: '/art/map',
-  mat: [1003, 548, 124, 80] as Rect,
-  hitbox: [995, 540, 142, 142] as Rect,
-  glow: [975, 520, 180, 136] as Rect,
+  /** The leaning frame plus its caption on the floor below. */
+  hitbox: [214, 658, 130, 120] as Rect,
+  glow: [196, 636, 166, 118] as Rect,
 }
 
 export const pct = (v: number, of: number) => `${(v / of) * 100}%`

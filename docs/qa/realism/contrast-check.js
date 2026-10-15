@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
   for (const [w, h] of [[2560, 1080], [1920, 1080], [1440, 900], [1366, 657]]) for (const mode of ['morning', 'golden', 'night']) {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
     await ctx.addInitScript(m => localStorage.setItem('ff-time', m), mode);
-    const p = await ctx.newPage(); await p.goto('http://localhost:3130/', { waitUntil: 'networkidle' }); await p.waitForTimeout(1800);
+    const p = await ctx.newPage(); await p.goto('http://localhost:3130/', { waitUntil: 'networkidle' }); await p.waitForTimeout(1800); await p.waitForFunction(() => [...document.querySelectorAll('img.room5__layer')].some(i => i.complete && i.naturalWidth > 0 && getComputedStyle(i).opacity === '1'), null, { timeout: 15000 }); await p.waitForTimeout(400);
     await p.evaluate(() => document.querySelector('.room5__sky')?.remove());   // measure on the still (the sky never sits behind text)
     const els = await p.$$('.room5__eyebrow, .room5__name, .room5__intro, .room5__company, .room5__dates');
     const row = [];

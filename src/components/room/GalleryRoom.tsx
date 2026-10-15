@@ -8,8 +8,8 @@ import RoomSky from './RoomSky'
 
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
-/** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 228vw, wall = contain-fit, else full width. */
-const SIZES = '(max-width: 599px) 228vw, (min-width: 860px) and (min-height: 528px) and (min-aspect-ratio: 4/3) max(88vw, calc(100svh * 1.5)), 100vw'
+/** Rendered scene width per layout (see .room5 in globals.css): crop ≈ 252vw, wall = contain-fit, else full width. */
+const SIZES = '(max-width: 599px) 252vw, (min-width: 860px) and (min-height: 528px) and (min-aspect-ratio: 4/3) max(88vw, calc(100svh * 1.5)), 100vw'
 
 /**
  * Homepage room: one scene at the image's intrinsic 3:2 ratio. Layouts, chosen in CSS:
@@ -41,23 +41,38 @@ export default function GalleryRoom() {
           ))}
           <p className="sr-only">{ROOM_DESCRIPTION}</p>
           <RoomSky />
-          {FRAMES.map(f => (
-            <div key={f.id} className="room5__art" data-frame={f.id} style={{ ...rectStyle(f.mat), ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }} aria-hidden="true">
-              {/* Each painting lit by that light's own lamp and daylight (public/art/lit, docs/decision-log.md DL-31) */}
-              {ROOM_MODES.map(m => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-${f.id}.webp`} alt="" width={480} height={480} decoding="async" />
-              ))}
-              <i className="room5__glare" />
-            </div>
-          ))}
-          <div className="room5__art room5__art--map" data-frame="map" style={{ ...rectStyle(MAP.mat), ['--art' as string]: `url(/art/lit/morning-map.webp)` }} aria-hidden="true">
-            {ROOM_MODES.map(m => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-map.webp`} alt="" width={480} height={311} decoding="async" />
-            ))}
-            <i className="room5__glare" />
-          </div>
+          {/* The frames are live objects over a frameless wall (docs/asset-lock/scripts/frames.py): each turns on hover to show
+              its back, with the gallery label. Paintings are lit by each light's own lamp and daylight (DL-31). */}
+          {FRAMES.map(f => {
+            const [ox, oy, ow, oh] = f.outer, [mx, my, mw, mh] = f.mat
+            const inner = { left: `${((mx - ox) / ow) * 100}%`, top: `${((my - oy) / oh) * 100}%`, width: `${(mw / ow) * 100}%`, height: `${(mh / oh) * 100}%` }
+            return (
+              <div key={f.id} className="room5__obj" data-frame={f.id} style={{ ...rectStyle(f.outer), ['--frame' as string]: `url(${ROOM_BASE}/frames/frame-morning-${f.id}.webp)` }} aria-hidden="true">
+                <div className="room5__flip">
+                  <div className="room5__face room5__face--front">
+                    {ROOM_MODES.map(m => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img key={m} className="room5__fimg" data-light={m} suppressHydrationWarning data-src={`${ROOM_BASE}/frames/frame-${m}-${f.id}.webp`} alt="" width={296} height={302} decoding="async" />
+                    ))}
+                    <div className="room5__art" data-frame={f.id} style={{ ...inner, ['--art' as string]: `url(/art/lit/morning-${f.id}.webp)` }}>
+                      {ROOM_MODES.map(m => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={m} data-light={m} suppressHydrationWarning data-src={`/art/lit/${m}-${f.id}.webp`} alt="" width={480} height={480} decoding="async" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="room5__face room5__face--back">
+                    <div className="room5__label">
+                      <span className="room5__label-co">{f.company}</span>
+                      <span className="room5__label-role">{f.role}</span>
+                      <span className="room5__label-dates">{f.dates}</span>
+                      <span className="room5__label-cta">View experience →</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
           {/* Hover: the picture light warms up over the painting and the wall around it */}
           {[...FRAMES.map(f => ({ id: f.id, glow: f.glow })), { id: 'map', glow: MAP.glow }].map(g => (
             <i key={g.id} className={`room5__glow${g.id === 'map' ? ' room5__glow--soft' : ''}`} data-frame={g.id} style={rectStyle(g.glow)} aria-hidden="true" />
