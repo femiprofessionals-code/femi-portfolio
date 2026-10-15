@@ -9,7 +9,7 @@ export default function HomeView() {
       <nav className="home-actions" aria-label="Next steps">
         <div className="wrap home-actions__row">
           <Link href="/work" className="btn btn--bronze">View work <Arrow /></Link>
-          <Link href="/resume" className="btn btn--frame">Résumé</Link>
+          <Link href="/resume" className="btn btn--frame">Resume</Link>
           <Link href="/contact" className="btn btn--frame">Contact</Link>
         </div>
       </nav>
