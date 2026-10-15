@@ -82,7 +82,7 @@ export default function TimeSelector() {
 
   const current = STAGES.find(s => s.id === stage)!
   const options: { id: Mode; label: string; hint?: string }[] = [
-    { id: 'auto', label: 'New York time', hint: clock ? `Now ${clock}` : 'Follows the city' },
+    { id: 'auto', label: 'New York Time', hint: clock || 'Follows the city' },
     ...STAGES.map(s => ({ id: s.id as Mode, label: s.label })),
   ]
 
@@ -94,7 +94,7 @@ export default function TimeSelector() {
         className="tod__toggle"
         aria-expanded={open}
         aria-controls="tod-menu"
-        aria-label={`Light in the gallery: ${current.label}${mode === 'auto' ? ', following New York time' : ', chosen manually'}`}
+        aria-label={`Light in the gallery: ${current.label}${mode === 'auto' ? ', following New York Time' : ', chosen manually'}`}
         onClick={() => setOpen(o => !o)}
       >
         <Icon id={stage} />

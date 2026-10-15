@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import Arrow from '@/components/Arrow'
 
 /**
- * Resume access request: name, email and phone, delivered to Femi's inbox by FormSubmit (formsubmit.co), a form-to-email
+ * Resume access request: name, email, optional company and phone, delivered to Femi's inbox by FormSubmit (formsubmit.co), a form-to-email
  * service that needs no account or key. The very first submission sends FormSubmit's one-time "Activate" email to the
  * address below; once Femi clicks it, every request arrives as a formatted email.
  */
@@ -28,7 +28,7 @@ export default function RequestAccess() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          Name: d.get('name'), Email: d.get('email'), Phone: d.get('phone'),
+          Name: d.get('name'), Email: d.get('email'), Company: String(d.get('company') || '').trim() || '—', Phone: d.get('phone'),
           _subject: `Resume request from ${d.get('name')}`, _replyto: d.get('email'), _template: 'table', _captcha: 'false',
         }),
       })
@@ -63,6 +63,10 @@ export default function RequestAccess() {
       <div className="resume-request__field">
         <label htmlFor="req-email">Email</label>
         <input id="req-email" name="email" type="email" autoComplete="email" required maxLength={160} />
+      </div>
+      <div className="resume-request__field">
+        <label htmlFor="req-company">Company <span className="resume-request__opt">(optional)</span></label>
+        <input id="req-company" name="company" type="text" autoComplete="organization" maxLength={160} />
       </div>
       <div className="resume-request__field">
         <label htmlFor="req-phone">Phone number</label>
