@@ -1,0 +1,119 @@
+{
+ "loading": {
+  "atLoad": [
+   {
+    "f": "v5/edge-left-night.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/edge-right-night.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/night-1536.webp",
+    "kb": 211
+   },
+   {
+    "f": "lit/night-trowe.webp",
+    "kb": 69
+   },
+   {
+    "f": "lit/night-gs.webp",
+    "kb": 69
+   },
+   {
+    "f": "lit/night-carlyle.webp",
+    "kb": 51
+   }
+  ],
+  "afterIdle": [
+   {
+    "f": "v5/edge-left-night.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/edge-right-night.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/night-1536.webp",
+    "kb": 211
+   },
+   {
+    "f": "lit/night-trowe.webp",
+    "kb": 69
+   },
+   {
+    "f": "lit/night-gs.webp",
+    "kb": 69
+   },
+   {
+    "f": "lit/night-carlyle.webp",
+    "kb": 51
+   },
+   {
+    "f": "v5/edge-left-morning.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/edge-right-morning.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/morning-1536.webp",
+    "kb": 249
+   },
+   {
+    "f": "lit/morning-trowe.webp",
+    "kb": 81
+   },
+   {
+    "f": "lit/morning-carlyle.webp",
+    "kb": 59
+   },
+   {
+    "f": "lit/morning-gs.webp",
+    "kb": 77
+   },
+   {
+    "f": "v5/edge-left-golden.webp",
+    "kb": 2
+   },
+   {
+    "f": "v5/edge-right-golden.webp",
+    "kb": 3
+   },
+   {
+    "f": "v5/golden-1536.webp",
+    "kb": 246
+   },
+   {
+    "f": "lit/golden-trowe.webp",
+    "kb": 69
+   },
+   {
+    "f": "lit/golden-carlyle.webp",
+    "kb": 50
+   },
+   {
+    "f": "lit/golden-gs.webp",
+    "kb": 66
+   }
+  ]
+ },
+ "selector": {
+  "focusAfterOpen": "Morning7am – 3pm pressed=true",
+  "onNight": "Night7pm – 7am",
+  "midOpacity": "morning:0.04 golden:0.00 night:0.96",
+  "after": {
+   "time": "night",
+   "focus": "tod__toggle",
+   "label": "Light in the gallery: Night, chosen manually",
+   "pressed": "New York timeNow =false Morning=false Golden hour=false Night=true"
+  },
+  "escFocus": "tod__toggle menuHidden=true",
+  "geometryUnchangedMid": true,
+  "geometryUnchangedEnd": true
+ },
+ "reducedMotionTransition": "1e-05s"
+}

@@ -1,0 +1,110 @@
+{
+  "source": "https://www.femifalade.com/",
+  "retrieved": "2026-10-14",
+  "policy": "Website is the requested content source. These are concise summaries, not independent verification. Do not add memory-only credentials. Refresh live content in Stage 1.",
+  "identity": {
+    "name": "Femi Falade",
+    "positioning": "Strategic Transformation",
+    "positioning_status": "User-selected emphasis",
+    "summary": "Transformation, financial operations, and AI-enabled workflows across institutional finance.",
+    "summary_status": "Proposed synthesis of website content"
+  },
+  "home": {
+    "companies": [
+      "T. Rowe Price",
+      "The Carlyle Group",
+      "Goldman Sachs"
+    ],
+    "actions": [
+      "View work",
+      "Download r\u00e9sum\u00e9",
+      "Contact"
+    ],
+    "location": "New York"
+  },
+  "about": {
+    "timeline": [
+      {
+        "company": "Goldman Sachs",
+        "role": "Senior Associate, Global Banking and Markets Transformation",
+        "dates": "Nov 2023\u2013Present"
+      },
+      {
+        "company": "The Carlyle Group",
+        "role": "Associate, EMEA Fund Operations",
+        "dates": "Jun 2021\u2013Nov 2023"
+      },
+      {
+        "company": "T. Rowe Price",
+        "role": "Analyst, Central Operations",
+        "dates": "Oct 2019\u2013Jun 2021"
+      }
+    ],
+    "education": "B.S. Finance, Morgan State University",
+    "principles": [
+      "Precision",
+      "Speed with rigor",
+      "Durable handoffs",
+      "AI used in daily work"
+    ],
+    "interests": null,
+    "interests_status": "Not supplied on retrieved pages; ask user rather than invent."
+  },
+  "work": {
+    "projects": [
+      {
+        "company": "Goldman Sachs",
+        "title": "Claude AI Workflow Deployment",
+        "website_summary": "AI-assisted review workflows for 60 team members; website reports a 60% cycle-time reduction."
+      },
+      {
+        "company": "Goldman Sachs",
+        "title": "Entity Migration",
+        "website_summary": "Cross-functional legal-entity migration involving 31 trading desks.",
+        "metric_status": "HOLD: website calls $580M assets migrated; prior user context gives annualized funding-cost savings. Do not publish numerical interpretation until clarified."
+      },
+      {
+        "company": "Goldman Sachs",
+        "title": "CFTC Regulatory Governance",
+        "website_summary": "Website describes a framework across ten departments delivered in thirty days."
+      },
+      {
+        "company": "The Carlyle Group",
+        "title": "Salesforce CRM, EMEA Funds",
+        "website_summary": "CRM architecture, investor workflows and team training."
+      },
+      {
+        "company": "The Carlyle Group",
+        "title": "Investor Onboarding Redesign",
+        "website_summary": "Streamlined investor onboarding supporting approximately 27 annual transactions."
+      },
+      {
+        "company": "T. Rowe Price",
+        "title": "Central Operations",
+        "website_summary": "Settlement, reconciliation and coordination across investment platforms."
+      }
+    ]
+  },
+  "services": {
+    "categories": [
+      "Regulatory",
+      "Transformation",
+      "AI and Tooling",
+      "Advisory"
+    ],
+    "status": "Website categories. Retrieve each tab before drafting detail; search extraction exposed regulatory tab only."
+  },
+  "contact": {
+    "email": "femi@femifalade.com",
+    "channels": [
+      "Email",
+      "LinkedIn",
+      "Calendly"
+    ],
+    "link_policy": "Extract exact existing destinations from website or repo; do not guess URLs.",
+    "engagements": "Website describes select consulting engagements in financial services, fintech and AI-adjacent infrastructure."
+  },
+  "private_projects": {
+    "status": "Website describes three platforms in development. Keep details restricted as existing site does; no invented screenshots or outcomes."
+  }
+}

@@ -1,0 +1,276 @@
+{
+ "note": "All coordinates are source px of the 1536x1024 master (x, y, w, h). Overlays must be positioned as % of the rendered scene box, which keeps the image at its intrinsic 3:2 ratio (no cover-cropping on desktop).",
+ "image": {
+  "w": 1536,
+  "h": 1024,
+  "source": "docs/reference/portfolio-pack/assets/room-master-morning.png",
+  "source_sha256": "cf276d3e182e09c9a152fe123dabc56036e3dda4bf52a1a7b4931695c77c0959",
+  "modes": {
+   "morning": "/room/v5/morning-{1536,2048,3072}.webp",
+   "golden": "/room/v5/golden-{1536,2048,3072}.webp",
+   "night": "/room/v5/night-{1536,2048,3072}.webp"
+  }
+ },
+ "alignment": "golden and night share the master geometry within 0.6 px (patch ECC on 13 regions) \u2014 crossfade the real images; no warping",
+ "frames": [
+  {
+   "id": "trowe",
+   "company": "T. Rowe Price",
+   "outer": [
+    502,
+    343,
+    148,
+    151
+   ],
+   "mat": [
+    526,
+    368,
+    99,
+    102
+   ],
+   "lamp": [
+    516,
+    318,
+    119,
+    26
+   ],
+   "hitbox": [
+    498,
+    339,
+    156,
+    247
+   ]
+  },
+  {
+   "id": "carlyle",
+   "company": "The Carlyle Group",
+   "outer": [
+    674,
+    343,
+    148,
+    151
+   ],
+   "mat": [
+    698,
+    368,
+    100,
+    102
+   ],
+   "lamp": [
+    688,
+    318,
+    119,
+    26
+   ],
+   "hitbox": [
+    670,
+    339,
+    156,
+    247
+   ]
+  },
+  {
+   "id": "gs",
+   "company": "Goldman Sachs",
+   "outer": [
+    845,
+    343,
+    149,
+    151
+   ],
+   "mat": [
+    870,
+    368,
+    100,
+    102
+   ],
+   "lamp": [
+    859,
+    318,
+    119,
+    26
+   ],
+   "hitbox": [
+    841,
+    339,
+    157,
+    247
+   ]
+  }
+ ],
+ "zones": {
+  "wall": [
+   462,
+   112,
+   568,
+   578
+  ],
+  "identity": [
+   474,
+   150,
+   544,
+   158
+  ],
+  "captions": [
+   490,
+   498,
+   520,
+   88
+  ],
+  "mobile_crop": [
+   440,
+   270,
+   610,
+   450
+  ]
+ },
+ "windows": [
+  {
+   "id": "left-corner",
+   "poly": [
+    [
+     0,
+     30
+    ],
+    [
+     150,
+     112
+    ],
+    [
+     150,
+     688
+    ],
+    [
+     0,
+     718
+    ]
+   ]
+  },
+  {
+   "id": "left",
+   "poly": [
+    [
+     234,
+     150
+    ],
+    [
+     462,
+     150
+    ],
+    [
+     462,
+     666
+    ],
+    [
+     234,
+     666
+    ]
+   ]
+  },
+  {
+   "id": "right",
+   "poly": [
+    [
+     1031,
+     150
+    ],
+    [
+     1352,
+     150
+    ],
+    [
+     1352,
+     666
+    ],
+    [
+     1031,
+     666
+    ]
+   ],
+   "mullion_x": [
+    1271,
+    1280
+   ]
+  },
+  {
+   "id": "right-corner",
+   "poly": [
+    [
+     1373,
+     122
+    ],
+    [
+     1536,
+     58
+    ],
+    [
+     1536,
+     722
+    ],
+    [
+     1373,
+     692
+    ]
+   ]
+  }
+ ],
+ "horizon_y": {
+  "left": 470,
+  "right": 470
+ },
+ "masks": {
+  "window": "/room/v5/masks/window.png \u2014 visible glass minus mullions, tree and furniture (white = outside view)",
+  "tree": "/room/v5/masks/tree.png \u2014 canopy, trunk and pot; foreground over the left windows",
+  "furniture": "/room/v5/masks/furniture.png \u2014 sofa, cushions, side table where they overlap the right glass"
+ },
+ "files": {
+  "morning-3072.webp": {
+   "bytes": 683494,
+   "sha256": "8d14d1be38c7bc9c5ccd592d9357768d9f4bdf02822b5b8484a3a66fb5ab5f01"
+  },
+  "morning-2048.webp": {
+   "bytes": 382874,
+   "sha256": "58ade3c6e73cdb63629c9d80e7f318968b070c3f6aa0fa710d7c312ff5ffe6d6"
+  },
+  "morning-1536.webp": {
+   "bytes": 254672,
+   "sha256": "ff9deadf7f656db5653a4ee5800335ebd5b8c5de16ef4036273318b4ce5a69ef"
+  },
+  "golden-3072.webp": {
+   "bytes": 652552,
+   "sha256": "1b4c70a2748978837a113ca95c3069ec549781eb21489896949ce7132fe3accc"
+  },
+  "golden-2048.webp": {
+   "bytes": 375088,
+   "sha256": "320e95b57c34a3ef755a5ab87eb5a7b04528df8fc0359c7a2c53c473d6859c5e"
+  },
+  "golden-1536.webp": {
+   "bytes": 251782,
+   "sha256": "ae9550bcc408bbac48624a10164204515c2699038275e7956a340dba9f9494fe"
+  },
+  "night-3072.webp": {
+   "bytes": 580474,
+   "sha256": "f6b05ab3f7f32b08e51612a15013827ae98068e487d107b99d4c86ed9dace9b1"
+  },
+  "night-2048.webp": {
+   "bytes": 327308,
+   "sha256": "6a9c5b220001efc996f783270a90e60a4780988022b599d167e64414277c8f80"
+  },
+  "night-1536.webp": {
+   "bytes": 215414,
+   "sha256": "3167fa00f09b46d5f45e55f296b4c99ac9fd15b579c9e594355810345eb3ff67"
+  },
+  "masks/window.png": {
+   "bytes": 30635,
+   "sha256": "73ba3ddd4f2d2b439b9b2d8e6150501c837dbe70e74c44c844a0fa2994eafc1b"
+  },
+  "masks/tree.png": {
+   "bytes": 30003,
+   "sha256": "75e2f3e0ae3e1021a9c4fbea599c1f6ece47617ce785498dc25e6610c34d6733"
+  },
+  "masks/furniture.png": {
+   "bytes": 3670,
+   "sha256": "a86838aafcbad336f68c089894c5d7ea9cbcaef64e7e1e621d85d25f6dae8ba8"
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "morning": {
+  "fps": 57,
+  "worstFrameMs": 50,
+  "scriptMs": 11,
+  "taskMs": 210,
+  "layoutCount": 0,
+  "recalcStyle": 343,
+  "runningAnimations": 16,
+  "pausedWhenOffscreen": false,
+  "runningWhenOffscreen": 18
+ },
+ "golden": {
+  "fps": 59,
+  "worstFrameMs": 50,
+  "scriptMs": 11,
+  "taskMs": 214,
+  "layoutCount": 0,
+  "recalcStyle": 352,
+  "runningAnimations": 16,
+  "pausedWhenOffscreen": false,
+  "runningWhenOffscreen": 18
+ },
+ "night": {
+  "fps": 59,
+  "worstFrameMs": 33,
+  "scriptMs": 13,
+  "taskMs": 252,
+  "layoutCount": 0,
+  "recalcStyle": 357,
+  "runningAnimations": 78,
+  "pausedWhenOffscreen": false,
+  "runningWhenOffscreen": 80
+ },
+ "reducedMotion": {
+  "m5Display": "none",
+  "runningAnimations": 0
+ }
+}

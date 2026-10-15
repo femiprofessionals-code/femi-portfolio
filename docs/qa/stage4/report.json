@@ -1,0 +1,378 @@
+[
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 99,
+   "y": 0,
+   "w": 1242,
+   "h": 828
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 482,
+   "y": 121,
+   "w": 440,
+   "h": 128
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.00011908061128257887,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1440x900",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 99,
+   "y": 0,
+   "w": 1242,
+   "h": 828
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 482,
+   "y": 121,
+   "w": 440,
+   "h": 128
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.00011908061128257887,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1440x900",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 94,
+   "y": 0,
+   "w": 1092,
+   "h": 728
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 431,
+   "y": 107,
+   "w": 387,
+   "h": 112
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.0001695503234863281,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1280x800",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 94,
+   "y": 0,
+   "w": 1092,
+   "h": 728
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 431,
+   "y": 107,
+   "w": 387,
+   "h": 112
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.0001695503234863281,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1280x800",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 0,
+   "y": 7,
+   "w": 1024,
+   "h": 683
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 316,
+   "y": 107,
+   "w": 363,
+   "h": 105
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1024x768",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 0,
+   "y": 7,
+   "w": 1024,
+   "h": 683
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 316,
+   "y": 107,
+   "w": 363,
+   "h": 105
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1024x768",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "full",
+  "scene": {
+   "x": 0,
+   "y": 76,
+   "w": 768,
+   "h": 512
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": false,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "768x1024",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "full",
+  "scene": {
+   "x": 0,
+   "y": 76,
+   "w": 768,
+   "h": 512
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": false,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "768x1024",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "crop",
+  "scene": {
+   "x": -281,
+   "y": -97,
+   "w": 982,
+   "h": 655
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "390x844",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "crop",
+  "scene": {
+   "x": -281,
+   "y": -97,
+   "w": 982,
+   "h": 655
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": true,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "390x844",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "crop",
+  "scene": {
+   "x": -260,
+   "y": -83,
+   "w": 906,
+   "h": 604
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": false,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "360x800",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "crop",
+  "scene": {
+   "x": -260,
+   "y": -83,
+   "w": 906,
+   "h": 604
+  },
+  "sceneFullyVisible": true,
+  "identity": null,
+  "identityClearsArt": null,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/morning-1536.webp",
+  "actionsVisible": false,
+  "cls": 0,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "360x800",
+  "mode": "morning"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 99,
+   "y": 0,
+   "w": 1242,
+   "h": 828
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 482,
+   "y": 121,
+   "w": 440,
+   "h": 128
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/golden-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.000317554313753858,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1440x900",
+  "mode": "golden"
+ },
+ {
+  "overflowX": false,
+  "layout": "wall",
+  "scene": {
+   "x": 99,
+   "y": 0,
+   "w": 1242,
+   "h": 828
+  },
+  "sceneFullyVisible": true,
+  "identity": {
+   "x": 482,
+   "y": 121,
+   "w": 440,
+   "h": 128
+  },
+  "identityClearsArt": true,
+  "h1s": [
+   "Femi Falade"
+  ],
+  "brokenImgs": [],
+  "chosenRoom": "http://localhost:3130/room/v5/night-1536.webp",
+  "actionsVisible": true,
+  "cls": 0.00010369379072359395,
+  "captionOverlap": false,
+  "errors": [],
+  "size": "1440x900",
+  "mode": "night"
+ }
+]
