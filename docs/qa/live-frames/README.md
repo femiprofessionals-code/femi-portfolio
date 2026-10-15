@@ -26,3 +26,18 @@ Femi:
 ## Checks
 - **Contrast:** 132/132 pass (min 4.2, large text). The test now waits until the room image is fully shown.
 - **Pointer:** the frame objects don't take the pointer, so the links above them do. A first build had them blocking hover and click, and the test caught it.
+
+## 3. Movement: a breeze through the olive tree
+`RoomTree` (WebGL), with assets from `docs/asset-lock/scripts/tree.py`:
+- **Assets per light:** each light has a tree sprite and a background patch with the tree painted out.
+  - The sprite (RGBA) holds the leaves, branches and trunk above the planter rim.
+  - The background keeps the real photo in the gaps between leaves, and fills only where leaves can move away from (≤ 7 px).
+- **Leaf matte:** taken from the morning light. A pixel counts as tree if it's clearly olive (G−B > 27), or if it's textured with a weaker green away from the beige window column; bark counts as dark and textured. This keeps the smooth window column and the dark mullions behind the tree still.
+- **Motion:**
+  - The sway grows with height (none at the trunk base) and is larger at the branch tips: up to ~4.5 master px at the crown, with slow gusts.
+  - Leaves flutter through a small noise field.
+  - The planter, the map and the room don't move.
+- **When it's off:** reduced motion, Save-Data, no WebGL, off-screen or a hidden tab. The still tree shows, and nothing is downloaded.
+- **Light changes:** the canvas fades out and back in after the room's own crossfade.
+- **Performance:** ~30 fps, capped at 2× DPR, about 250 KB per light (loaded after the page).
+- **Verified (Chromium, SwiftShader):** it runs in all three lights with no errors and matches the still exactly at rest. Reduced motion means no canvas and no tree or sky requests. See `tree-breeze-frames.jpg`.

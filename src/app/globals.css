@@ -946,3 +946,9 @@ html:not(.js) .room5__face--front { background: center / 100% 100% var(--frame);
 .room5 { --floor-light: rgba(248, 240, 226, .78); }
 html[data-time='golden'] .room5 { --floor-light: rgba(255, 234, 204, .78); }
 html[data-time='night'] .room5 { --floor-light: rgba(14, 9, 5, .45); }
+
+/* Olive tree in a breeze (RoomTree): over the still tree, fading in once its light's textures are ready */
+.room5__treebox { position: absolute; pointer-events: none; }
+.room5__tree { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .8s ease; }
+.room5__tree.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .room5__treebox { display: none; } }

@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { FRAMES, IDENTITY, MAP, ROOM_BASE, ROOM_MODES, SCENE, ZONES, rectStyle } from '@/content/scene'
+import { FRAMES, IDENTITY, MAP, ROOM_BASE, ROOM_MODES, SCENE, TREE_BOX, ZONES, rectStyle } from '@/content/scene'
 import { PERSON } from '@/content/site'
 import { LOAD_ACTIVE_LIGHT } from '@/lib/roomLights'
 import RoomLights from './RoomLights'
 import RoomSky from './RoomSky'
+import RoomTree from './RoomTree'
 
 const WIDTHS = [1536, 2048, 3072]
 const ROOM_DESCRIPTION = 'A quiet gallery room high above New York: three framed paintings on a limestone wall above a leather bench, an olive tree and a sofa by floor-to-ceiling windows.'
@@ -41,6 +42,7 @@ export default function GalleryRoom() {
           ))}
           <p className="sr-only">{ROOM_DESCRIPTION}</p>
           <RoomSky />
+          <div className="room5__treebox" style={rectStyle(TREE_BOX)}><RoomTree /></div>
           {/* The frames are live objects over a frameless wall (docs/asset-lock/scripts/frames.py): each turns on hover to show
               its back, with the gallery label. Paintings are lit by each light's own lamp and daylight (DL-31). */}
           {FRAMES.map(f => {
