@@ -81,9 +81,9 @@ export default function TimeSelector() {
   }
 
   const current = STAGES.find(s => s.id === stage)!
-  const options: { id: Mode; label: string; hint: string }[] = [
+  const options: { id: Mode; label: string; hint?: string }[] = [
     { id: 'auto', label: 'New York time', hint: clock ? `Now ${clock}` : 'Follows the city' },
-    ...STAGES.map(s => ({ id: s.id as Mode, label: s.label, hint: s.hours })),
+    ...STAGES.map(s => ({ id: s.id as Mode, label: s.label })),
   ]
 
   return (
@@ -112,7 +112,7 @@ export default function TimeSelector() {
           >
             <Icon id={o.id as Stage | 'auto'} />
             <span className="tod__opt-label">{o.label}</span>
-            <span className="tod__opt-hint" suppressHydrationWarning>{o.hint}</span>
+            {o.hint && <span className="tod__opt-hint" suppressHydrationWarning>{o.hint}</span>}
           </button>
         ))}
       </div>

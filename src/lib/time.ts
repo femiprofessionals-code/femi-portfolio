@@ -1,10 +1,11 @@
 export type Stage = 'morning' | 'golden' | 'night'
 export type Mode = Stage | 'auto'
 
-export const STAGES: { id: Stage; label: string; hours: string }[] = [
-  { id: 'morning', label: 'Morning', hours: '7am – 3pm' },
-  { id: 'golden', label: 'Golden hour', hours: '3pm – 7pm' },
-  { id: 'night', label: 'Night', hours: '7pm – 7am' },
+/** Light names as shown to visitors; only the New York clock carries a time (no hour ranges). */
+export const STAGES: { id: Stage; label: string }[] = [
+  { id: 'morning', label: 'Morning' },
+  { id: 'golden', label: 'Afternoon' },
+  { id: 'night', label: 'Night' },
 ]
 
 export const STORAGE_KEY = 'ff-time'
