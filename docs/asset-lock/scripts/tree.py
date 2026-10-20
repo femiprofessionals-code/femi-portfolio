@@ -1,9 +1,9 @@
 """Olive tree for the wind shader (RoomTree): per light, a tree sprite (RGBA, leaves + branches + trunk above the pot)
 and a background patch (RGBA: the room with the tree removed, only within a few px of the tree) so moving leaves reveal
-window, not doubled leaves. Leaf matte from the morning light (geometry is shared). Box: master x 0-460, y 180-604."""
+window, not doubled leaves. Leaf matte from the morning light (geometry is shared). Box: master x 0-428, y 180-604."""
 import cv2, numpy as np, sys
 R, OUT = sys.argv[1:3]; S = 2
-X0, Y0, X1, Y1 = 0, 180, 460, 604
+X0, Y0, X1, Y1 = 0, 180, 428, 604                  # stops where the wall begins (x 428): the moving tree never draws on the plaster
 tree = cv2.imread(R + '/masks/tree.png', 0)
 mo = cv2.imread(R + '/morning-3072.webp').astype(np.float32)
 lum = mo @ np.array([.114, .587, .299], np.float32)
@@ -24,6 +24,8 @@ zone = cv2.resize((cv2.dilate(tree, np.ones((5, 5), np.uint8)) > 0).astype(np.ui
 zone = cv2.GaussianBlur(zone.astype(np.float32), (0, 0), 6)       # soft zone edge, no blocky cut-outs
 a = leaf * np.clip(zone * 1.5, 0, 1)
 a[(Y1 - 6) * S:] = 0                                              # stop above the pot rim (the pot stays put)
+xs = np.arange(a.shape[1], dtype=np.float32)[None, :] / S
+a *= np.clip((424 - xs) / 4, 0, 1)                                # and fade out before the wall edge
 a = cv2.GaussianBlur(a, (0, 0), .6)
 y0, y1, x0, x1 = Y0 * S, Y1 * S, X0 * S, X1 * S
 A = a[y0:y1, x0:x1]
