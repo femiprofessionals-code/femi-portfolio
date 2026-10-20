@@ -52,9 +52,6 @@ export const FRAMES: Frame[] = [
 /** The travel map, propped against the olive tree's planter (baked into the room in each light; docs/decision-log.md DL-50). */
 export const MAP = {
   title: 'Travel',
-  /** Femi's figures (also the website's Travel page): 30+ countries, 60+ cities. */
-  note: '30+ countries',
-  label: '30+ countries and 60+ cities',
   href: '/about#outside-work',
   /** The leaning frame plus its caption on the floor below. */
   hitbox: [214, 658, 130, 120] as Rect,
