@@ -96,8 +96,6 @@ export default function GalleryRoom() {
           <div className="room5__hang room5__hang--map">
             <Link href={MAP.href} className="room5__frame room5__frame--map" data-frame="map" style={rectStyle(MAP.hitbox)}>
               <span className="room5__company">{MAP.title}</span>
-              <span className="room5__dates" aria-hidden="true">{MAP.note}</span>
-              <span className="sr-only">: {MAP.label}</span>
             </Link>
           </div>
           {/* Tablet/phone layouts: the paintings stay clickable. Keyboard and screen-reader users use the labelled list below. */}
