@@ -732,36 +732,26 @@ html[data-time='night'] .room5 img[data-light='night'] { opacity: 1; }
 /* Artwork in the mats: a live layer, never painted into the room image */
 .room5__art { position: absolute; overflow: hidden; background: #d8cbb6; }
 .room5__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.room5__hang--map::before { display: none; }
-.room5__frame--map::before { content: none; }
 /* the low wall sits in the bench's shade and the sun streaks, so this caption always gets a soft wash */
 /* Text on the wall: no washes (they read as shapes on the plaster). Where the plaster is too busy or too dark for the
    ink, a soft halo hugs the letters instead, like light catching raised lettering. Values tuned against rendered pixels. */
-.room5 { --id-halo: none; --cap-halo: none; --map-ink: var(--cap-ink); --map-halo: 0 0 .22cqw rgba(250, 244, 232, .95), 0 0 .8cqw rgba(250, 244, 232, .75); }
+.room5 { --id-halo: none; --cap-halo: none; }
 html[data-time='golden'] .room5 { --id-halo: 0 0 .25cqw rgba(255, 238, 212, .95), 0 0 1.1cqw rgba(255, 232, 200, .65);
-  --cap-halo: 0 0 .22cqw rgba(255, 236, 208, .95), 0 0 .8cqw rgba(255, 230, 196, .65);
-  --map-halo: 0 0 .25cqw rgba(255, 238, 212, 1), 0 0 .5cqw rgba(255, 236, 208, .9), 0 0 1.1cqw rgba(255, 230, 196, .7); }
-/* night: captions in the lamp pool keep dark ink on a warm halo; the map hangs below the lamps, in shade, so its caption is light */
+  --cap-halo: 0 0 .22cqw rgba(255, 236, 208, .95), 0 0 .8cqw rgba(255, 230, 196, .65); }
+/* night: captions in the lamp pool keep dark ink on a warm halo */
 html[data-time='night'] .room5 { --id-halo: 0 1px .3cqw rgba(10, 6, 3, .6), 0 0 1cqw rgba(12, 7, 3, .45);
-  --cap-halo: 0 0 .25cqw rgba(255, 228, 190, 1), 0 0 .5cqw rgba(255, 226, 186, .85), 0 0 1.1cqw rgba(255, 222, 180, .65);
-  --map-ink: #FFF6E8; --map-halo: 0 1px .25cqw rgba(10, 6, 3, .75), 0 0 .8cqw rgba(12, 7, 3, .6); }
+  --cap-halo: 0 0 .25cqw rgba(255, 228, 190, 1), 0 0 .5cqw rgba(255, 226, 186, .85), 0 0 1.1cqw rgba(255, 222, 180, .65); }
 .room5__frame { text-shadow: var(--cap-halo); }
-.room5__hang--map .room5__frame--map { text-shadow: var(--map-halo); color: var(--map-ink); }
-html[data-time='night'] .room5__hang:not(.room5__hang--map) .room5__dates { text-shadow: 0 0 .1cqw rgba(255, 232, 198, 1), 0 0 .25cqw rgba(255, 228, 190, 1), 0 0 .55cqw rgba(255, 226, 186, .9), 0 0 1.1cqw rgba(255, 222, 180, .7), 0 0 2cqw rgba(255, 220, 176, .55); }
-html[data-time='golden'] .room5__hang--map .room5__dates { text-shadow: 0 0 .1cqw rgba(255, 240, 216, 1), 0 0 .25cqw rgba(255, 238, 212, 1), 0 0 .55cqw rgba(255, 236, 208, .9), 0 0 1.1cqw rgba(255, 230, 196, .75), 0 0 2cqw rgba(255, 230, 196, .55); }
+html[data-time='night'] .room5__hang .room5__dates { text-shadow: 0 0 .1cqw rgba(255, 232, 198, 1), 0 0 .25cqw rgba(255, 228, 190, 1), 0 0 .55cqw rgba(255, 226, 186, .9), 0 0 1.1cqw rgba(255, 222, 180, .7), 0 0 2cqw rgba(255, 220, 176, .55); }
 html[data-time='golden'] .room5__eyebrow { text-shadow: 0 0 .2cqw rgba(255, 240, 216, 1), 0 0 .45cqw rgba(255, 238, 212, .95), 0 0 1.1cqw rgba(255, 232, 200, .8), 0 0 2.2cqw rgba(255, 232, 200, .55); }
-.room5__frame--map { isolation: isolate; }
 /* Hover / keyboard focus on a painting: its picture light warms up and a soft glass glare drifts across the artwork.
    The light is a warm cone from the lamp, added with 'screen' so it brightens the room's own pixels rather than painting over them. */
 .room5__glow { position: absolute; z-index: 1; pointer-events: none; opacity: 0; mix-blend-mode: screen; transition: opacity .7s cubic-bezier(.2, .7, .2, 1);
   background: radial-gradient(ellipse 50% 82% at 50% 0%, rgba(255, 218, 168, .62) 0%, rgba(255, 206, 144, .3) 40%, rgba(255, 200, 130, .08) 62%, rgba(255, 200, 130, 0) 78%); }
-.room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 228, 190, .45) 0%, rgba(255, 220, 176, .2) 46%, rgba(255, 220, 176, 0) 78%); }
 html[data-time='night'] .room5__glow { background: radial-gradient(ellipse 50% 84% at 50% 0%, rgba(255, 196, 128, .7) 0%, rgba(255, 184, 110, .34) 40%, rgba(255, 180, 100, .09) 62%, rgba(255, 180, 100, 0) 78%); }
-html[data-time='night'] .room5__glow--soft { background: radial-gradient(ellipse 60% 62% at 50% 40%, rgba(255, 206, 150, .5) 0%, rgba(255, 196, 136, .22) 46%, rgba(255, 196, 136, 0) 78%); }
 .room5__scene:has(.room5__frame[data-frame='trowe']:is(:hover, :focus-visible)) .room5__glow[data-frame='trowe'] { opacity: 1; }
 .room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__glow[data-frame='carlyle'] { opacity: 1; }
 .room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__glow[data-frame='gs'] { opacity: 1; }
-.room5__scene:has(.room5__frame[data-frame='map']:is(:hover, :focus-visible)) .room5__glow[data-frame='map'] { opacity: 1; }
 .room5__art::after { content: ''; position: absolute; inset: 0; box-shadow: inset .14cqw .22cqw .38cqw rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(0, 0, 0, .14); pointer-events: none; }
 
 /* Wall text and captions exist only in the wall layout */
@@ -894,7 +884,7 @@ html[data-time='golden'] .m5 [data-mode='golden']::before { animation-play-state
 
 /* Smallest wall text in golden light and at night: a soft pool of light the size of the line, feathered to nothing, so
    these lines read clearly over the sun streaks and lamp falloff without a visible shape on the plaster. */
-html[data-time='golden'] .room5__dates, html[data-time='night'] .room5__hang:not(.room5__hang--map) .room5__dates, html[data-time='golden'] .room5__eyebrow {
+html[data-time='golden'] .room5__dates, html[data-time='night'] .room5__hang .room5__dates, html[data-time='golden'] .room5__eyebrow {
   padding: .35em 1.1em; margin: -.35em -1.1em; border-radius: 50%;
   background: radial-gradient(closest-side, var(--line-light) 0%, var(--line-light) 45%, transparent 100%); }
 html[data-time='golden'] .room5 { --line-light: rgba(255, 236, 208, .55); }
@@ -930,12 +920,6 @@ html:not(.js) .room5__face--front { background: center / 100% 100% var(--frame);
 .room5__scene:has(.room5__frame[data-frame='carlyle']:is(:hover, :focus-visible)) .room5__obj[data-frame='carlyle'] .room5__flip { transform: rotateY(180deg); }
 .room5__scene:has(.room5__frame[data-frame='gs']:is(:hover, :focus-visible)) .room5__obj[data-frame='gs'] .room5__flip { transform: rotateY(180deg); }
 @media (prefers-reduced-motion: reduce) { .room5__flip { transition: none; } .room5__glow { transition: none; } }
-/* The travel caption sits on the floor beside the frame's contact shadow and the rug edge: same soft line light, all lights */
-.room5__hang--map .room5__company, .room5__hang--map .room5__dates { padding: .3em 1em; margin: -.3em -1em; border-radius: 50%;
-  background: radial-gradient(closest-side, var(--floor-light) 0%, var(--floor-light) 50%, transparent 100%); }
-.room5 { --floor-light: rgba(248, 240, 226, .78); }
-html[data-time='golden'] .room5 { --floor-light: rgba(255, 234, 204, .78); }
-html[data-time='night'] .room5 { --floor-light: rgba(14, 9, 5, .45); }
 
 /* Olive tree in a breeze (RoomTree): over the still tree, fading in once its light's textures are ready */
 .room5__treebox { position: absolute; pointer-events: none; }
