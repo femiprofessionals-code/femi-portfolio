@@ -4,7 +4,7 @@ import { ROOM_BASE, TREE_BOX } from '@/content/scene'
 
 /**
  * A breeze through the olive tree, cinemagraph-style: the canopy (cut from the room in each light, docs/asset-lock/scripts/tree.py)
- * is redrawn in WebGL: a slight sway of the crown with leaves trembling in clusters and singly, catching the light; the trunk base and planter stay still.
+ * is redrawn in WebGL with a gentle, height-weighted sway plus a little leaf flutter; the trunk base and planter stay still.
  * Underneath, the room with the tree painted out (only where leaves can move) so nothing doubles. The still room shows when
  * this is off: reduced motion, Save-Data, no WebGL, off-screen or a hidden tab.
  */
@@ -18,17 +18,12 @@ float n(vec2 q){ vec2 i = floor(q), f = fract(q); f = f * f * (3. - 2. * f);
 void main(){
   vec2 m = uv / px + vec2(0., 180.);                                  // master coordinates
   float lift = smoothstep(575., 300., m.y);                             // 0 at the trunk base, 1 in the crown
-  float reach = .6 + .4 * clamp(abs(m.x - 212.) / 190., 0., 1.);         // branch tips travel further
-  float gust = .6 + .4 * sin(t * .17) * sin(t * .11 + 1.3);
-  // a gentle sway of the whole crown (indoors, slight)...
-  float sway = 1.1 * sin(t * .55 + m.y * .009) + .5 * sin(t * 1.3 + m.x * .02 + m.y * .015);
-  // ...and leaves trembling independently: clusters (~15 px) and single leaves
-  float c1 = n(m * .065 + vec2(t * .45, t * .2)) - .5, c2 = n(m * .065 + vec2(-t * .3, t * .5) + 17.) - .5;
-  float l1 = n(m * .17 + vec2(t * 1.3, t * .8)) - .5, l2 = n(m * .17 + vec2(-t * .9, t * 1.2) + 31.) - .5;
-  vec2 d = (vec2(sway * gust * reach, .2 * sin(t * .9 + m.x * .02) * gust)
-          + gust * vec2(1.7 * c1 + .9 * l1, 1.2 * c2 + .7 * l2)) * lift;
+  float reach = .55 + .45 * clamp(abs(m.x - 212.) / 190., 0., 1.);       // branch tips travel further
+  float gust = .55 + .45 * sin(t * .21) * sin(t * .13 + 1.3);
+  float sway = 2.4 * sin(t * .74 + m.y * .011) + 1.05 * sin(t * 1.63 + m.x * .021 + m.y * .017);   // up to ~4.5 master px at the crown
+  float flut = n(m * .09 + vec2(t * .9, t * .4)) - .5;
+  vec2 d = vec2(sway * gust * reach + 1.4 * flut, .35 * sin(t * 1.1 + m.x * .02) * gust + .5 * (n(m * .11 - t * .7) - .5)) * lift;
   vec4 tr = texture2D(tree, uv - d * px);
-  tr.rgb *= 1. + .05 * lift * gust * (l1 + .6 * c1);                    // leaves catch the light as they turn
   vec4 b = texture2D(bg, uv);
   gl_FragColor = vec4(tr.rgb * tr.a + b.rgb * b.a * (1. - tr.a), tr.a + b.a * (1. - tr.a));   // premultiplied "over"
 }`

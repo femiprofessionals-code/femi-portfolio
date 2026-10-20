@@ -62,7 +62,7 @@ export const MAP = {
 }
 
 /** The olive tree's canopy and trunk, down to the planter rim (RoomTree, docs/asset-lock/scripts/tree.py). */
-export const TREE_BOX: Rect = [0, 180, 428, 424]   // ends where the wall begins
+export const TREE_BOX: Rect = [0, 180, 460, 424]
 
 export const pct = (v: number, of: number) => `${(v / of) * 100}%`
 export const rectStyle = ([x, y, w, h]: Rect) => ({ left: pct(x, SCENE.w), top: pct(y, SCENE.h), width: pct(w, SCENE.w), height: pct(h, SCENE.h) })
