@@ -27,8 +27,9 @@ a[(Y1 - 6) * S:] = 0                                              # stop above t
 a = cv2.GaussianBlur(a, (0, 0), .6)
 y0, y1, x0, x1 = Y0 * S, Y1 * S, X0 * S, X1 * S
 A = a[y0:y1, x0:x1]
-hole = (cv2.dilate((A > .05).astype(np.uint8), np.ones((15, 15), np.uint8)) > 0)    # where the picture can change
-leafy = cv2.dilate((A > .3).astype(np.uint8), np.ones((3, 3), np.uint8))           # what to paint away
+hole = (cv2.dilate((A > .05).astype(np.uint8), np.ones((5, 5), np.uint8)) > 0)      # where the picture can change: the leaves
+# themselves only; beside them the moving sky shows (a wider patch hid it and read as a pale outline round the tree, DL-59)
+leafy = cv2.dilate((A > .05).astype(np.uint8), np.ones((5, 5), np.uint8))          # what to paint away (leaf edges too, so no leaf colour bleeds in)
 for mode in ('morning', 'golden', 'night'):
     im = cv2.imread(f'{R}/{mode}-3072.webp')
     crop = im[y0:y1, x0:x1]
