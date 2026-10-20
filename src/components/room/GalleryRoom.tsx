@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Arrow from '@/components/Arrow'
-import { FRAMES, IDENTITY, MAP, ROOM_BASE, ROOM_MODES, SCENE, TREE_BOX, ZONES, rectStyle } from '@/content/scene'
+import { FRAMES, IDENTITY, ROOM_BASE, ROOM_MODES, SCENE, TREE_BOX, ZONES, rectStyle } from '@/content/scene'
 import { PERSON } from '@/content/site'
 import { LOAD_ACTIVE_LIGHT } from '@/lib/roomLights'
 import RoomLights from './RoomLights'
@@ -76,8 +76,8 @@ export default function GalleryRoom() {
             )
           })}
           {/* Hover: the picture light warms up over the painting and the wall around it */}
-          {[...FRAMES.map(f => ({ id: f.id, glow: f.glow })), { id: 'map', glow: MAP.glow }].map(g => (
-            <i key={g.id} className={`room5__glow${g.id === 'map' ? ' room5__glow--soft' : ''}`} data-frame={g.id} style={rectStyle(g.glow)} aria-hidden="true" />
+          {FRAMES.map(g => (
+            <i key={g.id} className="room5__glow" data-frame={g.id} style={rectStyle(g.glow)} aria-hidden="true" />
           ))}
           <div className="room5__identity" style={rectStyle(ZONES.identity)}>
             <p className="room5__eyebrow">{IDENTITY.positioning}</p>
@@ -93,17 +93,11 @@ export default function GalleryRoom() {
               </Link>
             ))}
           </nav>
-          <div className="room5__hang room5__hang--map">
-            <Link href={MAP.href} className="room5__frame room5__frame--map" data-frame="map" style={rectStyle(MAP.hitbox)}>
-              <span className="room5__company">{MAP.title}</span>
-            </Link>
-          </div>
           {/* Tablet/phone layouts: the paintings stay clickable. Keyboard and screen-reader users use the labelled list below. */}
           <div className="room5__touch" aria-hidden="true">
             {FRAMES.map(f => (
               <Link key={f.id} href={f.href} tabIndex={-1} className="room5__tap" style={rectStyle(f.hitbox)} />
             ))}
-            <Link href={MAP.href} tabIndex={-1} className="room5__tap" style={rectStyle(MAP.hitbox)} />
           </div>
         </div>
         <script dangerouslySetInnerHTML={{ __html: LOAD_ACTIVE_LIGHT }} />

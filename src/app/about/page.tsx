@@ -76,7 +76,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div style={{ display: 'grid', gap: '2rem', maxWidth: '44rem' }} className="reveal">
             <p className="h3 italic">
-              Outside of work: New York, architecture and interiors, and travel.
+              Outside of work: New York, architecture and interiors.
             </p>
             <div className="btn-row">
               <Link href="/experience" className="btn">Experience <Arrow /></Link>

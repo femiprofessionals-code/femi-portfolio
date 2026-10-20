@@ -49,15 +49,6 @@ export const FRAMES: Frame[] = [
   { id: 'gs', company: 'Goldman Sachs', role: 'Senior Associate, Global Banking and Markets Transformation', dates: 'Nov 2023 – Present', years: '2023 – Present', href: '/experience#goldman-sachs', art: '/art/gs-painting', mat: [870, 368, 100, 102], hitbox: [841, 339, 157, 247], glow: [799, 330, 240, 200], outer: [845, 343, 149, 151] },
 ]
 
-/** The travel map, propped against the olive tree's planter (baked into the room in each light; docs/decision-log.md DL-50). */
-export const MAP = {
-  title: 'Travel',
-  href: '/about#outside-work',
-  /** The leaning frame plus its caption on the floor below. */
-  hitbox: [214, 658, 130, 120] as Rect,
-  glow: [196, 636, 166, 118] as Rect,
-}
-
 /** The olive tree's canopy and trunk, down to the planter rim (RoomTree, docs/asset-lock/scripts/tree.py). */
 export const TREE_BOX: Rect = [0, 180, 460, 424]
 
